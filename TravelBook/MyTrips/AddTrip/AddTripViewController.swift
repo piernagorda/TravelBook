@@ -1,10 +1,3 @@
-//
-//  AddTripViewController.swift
-//  TravelBook
-//
-//  Created by Javier Piernagorda Olivé on 2024-03-28.
-//
-
 import UIKit
 
 class AddTripViewController: UITableViewController {
@@ -17,9 +10,10 @@ class AddTripViewController: UITableViewController {
         tableView.register(second, forCellReuseIdentifier: "datacell4")
     }
     
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,6 +22,10 @@ class AddTripViewController: UITableViewController {
         } else {
             return 2
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,8 +37,9 @@ class AddTripViewController: UITableViewController {
             cell.chooseImage?.layer.borderColor = UIColor.black.cgColor
             cell.chooseImage?.layer.borderWidth = 1
             cell.chooseImage?.layer.cornerRadius = 10.0
+            cell.selectionStyle = .none
             return cell
-        } else {
+        } else if indexPath.section == 1{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "datacell4", for: indexPath) as? NameAndDescriptionTableViewCell else {
                 return UITableViewCell()
             }
@@ -52,6 +51,21 @@ class AddTripViewController: UITableViewController {
                 cell.textField?.placeholder = "Brief description of the trip"
             }
             cell.imageView?.tintColor = .black
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "datacell4", for: indexPath) as? NameAndDescriptionTableViewCell else {
+                return UITableViewCell()
+            }
+            if indexPath.row == 0 {
+                cell.imageView?.image = UIImage(systemName: "calendar")
+                cell.textField?.placeholder = "Start Date (dd/MM/YYYY)"
+            } else{
+                cell.imageView?.image = UIImage(systemName: "calendar.badge.checkmark")
+                cell.textField?.placeholder = "End Date (dd/MM/YYYY)"
+            }
+            cell.imageView?.tintColor = .black
+            cell.selectionStyle = .none
             return cell
         }
     }

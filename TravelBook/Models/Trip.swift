@@ -43,7 +43,9 @@ extension TripModel {
     
     static func mockThree() -> TripModel {
         let thessa = LocationModel(country: "Greece", city: "Thessaloniki", latitude: 40.6211852, longitude: 22.9048277)
-        return TripModel(locations: [.mock(), thessa],
+        let turkey = LocationModel(country: "Turkey", city: "Capadoccia", latitude: 38.3694845, longitude: 33.7451519)
+        let sophia = LocationModel(country: "Bulgaria", city: "Sophia", latitude: 42.6954025, longitude: 23.2413747)
+        return TripModel(locations: [.mock(), thessa, turkey, sophia],
                          year: 2020,
                          title: "Test Trip",
                          tripImage: UIImage(named: "default-image3"),

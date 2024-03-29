@@ -22,6 +22,10 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         achievementsCollectionView.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem = nil
+    }
+    
     func setUpProfileView() {
         name?.text = mockUser?.name
         username?.text = "@"+mockUser!.username

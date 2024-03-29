@@ -29,6 +29,9 @@
 		5943E1C82BB21C74001BEFD6 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1C62BB21C74001BEFD6 /* ProfileView.xib */; };
 		5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */; };
 		5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */; };
+		599E5D0D2BB7658E00E6DE7E /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 599E5D0C2BB7658E00E6DE7E /* MapboxMaps */; };
+		599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */; };
+		599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599E5D102BB7689E00E6DE7E /* TripView.xib */; };
 		59F56CF42BB617B800D3649E /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F56CF22BB617B800D3649E /* AddTripViewController.swift */; };
 		59F56CF52BB617B800D3649E /* AddTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F56CF32BB617B800D3649E /* AddTripView.xib */; };
 		59F56CFA2BB618D000D3649E /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F56CF82BB618D000D3649E /* PictureTableViewCell.swift */; };
@@ -62,6 +65,8 @@
 		5943E1C62BB21C74001BEFD6 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsCollectionViewController.swift; sourceTree = "<group>"; };
 		5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsCollectionView.xib; sourceTree = "<group>"; };
+		599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
+		599E5D102BB7689E00E6DE7E /* TripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripView.xib; sourceTree = "<group>"; };
 		59F56CF22BB617B800D3649E /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		59F56CF32BB617B800D3649E /* AddTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTripView.xib; sourceTree = "<group>"; };
 		59F56CF82BB618D000D3649E /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
@@ -75,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				599E5D0D2BB7658E00E6DE7E /* MapboxMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,12 +190,22 @@
 		5943E1C92BB21CC4001BEFD6 /* MyTrips */ = {
 			isa = PBXGroup;
 			children = (
+				599E5D0E2BB7688800E6DE7E /* TripView */,
 				59F56CF12BB6177200D3649E /* AddTrip */,
 				591952DB2BB5E59D00FD52FE /* MyTripsCells */,
 				5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */,
 				5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */,
 			);
 			path = MyTrips;
+			sourceTree = "<group>";
+		};
+		599E5D0E2BB7688800E6DE7E /* TripView */ = {
+			isa = PBXGroup;
+			children = (
+				599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */,
+				599E5D102BB7689E00E6DE7E /* TripView.xib */,
+			);
+			path = TripView;
 			sourceTree = "<group>";
 		};
 		59F56CF12BB6177200D3649E /* AddTrip */ = {
@@ -237,6 +253,9 @@
 			dependencies = (
 			);
 			name = TravelBook;
+			packageProductDependencies = (
+				599E5D0C2BB7658E00E6DE7E /* MapboxMaps */,
+			);
 			productName = TravelBook;
 			productReference = 5943E1A12BB2147B001BEFD6 /* TravelBook.app */;
 			productType = "com.apple.product-type.application";
@@ -265,6 +284,9 @@
 				Base,
 			);
 			mainGroup = 5943E1982BB2147B001BEFD6;
+			packageReferences = (
+				599E5D0B2BB7658E00E6DE7E /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
+			);
 			productRefGroup = 5943E1A22BB2147B001BEFD6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -280,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				591952E42BB5F9F500FD52FE /* AchievementsViewCell.xib in Resources */,
+				599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */,
 				5943E1BC2BB214EC001BEFD6 /* LoginView.xib in Resources */,
 				5943E1C12BB217BA001BEFD6 /* RegisterView.xib in Resources */,
 				59F56CF52BB617B800D3649E /* AddTripView.xib in Resources */,
@@ -303,6 +326,7 @@
 				591952D82BB5E2A200FD52FE /* Trip.swift in Sources */,
 				5943E1BB2BB214EC001BEFD6 /* LoginViewController.swift in Sources */,
 				5943E1C02BB217BA001BEFD6 /* RegisterViewController.swift in Sources */,
+				599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */,
 				5943E1A92BB2147B001BEFD6 /* ViewController.swift in Sources */,
 				59F56CFA2BB618D000D3649E /* PictureTableViewCell.swift in Sources */,
 				5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */,
@@ -463,6 +487,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -491,6 +516,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -526,6 +552,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		599E5D0B2BB7658E00E6DE7E /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		599E5D0C2BB7658E00E6DE7E /* MapboxMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 599E5D0B2BB7658E00E6DE7E /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
+			productName = MapboxMaps;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5943E1992BB2147B001BEFD6 /* Project object */;
 }
