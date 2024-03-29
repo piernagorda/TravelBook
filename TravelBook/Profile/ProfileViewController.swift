@@ -7,23 +7,47 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    @IBOutlet weak var name: UILabel?
+    @IBOutlet weak var username: UILabel?
+    @IBOutlet weak var biography: UILabel?
+    @IBOutlet weak var profilePicture: UIImageView?
+    @IBOutlet weak var backgroundPicture: UIImageView?
+    @IBOutlet weak var achievementsCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
+        setUpProfileView()
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        achievementsCollectionView.dataSource = self
+        achievementsCollectionView.delegate = self
+    }
+    
+    func setUpProfileView() {
+        name?.text = mockUser?.name
+        username?.text = "@"+mockUser!.username
+        biography?.text = mockUser?.description
+        let nib = UINib(nibName: "AchievementsViewCell", bundle: nil)
+        self.achievementsCollectionView!.register(nib, forCellWithReuseIdentifier: "datacell2")
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return mockUser!.countriesVisited.count
     }
-    */
 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "datacell2", for: indexPath) as? AchievementsViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.achievementImage?.image = UIImage(named: mockUser!.countriesVisited[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {    // add the code here to perform action on the cell
+        // let cell = collectionView.cellForItem(at: indexPath) as? CustomCellClass
+    }
+    
 }

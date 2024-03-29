@@ -21,6 +21,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped() {
+        mockUser = .mock()
+        mockUser?.addTrip(trip: .mockOne())
+        mockUser?.addTrip(trip: .mockTwo())
+        mockUser?.addTrip(trip: .mockThree())
         let tabBarController = TabBarController()
         navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(tabBarController, animated: true)
