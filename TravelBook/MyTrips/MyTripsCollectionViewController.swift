@@ -4,8 +4,6 @@ let reuseIdentifier = "datacell"
 
 class MyTripsCollectionViewController: UICollectionViewController {
     
-    let addTripVC = AddTripViewController(nibName: "AddTripView", bundle: nil)
-    
     override func viewDidLoad() {
         let nib = UINib(nibName: "MyTripsViewCell", bundle: nil)
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -21,35 +19,17 @@ class MyTripsCollectionViewController: UICollectionViewController {
     }
     
     @objc func addTripPressed() {
+        let addTripVC = AddTripViewController(nibName: "AddTripView", bundle: nil)
+        addTripVC.callback = { closeModal, tripToAdd in
+            addTripVC.dismiss(animated: true)
+            if !closeModal! {
+                mockUser?.addTrip(trip: tripToAdd!)
+                self.collectionView.reloadData()
+            }
+        }
         let navC = UINavigationController(rootViewController: addTripVC)
-        navC.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeModal))
-        navC.modalPresentationStyle = .formSheet
-        navC.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Trip", style: .plain, target: self, action: #selector(addTrip))
         navC.modalPresentationStyle = .formSheet
         navigationController?.present(navC, animated: true)
-    }
-    
-    // Methods of the next view
-    @objc func closeModal() {
-        dismiss(animated: true)
-    }
-    
-    @objc func addTrip() {
-        let textFieldTripName = addTripVC.table.cellForRow(at: IndexPath(row: 0, section: 0)) as? NameAndDescriptionTableViewCell
-        let textFieldTripDescription = addTripVC.table.cellForRow(at: IndexPath(row: 1, section: 0)) as? NameAndDescriptionTableViewCell
-        let textFieldTripStart = addTripVC.table.cellForRow(at: IndexPath(row: 0, section: 1)) as? NameAndDescriptionTableViewCell
-        let textFieldTripEnd = addTripVC.table.cellForRow(at: IndexPath(row: 1, section: 1)) as? NameAndDescriptionTableViewCell
-        if textFieldTripName?.textField?.text != "" && textFieldTripDescription?.textField?.text != ""
-            && textFieldTripStart?.textField?.text != "" && textFieldTripEnd?.textField?.text != "" {
-            print("Tiene texto!")
-            collectionView.reloadData()
-            dismiss(animated: true)
-        } else {
-            let alertController = UIAlertController(title: "Empty fields!", message: "You need to fill all the fields out", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(okAction)
-            addTripVC.present(alertController, animated: true, completion: nil)
-        }
     }
 }
 

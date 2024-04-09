@@ -13,34 +13,59 @@ class AddTripViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var choosePhotoButton: UIButton?
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var addLocationsButton: UIButton?
-    public var temporaryTrip = TripModel(locations: [], year: 0, title: "", description: "")
-    private let addLocationsVC = AddLocationsViewController(nibName: "AddLocationsView", bundle: nil)
+    
+    public var callback: (_ close: Bool?, _ tripToAdd: TripModel?) -> Void = {close, tripToAdd in ()}
+    private var temporaryTrip = TripModel(locations: [], year: 0, title: "", description: "")
 
     override func viewDidLoad() {
         table.delegate = self
         table.dataSource = self
+        navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeModal))
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Trip", style: .plain, target: self, action: #selector(addTrip))
         super.viewDidLoad()
-        let second = UINib(nibName: "NameAndDescriptionTableView", bundle: nil)
-        table.register(second, forCellReuseIdentifier: "datacell4")
+        let cell = UINib(nibName: "NameAndDescriptionTableView", bundle: nil)
+        table.register(cell, forCellReuseIdentifier: "datacell4")
     }
     
     @IBAction func addLocationsPressed() {
+        let addLocationsVC = AddLocationsViewController(nibName: "AddLocationsView", bundle: nil)
+        addLocationsVC.callback = { closeModal, locations in
+            addLocationsVC.dismiss(animated: true)
+            if !closeModal {
+                self.temporaryTrip.locations = locations!
+            }
+        }
         let navC = UINavigationController(rootViewController: addLocationsVC)
-        navC.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeModal))
-        navC.modalPresentationStyle = .formSheet
-        navC.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Locations", style: .plain, target: self, action: #selector(addLocations))
         navC.modalPresentationStyle = .formSheet
         navigationController?.present(navC, animated: true)
     }
     
-    // Methods of the next view
-    @objc func closeModal() {
-        dismiss(animated: true)
+    @objc func addTrip() {
+        let textFieldTripName = table.cellForRow(at: IndexPath(row: 0, section: 0)) as? NameAndDescriptionTableViewCell
+        let textFieldTripDescription = table.cellForRow(at: IndexPath(row: 1, section: 0)) as? NameAndDescriptionTableViewCell
+        let textFieldTripStart = table.cellForRow(at: IndexPath(row: 0, section: 1)) as? NameAndDescriptionTableViewCell
+        let textFieldTripEnd = table.cellForRow(at: IndexPath(row: 1, section: 1)) as? NameAndDescriptionTableViewCell
+        guard let tripName = textFieldTripName?.textField?.text, let tripDescription = textFieldTripDescription?.textField?.text,
+              let tripBeginning = textFieldTripStart?.textField?.text, let tripEnd = textFieldTripEnd?.textField?.text else {
+            showIncompleteFieldsError()
+            return
+        }
+        let temporaryTrip = TripModel(locations: temporaryTrip.locations,
+                                      year: Int(tripBeginning) ?? 0,
+                                      title: tripName,
+                                      description: tripDescription)
+        callback(false, temporaryTrip)
     }
     
-    @objc func addLocations() {
-        temporaryTrip.locations = addLocationsVC.countriesInTrip
-        dismiss(animated: true)
+    @objc func closeModal() {
+        callback(true, nil)
+    }
+    
+    private func showIncompleteFieldsError() {
+        let alertController = UIAlertController(title: "Empty fields!", message: "You need to fill out all the fields", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

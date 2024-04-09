@@ -8,6 +8,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
     @IBOutlet weak var name: UILabel?
     @IBOutlet weak var username: UILabel?
     @IBOutlet weak var biography: UILabel?
@@ -34,13 +35,9 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         self.achievementsCollectionView!.register(nib, forCellWithReuseIdentifier: "datacell2")
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mockUser!.countriesVisited.count
-    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { mockUser!.countriesVisited.count }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "datacell2", for: indexPath) as? AchievementsViewCell else {

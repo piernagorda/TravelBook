@@ -11,7 +11,7 @@ final class TripModel {
     init(locations: [LocationModel],
          year: Int,
          title: String,
-         tripImage: UIImage? = nil,
+         tripImage: UIImage? = UIImage(named: "default-image"),
          description: String){
         self.locations = locations
         self.year = year
