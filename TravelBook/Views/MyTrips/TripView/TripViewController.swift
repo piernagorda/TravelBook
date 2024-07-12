@@ -6,17 +6,19 @@
 //
 
 import UIKit
-import MapboxMaps
+// import MapboxMaps
 
 class TripViewController: UIViewController {
-
+    public var index: Int?
+    /*
     private var mapView: MapView!
     private var cancelables = Set<AnyCancelable>()
-    public var index: Int?
+     */
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Set the map's center coordinate and zoom level
+        /*
         let originLatitude = Double(mockUser!.trips[self.index!].locations[0].latitude)
         let originLongitude = Double(mockUser!.trips[self.index!].locations[0].longitude)
         let destinationLatitude = Double(mockUser!.trips[self.index!].locations[1].latitude)
@@ -36,8 +38,9 @@ class TripViewController: UIViewController {
         mapView.mapboxMap.onMapLoaded.observeNext { [weak self] _ in
             self?.setupExample()
         }.store(in: &cancelables)
+         */
     }
-
+    /*
     func setupExample() {
         
         let origin = CLLocationCoordinate2DMake(CLLocationDegrees(mockUser!.trips[self.index!].locations[0].latitude), CLLocationDegrees(mockUser!.trips[self.index!].locations[0].longitude))
@@ -130,4 +133,5 @@ class TripViewController: UIViewController {
         }
 
     }
+     */
 }

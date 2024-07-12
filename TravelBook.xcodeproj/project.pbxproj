@@ -17,7 +17,6 @@
 		591952E42BB5F9F500FD52FE /* AchievementsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591952E22BB5F9F500FD52FE /* AchievementsViewCell.xib */; };
 		5943E1A52BB2147B001BEFD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */; };
 		5943E1A72BB2147B001BEFD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */; };
-		5943E1A92BB2147B001BEFD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A82BB2147B001BEFD6 /* ViewController.swift */; };
 		5943E1AE2BB2147C001BEFD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1AD2BB2147C001BEFD6 /* Assets.xcassets */; };
 		5943E1B12BB2147C001BEFD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1AF2BB2147C001BEFD6 /* LaunchScreen.storyboard */; };
 		5943E1BB2BB214EC001BEFD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1B92BB214EC001BEFD6 /* LoginViewController.swift */; };
@@ -31,11 +30,12 @@
 		5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */; };
 		59960C952BB8860900724A22 /* AddLocationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59960C942BB8860900724A22 /* AddLocationsView.xib */; };
 		59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59960C932BB8860900724A22 /* AddLocationsViewController.swift */; };
-		599E5D0D2BB7658E00E6DE7E /* MapboxMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 599E5D0C2BB7658E00E6DE7E /* MapboxMaps */; };
 		599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */; };
 		599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599E5D102BB7689E00E6DE7E /* TripView.xib */; };
 		59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A850EB2BB9C938005D3E9B /* AddTripView.xib */; };
 		59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */; };
+		59E3CBB12C41A9900023794A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E3CBAF2C41A9900023794A /* MapViewController.swift */; };
+		59E3CBB22C41A9900023794A /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59E3CBB02C41A9900023794A /* MapView.xib */; };
 		59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F56CFC2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift */; };
 		59F56CFF2BB618EF00D3649E /* NameAndDescriptionTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59F56CFD2BB618EF00D3649E /* NameAndDescriptionTableView.xib */; };
 /* End PBXBuildFile section */
@@ -52,7 +52,6 @@
 		5943E1A12BB2147B001BEFD6 /* TravelBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5943E1A82BB2147B001BEFD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5943E1AD2BB2147C001BEFD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5943E1B02BB2147C001BEFD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5943E1B22BB2147C001BEFD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +70,8 @@
 		599E5D102BB7689E00E6DE7E /* TripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripView.xib; sourceTree = "<group>"; };
 		59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		59A850EB2BB9C938005D3E9B /* AddTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTripView.xib; sourceTree = "<group>"; };
+		59E3CBAF2C41A9900023794A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		59E3CBB02C41A9900023794A /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
 		59F56CFC2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAndDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		59F56CFD2BB618EF00D3649E /* NameAndDescriptionTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NameAndDescriptionTableView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,7 +81,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				599E5D0D2BB7658E00E6DE7E /* MapboxMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,14 +143,10 @@
 		5943E1A32BB2147B001BEFD6 /* TravelBook */ = {
 			isa = PBXGroup;
 			children = (
+				59E3CBB32C41AAFA0023794A /* Views */,
 				591952D22BB5E17B00FD52FE /* Models */,
-				5943E1C92BB21CC4001BEFD6 /* MyTrips */,
-				5943E1C42BB21C68001BEFD6 /* Profile */,
-				5943E1BD2BB2164D001BEFD6 /* Register */,
-				5943E1B82BB214DA001BEFD6 /* Login */,
 				5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */,
 				5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */,
-				5943E1A82BB2147B001BEFD6 /* ViewController.swift */,
 				5943E1AD2BB2147C001BEFD6 /* Assets.xcassets */,
 				5943E1AF2BB2147C001BEFD6 /* LaunchScreen.storyboard */,
 				5943E1B22BB2147C001BEFD6 /* Info.plist */,
@@ -217,6 +213,27 @@
 			path = TripView;
 			sourceTree = "<group>";
 		};
+		59E3CBAE2C41A9680023794A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				59E3CBAF2C41A9900023794A /* MapViewController.swift */,
+				59E3CBB02C41A9900023794A /* MapView.xib */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		59E3CBB32C41AAFA0023794A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5943E1B82BB214DA001BEFD6 /* Login */,
+				5943E1BD2BB2164D001BEFD6 /* Register */,
+				59E3CBAE2C41A9680023794A /* Map */,
+				5943E1C92BB21CC4001BEFD6 /* MyTrips */,
+				5943E1C42BB21C68001BEFD6 /* Profile */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		59F56CF12BB6177200D3649E /* AddTrip */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,7 +271,6 @@
 			);
 			name = TravelBook;
 			packageProductDependencies = (
-				599E5D0C2BB7658E00E6DE7E /* MapboxMaps */,
 			);
 			productName = TravelBook;
 			productReference = 5943E1A12BB2147B001BEFD6 /* TravelBook.app */;
@@ -285,7 +301,6 @@
 			);
 			mainGroup = 5943E1982BB2147B001BEFD6;
 			packageReferences = (
-				599E5D0B2BB7658E00E6DE7E /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */,
 			);
 			productRefGroup = 5943E1A22BB2147B001BEFD6 /* Products */;
 			projectDirPath = "";
@@ -302,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				591952E42BB5F9F500FD52FE /* AchievementsViewCell.xib in Resources */,
+				59E3CBB22C41A9900023794A /* MapView.xib in Resources */,
 				599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */,
 				5943E1BC2BB214EC001BEFD6 /* LoginView.xib in Resources */,
 				5943E1C12BB217BA001BEFD6 /* RegisterView.xib in Resources */,
@@ -327,9 +343,9 @@
 				5943E1BB2BB214EC001BEFD6 /* LoginViewController.swift in Sources */,
 				5943E1C02BB217BA001BEFD6 /* RegisterViewController.swift in Sources */,
 				599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */,
-				5943E1A92BB2147B001BEFD6 /* ViewController.swift in Sources */,
 				59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */,
 				5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */,
+				59E3CBB12C41A9900023794A /* MapViewController.swift in Sources */,
 				591952D42BB5E29000FD52FE /* Location.swift in Sources */,
 				59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */,
 				591952E32BB5F9F500FD52FE /* AchievementsViewCell.swift in Sources */,
@@ -552,25 +568,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		599E5D0B2BB7658E00E6DE7E /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mapbox/mapbox-maps-ios.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		599E5D0C2BB7658E00E6DE7E /* MapboxMaps */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 599E5D0B2BB7658E00E6DE7E /* XCRemoteSwiftPackageReference "mapbox-maps-ios" */;
-			productName = MapboxMaps;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5943E1992BB2147B001BEFD6 /* Project object */;
 }
