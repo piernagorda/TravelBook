@@ -17,6 +17,7 @@ class TripViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
         // Set the map's center coordinate and zoom level
         /*
         let originLatitude = Double(mockUser!.trips[self.index!].locations[0].latitude)
@@ -39,7 +40,6 @@ class TripViewController: UIViewController {
             self?.setupExample()
         }.store(in: &cancelables)
          */
-    }
     /*
     func setupExample() {
         

@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="TravelBook" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="paM-TB-jNx" id="npl-Kp-ZKl"/>
                 <outlet property="map" destination="Orx-B2-U2q" id="4uv-cD-79u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,28 +25,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                     <standardMapConfiguration key="preferredConfiguration"/>
                 </mapView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="paM-TB-jNx">
-                    <rect key="frame" x="0.0" y="682" width="390" height="128"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YgQ-QE-nC7">
-                        <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="paM-TB-jNx" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="0Y1-n7-NqC"/>
-                <constraint firstItem="paM-TB-jNx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="635" id="1tH-aB-wQY"/>
                 <constraint firstItem="Orx-B2-U2q" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9RG-33-RHm"/>
-                <constraint firstItem="paM-TB-jNx" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Sig-4Y-gsd"/>
                 <constraint firstAttribute="bottom" secondItem="Orx-B2-U2q" secondAttribute="bottom" id="UO8-lD-LlI"/>
                 <constraint firstItem="Orx-B2-U2q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XCb-rV-4qL"/>
                 <constraint firstItem="Orx-B2-U2q" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="hZB-aK-Hmi"/>
-                <constraint firstItem="paM-TB-jNx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wv7-JT-xDN"/>
             </constraints>
             <point key="canvasLocation" x="130.76923076923077" y="-11.374407582938389"/>
         </view>

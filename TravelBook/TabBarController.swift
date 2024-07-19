@@ -24,9 +24,11 @@ final class TabBarController: UITabBarController{
         self.profileViewController?.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle.fill")
         
         self.tabBar.tintColor = .black
+        self.tabBar.backgroundColor = .white
         
         self.viewControllers = [myTripsViewController!, mapViewController!, profileViewController!]
         
+
         super.viewDidLoad()
     }
     

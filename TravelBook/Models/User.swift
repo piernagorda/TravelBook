@@ -44,7 +44,7 @@ final class UserModel {
 extension UserModel {
     static func mock() -> UserModel {
         UserModel(email: "javier.poa@gmail.com",
-                  password: "abc",
+                  password: "123456",
                   username: "piernagorda",
                   name: "Javier",
                   lastname: "Piernagorda",
