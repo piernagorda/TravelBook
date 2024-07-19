@@ -21,9 +21,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mockUser = .mock()
-        mockUser?.addTrip(trip: .mockOne())
-        mockUser?.addTrip(trip: .mockTwo())
-        mockUser?.addTrip(trip: .mockThree())
+        navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction func loginButtonTapped() {
@@ -39,7 +37,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func registerButtonTapped() {
         let registerController = RegisterViewController(nibName: "RegisterView", bundle: nil)
-        navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(registerController, animated: true)
     }
     
@@ -53,7 +50,6 @@ extension LoginViewController {
     private func navigateToHomeScreen() {
         let tabController = TabBarController()
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.isHidden = false
         navigationController?.pushViewController(tabController, animated: true)
     }
     

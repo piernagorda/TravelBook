@@ -21,20 +21,8 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func registerButtonPressed() {
         view.endEditing(true)
         if (fullNameTextField!.hasText && emailTextField!.hasText && usernameTextField!.hasText && passwordTextField!.hasText && passwordRepeatTextField!.hasText && passwordTextField!.text == passwordRepeatTextField!.text){
@@ -75,7 +63,6 @@ class RegisterViewController: UIViewController {
         
         let tabController = TabBarController()
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.isHidden = false
         navigationController?.pushViewController(tabController, animated: true)
     }
 }

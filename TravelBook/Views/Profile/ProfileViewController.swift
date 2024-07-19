@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = nil
+        super.navigationController?.navigationBar.isHidden = false
     }
     
     func setUpProfileView() {

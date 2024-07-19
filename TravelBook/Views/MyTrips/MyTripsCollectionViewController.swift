@@ -16,6 +16,7 @@ class MyTripsCollectionViewController: UICollectionViewController {
         navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(addTripPressed))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
+        super.navigationController?.navigationBar.isHidden = false
     }
     
     @objc func addTripPressed() {

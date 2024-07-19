@@ -15,15 +15,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.navigationController?.navigationBar.isHidden = true
         setUpMap()
-
         map.delegate = self
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.navigationController?.navigationBar.isHidden = true
     }
     
     private func setUpMap() {
-        var trip: TripModel = .mockOne()
+        let trip: TripModel = .mockOne()
         
         let locations = trip.locations
         let count = locations.count - 1

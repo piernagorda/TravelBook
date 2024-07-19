@@ -17,6 +17,7 @@ final class UserModel {
          name: String,
          lastname: String,
          description: String? = nil,
+         trips: [TripModel],
          countriesVisited: [String]?) {
         self.email = email
         self.password = password
@@ -24,7 +25,7 @@ final class UserModel {
         self.name = name
         self.lastname = lastname
         self.description = description
-        self.trips = []
+        self.trips = trips
         self.countriesVisited = countriesVisited ?? []
     }
     
@@ -49,6 +50,7 @@ extension UserModel {
                   name: "Javier",
                   lastname: "Piernagorda",
                   description: "This is my bio!",
+                  trips: [.mockOne(), .mockTwo(), .mockThree()],
                   countriesVisited: ["ES", "FI", "US", "CA", "FR", "IT", "GR"])
     }
 }
