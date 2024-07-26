@@ -24,7 +24,7 @@ class MyTripsCollectionViewController: UICollectionViewController {
         addTripVC.callback = { closeModal, tripToAdd in
             addTripVC.dismiss(animated: true)
             if !closeModal! {
-                mockUser?.addTrip(trip: tripToAdd!)
+                currentUser?.addTrip(trip: tripToAdd!)
                 self.collectionView.reloadData()
             }
         }
@@ -38,7 +38,7 @@ extension MyTripsCollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { mockUser!.trips.count }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { currentUser!.trips.count }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MyTripsViewCell else {
@@ -48,9 +48,9 @@ extension MyTripsCollectionViewController {
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 10.0
         cell.layer.masksToBounds = true
-        cell.titleLabel?.text = mockUser!.trips[indexPath.row].title
-        cell.yearLabel?.text = "\(mockUser!.trips[indexPath.row].year)"
-        cell.image?.image = mockUser!.trips[indexPath.row].tripImage
+        cell.titleLabel?.text = currentUser!.trips[indexPath.row].title
+        cell.yearLabel?.text = "\(currentUser!.trips[indexPath.row].year)"
+        cell.image?.image = UIImage(named: currentUser!.trips[indexPath.row].tripImage ?? "default-image")
         return cell
     }
     

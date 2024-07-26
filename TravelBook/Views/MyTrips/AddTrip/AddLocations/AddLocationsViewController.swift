@@ -53,6 +53,9 @@ extension AddLocationsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var locationToAppend = filterData[indexPath.row]
+        locationToAppend.countryA2code =  countryToAlpha2Code[locationToAppend.country] ?? ""
+        print(locationToAppend.countryA2code)
         countriesInTrip.append(filterData[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -75,10 +78,14 @@ extension AddLocationsViewController: UISearchBarDelegate{
                     let req : [CLPlacemark] = try await geocoder.geocodeAddressString(searchText)
                     if (!req.isEmpty) {
                         for x in req {
+                            
+                           
+                            
                             let city: LocationModel = LocationModel(country: x.country!,
                                                                     city: x.name!,
                                                                     latitude: x.location!.coordinate.latitude,
-                                                                    longitude: x.location!.coordinate.longitude)
+                                                                    longitude: x.location!.coordinate.longitude,
+                                                                    countryA2Code: "")
                             if !searchIfLocationInArray(location: city, array: self!.filterData) {
                                 self?.filterData.append(city)
                             }

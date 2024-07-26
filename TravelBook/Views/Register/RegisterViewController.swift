@@ -57,6 +57,7 @@ class RegisterViewController: UIViewController {
     }
     
     private func navigateToHomeScreen(_ userData: RegisterUserRequest) {
+        /*
         mockUser?.name = userData.name
         mockUser?.email = userData.email
         mockUser?.username = userData.username
@@ -64,5 +65,6 @@ class RegisterViewController: UIViewController {
         let tabController = TabBarController()
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.pushViewController(tabController, animated: true)
+         */
     }
 }

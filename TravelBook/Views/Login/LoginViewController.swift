@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import UIKit
@@ -17,17 +18,30 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var preloadDataButton: UIButton?
     @IBOutlet weak var loginButton: UIButton?
     @IBOutlet weak var registerButton: UIButton?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        mockUser = .mock()
         navigationController?.navigationBar.isHidden = false
+        loginButton?.layer.cornerRadius = 5
+        loginButton?.layer.borderWidth = 1
+        registerButton?.layer.cornerRadius = 5
+        registerButton?.layer.borderWidth = 1
+        preloadDataButton?.layer.cornerRadius = 5
+        preloadDataButton?.layer.borderWidth = 1
     }
     
     @IBAction func loginButtonTapped() {
         AuthService.shared.signIn(email: emailTextField!.text!, password: passwordTextField!.text!) { signedIn, error in
             if signedIn {
-                self.navigateToHomeScreen()
+                self.fetchUserModel(userId: "as23912sda") { result in
+                    switch result {
+                    case .success(let userModel):
+                        print("User retrieved successfully: \(userModel)")
+                        self.navigateToHomeScreen()
+                    case .failure(let error):
+                        print("Error retrieving user: \(error.localizedDescription)")
+                    }
+                }
             }
             else {
                 self.showError(error: error!)
@@ -41,12 +55,42 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func preloadData() {
-        self.emailTextField!.text = mockUser?.email
-        self.passwordTextField!.text = mockUser?.password
+        self.emailTextField!.text = "javier.poa@gmail.com"
+        self.passwordTextField!.text = "123456"
     }
 }
 
 extension LoginViewController {
+    
+    func fetchUserModel(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(userId)
+        
+        userRef.getDocument { (document, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let document = document, document.exists, let data = document.data() else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist or data is nil"])))
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                let userModel = try JSONDecoder().decode(UserModel.self, from: jsonData)
+                // Setting the current user to the data retrieved
+                currentUser = userModel
+                print("Current user is: ")
+                print(currentUser)
+                completion(.success(userModel))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
     private func navigateToHomeScreen() {
         let tabController = TabBarController()
         navigationController?.navigationBar.prefersLargeTitles = false

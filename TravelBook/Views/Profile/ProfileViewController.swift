@@ -29,22 +29,22 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func setUpProfileView() {
-        name?.text = mockUser?.name
-        username?.text = "@"+mockUser!.username
-        biography?.text = mockUser?.description
+        name?.text = currentUser?.name
+        username?.text = "@"+currentUser!.username
+        biography?.text = currentUser?.description
         let nib = UINib(nibName: "AchievementsViewCell", bundle: nil)
         self.achievementsCollectionView!.register(nib, forCellWithReuseIdentifier: "datacell2")
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { mockUser!.countriesVisited.count }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { currentUser!.countriesVisited.count }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "datacell2", for: indexPath) as? AchievementsViewCell else {
             return UICollectionViewCell()
         }
-        cell.achievementImage?.image = UIImage(named: mockUser!.countriesVisited[indexPath.row])
+        cell.achievementImage?.image = UIImage(named: currentUser!.countriesVisited[indexPath.row])
         return cell
     }
     

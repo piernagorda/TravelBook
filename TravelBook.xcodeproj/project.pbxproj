@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3FAB2C541E1800C718A9 /* A2Codes.swift */; };
 		5917D3DF2C4AC9E700B72587 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */; };
 		5917D3E22C4ACAA600B72587 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5917D3E12C4ACAA600B72587 /* FirebaseAuth */; };
 		5917D3E42C4ACAA600B72587 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 5917D3E32C4ACAA600B72587 /* FirebaseAuthCombine-Community */; };
@@ -21,7 +22,7 @@
 		591952D42BB5E29000FD52FE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D32BB5E29000FD52FE /* Location.swift */; };
 		591952D62BB5E29A00FD52FE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D52BB5E29A00FD52FE /* User.swift */; };
 		591952D82BB5E2A200FD52FE /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D72BB5E2A200FD52FE /* Trip.swift */; };
-		591952DA2BB5E39200FD52FE /* MockUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D92BB5E39200FD52FE /* MockUser.swift */; };
+		591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D92BB5E39200FD52FE /* CurrentUser.swift */; };
 		591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */; };
 		591952DF2BB5E5BC00FD52FE /* MyTripsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */; };
 		591952E32BB5F9F500FD52FE /* AchievementsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952E12BB5F9F500FD52FE /* AchievementsViewCell.swift */; };
@@ -52,13 +53,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590B3FAB2C541E1800C718A9 /* A2Codes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A2Codes.swift; sourceTree = "<group>"; };
 		5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5917D3F12C4ACE8000B72587 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		5917D3F42C4AE2FC00B72587 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		591952D32BB5E29000FD52FE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		591952D52BB5E29A00FD52FE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		591952D72BB5E2A200FD52FE /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		591952D92BB5E39200FD52FE /* MockUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUser.swift; sourceTree = "<group>"; };
+		591952D92BB5E39200FD52FE /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewCell.swift; sourceTree = "<group>"; };
 		591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsViewCell.xib; sourceTree = "<group>"; };
 		591952E12BB5F9F500FD52FE /* AchievementsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				5917D3F42C4AE2FC00B72587 /* AuthService.swift */,
+				590B3FAB2C541E1800C718A9 /* A2Codes.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -123,7 +126,7 @@
 				591952D32BB5E29000FD52FE /* Location.swift */,
 				591952D52BB5E29A00FD52FE /* User.swift */,
 				591952D72BB5E2A200FD52FE /* Trip.swift */,
-				591952D92BB5E39200FD52FE /* MockUser.swift */,
+				591952D92BB5E39200FD52FE /* CurrentUser.swift */,
 				5917D3F12C4ACE8000B72587 /* RegisterModel.swift */,
 			);
 			path = Models;
@@ -399,8 +402,9 @@
 				59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */,
 				5917D3F22C4ACE8000B72587 /* RegisterModel.swift in Sources */,
 				591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */,
+				590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */,
 				591952D62BB5E29A00FD52FE /* User.swift in Sources */,
-				591952DA2BB5E39200FD52FE /* MockUser.swift in Sources */,
+				591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */,
 				5943E1A72BB2147B001BEFD6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

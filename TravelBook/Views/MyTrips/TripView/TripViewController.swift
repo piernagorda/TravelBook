@@ -8,8 +8,12 @@
 import UIKit
 // import MapboxMaps
 
-class TripViewController: UIViewController {
-    public var index: Int?
+class TripViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet weak var coverImage: UIImageView?
+    @IBOutlet weak var tableView: UITableView?
+    
+    public var index: Int!
     /*
     private var mapView: MapView!
     private var cancelables = Set<AnyCancelable>()
@@ -17,6 +21,22 @@ class TripViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        self.coverImage?.image = UIImage(named: currentUser?.trips[index].tripImage ?? "default-image")
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let city = currentUser?.trips[index].locations[indexPath.row].city
+        let country = currentUser?.trips[index].locations[indexPath.row].country
+        cell.textLabel?.text = (city ?? "") + ", " + (country ?? "")
+        cell.imageView?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code ?? "AZ")
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        currentUser?.trips[index].locations.count ?? 0
     }
         // Set the map's center coordinate and zoom level
         /*
