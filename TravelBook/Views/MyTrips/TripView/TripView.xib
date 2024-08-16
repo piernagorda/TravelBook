@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TripViewController" customModule="TravelBook" customModuleProvider="target">
             <connections>
-                <outlet property="coverImage" destination="wAJ-sX-cIo" id="IC9-SL-Mkj"/>
+                <outlet property="map" destination="kma-gY-46a" id="gUq-ci-Jxh"/>
                 <outlet property="tableView" destination="OAD-mE-Md2" id="erA-se-WZo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,25 +22,28 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wAJ-sX-cIo">
-                    <rect key="frame" x="0.0" y="59" width="393" height="228"/>
-                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OAD-mE-Md2">
                     <rect key="frame" x="0.0" y="287" width="393" height="565"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kma-gY-46a">
+                    <rect key="frame" x="0.0" y="59" width="393" height="220"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="220" id="0yj-YQ-eoL"/>
+                    </constraints>
+                    <standardMapConfiguration key="preferredConfiguration"/>
+                </mapView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="wAJ-sX-cIo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="EXW-em-j5n"/>
-                <constraint firstItem="wAJ-sX-cIo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KVL-qF-JeM"/>
-                <constraint firstItem="wAJ-sX-cIo" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="KWP-v8-1eH"/>
-                <constraint firstItem="OAD-mE-Md2" firstAttribute="top" secondItem="wAJ-sX-cIo" secondAttribute="bottom" id="MTu-s5-BjA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kma-gY-46a" secondAttribute="trailing" id="8G6-K4-jJr"/>
+                <constraint firstItem="OAD-mE-Md2" firstAttribute="top" secondItem="kma-gY-46a" secondAttribute="bottom" constant="8" id="TZ5-IW-9v5"/>
+                <constraint firstItem="kma-gY-46a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VCg-hJ-rLp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OAD-mE-Md2" secondAttribute="trailing" id="YLc-Ti-6kC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="OAD-mE-Md2" secondAttribute="bottom" constant="-34" id="fsI-AA-1qO"/>
                 <constraint firstItem="OAD-mE-Md2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gc5-Gu-nS4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wAJ-sX-cIo" secondAttribute="bottom" constant="531" id="snr-gF-alp"/>
+                <constraint firstItem="kma-gY-46a" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="sPB-YU-lMm"/>
             </constraints>
             <point key="canvasLocation" x="-2.2900763358778624" y="-11.267605633802818"/>
         </view>

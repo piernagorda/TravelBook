@@ -35,8 +35,8 @@ class LoginViewController: UIViewController {
             if signedIn {
                 self.fetchUserModel(userId: "as23912sda") { result in
                     switch result {
-                    case .success(let userModel):
-                        print("User retrieved successfully: \(userModel)")
+                    case .success:
+                        print("User retrieved successfully")
                         self.navigateToHomeScreen()
                     case .failure(let error):
                         print("Error retrieving user: \(error.localizedDescription)")
@@ -61,7 +61,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController {
-    
+
     func fetchUserModel(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
@@ -82,8 +82,6 @@ extension LoginViewController {
                 let userModel = try JSONDecoder().decode(UserModel.self, from: jsonData)
                 // Setting the current user to the data retrieved
                 currentUser = userModel
-                print("Current user is: ")
-                print(currentUser)
                 completion(.success(userModel))
             } catch {
                 completion(.failure(error))

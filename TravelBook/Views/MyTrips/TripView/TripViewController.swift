@@ -6,11 +6,11 @@
 //
 
 import UIKit
-// import MapboxMaps
+import MapKit
 
-class TripViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TripViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
 
-    @IBOutlet weak var coverImage: UIImageView?
+    @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var tableView: UITableView?
     
     public var index: Int!
@@ -23,7 +23,8 @@ class TripViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         tableView?.delegate = self
         tableView?.dataSource = self
-        self.coverImage?.image = UIImage(named: currentUser?.trips[index].tripImage ?? "default-image")
+        map.delegate = self
+        setUpMap()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,120 +39,129 @@ class TripViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         currentUser?.trips[index].locations.count ?? 0
     }
-        // Set the map's center coordinate and zoom level
-        /*
-        let originLatitude = Double(mockUser!.trips[self.index!].locations[0].latitude)
-        let originLongitude = Double(mockUser!.trips[self.index!].locations[0].longitude)
-        let destinationLatitude = Double(mockUser!.trips[self.index!].locations[1].latitude)
-        let destinationLongitude = Double(mockUser!.trips[self.index!].locations[1].longitude)
-        // Washington, D.C.
-        let destination = CLLocationCoordinate2DMake(CLLocationDegrees(mockUser!.trips[self.index!].locations[1].latitude), CLLocationDegrees(mockUser!.trips[self.index!].locations[1].longitude))
+    
+    
+    
+    private func setUpMap() {
+        let trip: TripModel = currentUser!.trips[index]
+        var coordinates: [CLLocationCoordinate2D] = []
+        let locations = trip.locations
+        let count = locations.count - 1
         
-        let centerCoordinate = CLLocationCoordinate2D(latitude: (originLatitude + destinationLatitude)/2,
-                                                      longitude: (originLongitude + destinationLongitude)/2)
-        let options = MapInitOptions(cameraOptions: CameraOptions(center: centerCoordinate,
-                                                                  zoom: 3),
-                                     styleURI: .streets)
-        mapView = MapView(frame: view.bounds, mapInitOptions: options)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(mapView)
-        // Allows the view controller to receive information about map events.
-        mapView.mapboxMap.onMapLoaded.observeNext { [weak self] _ in
-            self?.setupExample()
-        }.store(in: &cancelables)
-         */
-    /*
-    func setupExample() {
+        for i in 0 ..< count {
+            var annotations : [CLLocationCoordinate2D] = []
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = locations[i].latitude
+            annotation.coordinate.longitude = locations[i].longitude
+            annotation.title = locations[i].city
+            annotation.subtitle = locations[i].country
+            self.map.addAnnotation(annotation)
+            annotations.append(annotation.coordinate)
+            coordinates.append(annotation.coordinate)
+       
+            let annotation2 = MKPointAnnotation()
+            annotation2.coordinate.latitude = locations[i+1].latitude
+            annotation2.coordinate.longitude = locations[i+1].longitude
+            annotation2.title = locations[i+1].city
+            annotation2.subtitle = locations[i+1].country
+            self.map.addAnnotation(annotation2)
+            annotations.append(annotation2.coordinate)
+            coordinates.append(annotation2.coordinate)
         
-        let origin = CLLocationCoordinate2DMake(CLLocationDegrees(mockUser!.trips[self.index!].locations[0].latitude), CLLocationDegrees(mockUser!.trips[self.index!].locations[0].longitude))
-        let destination = CLLocationCoordinate2DMake(CLLocationDegrees(mockUser!.trips[self.index!].locations[1].latitude), CLLocationDegrees(mockUser!.trips[self.index!].locations[1].longitude))
-        let arcLine = arc(start: origin, end: destination)
-         
-        // Add the layers to be rendered on the map.
-        addLayers(for: arcLine)
-
-        // Begin animating the airplane across the route line.
-        startAnimation(routeLine: arcLine)
-    }
-
-    func arc(start: CLLocationCoordinate2D, end: CLLocationCoordinate2D) -> LineString {
-        let line = LineString([start, end])
-        let distance = Int(start.distance(to: end))
-
-        var coordinates = [CLLocationCoordinate2D]()
-        let steps = 500
-        var index = 0
-
-        while index < distance {
-            index += distance / steps
-            let coord = line.coordinateFromStart(distance: CLLocationDistance(index))!
-            coordinates.append(coord)
+            // map.addOverlay(MKPolyline(coordinates: annotations, count: 2))
+            let startCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.locations[i].latitude),
+                                                         longitude: CLLocationDegrees(trip.locations[i].longitude))
+            let endCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.locations[i+1].latitude),
+                                                       longitude: CLLocationDegrees(trip.locations[i+1].longitude))
+            // Draw a curved line between the start and end locations
+            drawCurvedLineBetween(startCoordinate, endCoordinate, mapView: self.map)
         }
-
-        return LineString(coordinates.compactMap({ $0 }))
+        
+        // Calculate the region to include all annotations
+        if !coordinates.isEmpty {
+            let region = regionForCoordinates(coordinates: coordinates)
+            map.setRegion(region, animated: true)
+        }
     }
+    
+    func drawCurvedLineBetween(_ start: CLLocationCoordinate2D, _ end: CLLocationCoordinate2D, mapView: MKMapView) {
+        // This has been done using Bezier quadratic curves. More info here: https://www.youtube.com/watch?v=oRd3l7ILTNY
+        let startPoint = CGPoint(x: start.latitude, y: start.longitude)
+        let endPoint = CGPoint(x: end.latitude, y: end.longitude)
 
-    func addLayers(for routeLine: LineString) {
-        // Define the source data and style layer for the airplane's route line.
-        var airplaneRoute = GeoJSONSource(id: "airplane-route")
-        airplaneRoute.data = .feature(Feature(geometry: routeLine))
+        // Calculate the distance between the two points
+        let distance = hypot(endPoint.x - startPoint.x, endPoint.y - startPoint.y)
 
-        var lineLayer = LineLayer(id: "line-layer", source: airplaneRoute.id)
-        lineLayer.lineColor = .constant(StyleColor(.red))
-        lineLayer.lineWidth = .constant(3.0)
-        lineLayer.lineCap = .constant(.round)
+        // Determine the amount to offset the control point, increasing with distance
+        let curveHeight = distance * 0.2 // You can adjust this factor to make the curve more or less pronounced
 
-        // Define the source data and style layer for the airplane symbol.
-        var airplaneSymbol = GeoJSONSource(id: "airplane-symbol")
-        let point = Point(routeLine.coordinates[0])
-        airplaneSymbol.data = .feature(Feature(geometry: point))
+        // Find the midpoint
+        let midPoint = CGPoint(x: (startPoint.x + endPoint.x) / 2, y: (startPoint.y + endPoint.y) / 2)
 
-        var airplaneSymbolLayer = SymbolLayer(id: "airplane", source: airplaneSymbol.id)
-        // "airport" is the name the image that belongs in the style's sprite by default.
-        airplaneSymbolLayer.iconImage = .constant(.name("airport"))
-        airplaneSymbolLayer.iconRotationAlignment = .constant(.map)
-        airplaneSymbolLayer.iconAllowOverlap = .constant(true)
-        airplaneSymbolLayer.iconIgnorePlacement = .constant(true)
-        // Get the "bearing" property from the point's feature dictionary,
-        // and use that value to determine the rotation angle of the airplane icon.
-        airplaneSymbolLayer.iconRotate = .expression(Exp(.get) {
-            "bearing"
-        })
-
-        // Add the sources and layers to the map style.
-        try! mapView.mapboxMap.addSource(airplaneRoute)
-        try! mapView.mapboxMap.addLayer(lineLayer)
-
-        try! mapView.mapboxMap.addSource(airplaneSymbol)
-        try! mapView.mapboxMap.addLayer(airplaneSymbolLayer, layerPosition: nil)
+        // Control point is offset perpendicular to the line between start and end
+        let controlPoint = CLLocationCoordinate2D(
+            latitude: midPoint.x + curveHeight,
+            longitude: midPoint.y
+        )
+        
+        var curveCoordinates = [CLLocationCoordinate2D]()
+        
+        let steps = 500
+        for i in 0...steps {
+            let t = Double(i) / Double(steps)
+            let x = (1 - t) * (1 - t) * start.latitude + 2 * (1 - t) * t * controlPoint.latitude + t * t * end.latitude
+            let y = (1 - t) * (1 - t) * start.longitude + 2 * (1 - t) * t * controlPoint.longitude + t * t * end.longitude
+            curveCoordinates.append(CLLocationCoordinate2D(latitude: x, longitude: y))
+        }
+        
+        let polyline = MKPolyline(coordinates: curveCoordinates, count: curveCoordinates.count)
+        mapView.addOverlay(polyline)
     }
-
-    func startAnimation(routeLine: LineString) {
-        var runCount = 0
-
-        _ = Timer.scheduledTimer(withTimeInterval: 0.005, repeats: true) { [weak self] timer in
-
-            guard let self = self else { return }
-
-            let coordinate = routeLine.coordinates[runCount]
-            let nextCoordinate = routeLine.coordinates[runCount + 1]
-
-            // Identify the new coordinate to animate to, and calculate
-            // the bearing between the new coordinate and the following coordinate.
-            var geoJSON = Feature(geometry: Point(coordinate))
-            geoJSON.properties = ["bearing": .number(coordinate.direction(to: nextCoordinate))]
-
-            // Update the airplane source layer with the new coordinate and bearing.
-            self.mapView.mapboxMap.updateGeoJSONSource(withId: "airplane-symbol",
-                                                                  geoJSON: .feature(geoJSON))
-
-            runCount += 1
-
-            if runCount == 500 {
-                timer.invalidate()
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            // Use a navy blue color
+            renderer.strokeColor = UIColor(red: 0.0, green: 0.0, blue: 0.5, alpha: 0.8) // Adjust alpha for desired opacity
+            // Adjust line width for a thinner line
+            renderer.lineWidth = 4.0
+            // Optionally, create a dashed line pattern
+            // renderer.lineDashPattern = [NSNumber(value: 4), NSNumber(value: 8)] // Dash pattern: 4 points on, 8 points off
+            return renderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
+    
+    // Function to calculate the region to encompass all coordinates with additional padding
+    private func regionForCoordinates(coordinates: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
+        var minLat = CLLocationDegrees(90.0)
+        var maxLat = CLLocationDegrees(-90.0)
+        var minLon = CLLocationDegrees(180.0)
+        var maxLon = CLLocationDegrees(-180.0)
+        
+        for coordinate in coordinates {
+            if coordinate.latitude < minLat {
+                minLat = coordinate.latitude
+            }
+            if coordinate.latitude > maxLat {
+                maxLat = coordinate.latitude
+            }
+            if coordinate.longitude < minLon {
+                minLon = coordinate.longitude
+            }
+            if coordinate.longitude > maxLon {
+                maxLon = coordinate.longitude
             }
         }
-
+        
+        // Adjust padding factor to zoom out more
+        let paddingFactor: CLLocationDegrees = 1.3
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * paddingFactor,
+                                    longitudeDelta: (maxLon - minLon) * paddingFactor)
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                            longitude: (minLon + maxLon) / 2)
+        
+        return MKCoordinateRegion(center: center, span: span)
     }
-     */
 }

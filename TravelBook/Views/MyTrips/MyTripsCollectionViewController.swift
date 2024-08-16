@@ -1,4 +1,6 @@
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 let reuseIdentifier = "datacell"
 
@@ -24,13 +26,53 @@ class MyTripsCollectionViewController: UICollectionViewController {
         addTripVC.callback = { closeModal, tripToAdd in
             addTripVC.dismiss(animated: true)
             if !closeModal! {
-                currentUser?.addTrip(trip: tripToAdd!)
-                self.collectionView.reloadData()
+                self.sendTripToDatabase(trip: tripToAdd!) { good, error  in
+                    if let error {
+                        print("Error adding the trip in the DB...")
+                    } else {
+                        currentUser?.addTrip(trip: tripToAdd!)
+                        self.collectionView.reloadData()
+                    }
+                }
             }
         }
         let navC = UINavigationController(rootViewController: addTripVC)
         navC.modalPresentationStyle = .formSheet
         navigationController?.present(navC, animated: true)
+    }
+    
+    private func sendTripToDatabase(trip: TripModel, completion: @escaping (Bool, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document("as23912sda")
+        
+        do {
+            // Convert Trip struct to JSON data
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(trip)
+            // Convert JSON data to a dictionary
+            let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
+            // Make sure jsonObject is a dictionary
+            guard let tripDictionary = jsonObject as? [String: Any] else {
+                print("Failed to convert JSON data to dictionary.")
+                completion(false, NSError(domain: "ConversionError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert JSON data to dictionary."]))
+                return
+            }
+            // Update the array field by appending the new trip
+            userRef.updateData([
+                "trips": FieldValue.arrayUnion([tripDictionary])
+            ]) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                    completion(false, error)
+                } else {
+                    print("Document successfully updated with new trip!")
+                    completion(true, nil)
+                }
+            }
+        } catch {
+            print("Error encoding trip: \(error)")
+            completion(false, error)
+        }
     }
 }
 

@@ -126,7 +126,6 @@
 				591952D32BB5E29000FD52FE /* Location.swift */,
 				591952D52BB5E29A00FD52FE /* User.swift */,
 				591952D72BB5E2A200FD52FE /* Trip.swift */,
-				591952D92BB5E39200FD52FE /* CurrentUser.swift */,
 				5917D3F12C4ACE8000B72587 /* RegisterModel.swift */,
 			);
 			path = Models;
@@ -177,6 +176,7 @@
 		5943E1A32BB2147B001BEFD6 /* TravelBook */ = {
 			isa = PBXGroup;
 			children = (
+				59CCBF4F2C70074100DE3A96 /* Dummies */,
 				5917D3F32C4AE2F300B72587 /* Utils */,
 				59E3CBB32C41AAFA0023794A /* Views */,
 				591952D22BB5E17B00FD52FE /* Models */,
@@ -247,6 +247,14 @@
 				599E5D102BB7689E00E6DE7E /* TripView.xib */,
 			);
 			path = TripView;
+			sourceTree = "<group>";
+		};
+		59CCBF4F2C70074100DE3A96 /* Dummies */ = {
+			isa = PBXGroup;
+			children = (
+				591952D92BB5E39200FD52FE /* CurrentUser.swift */,
+			);
+			path = Dummies;
 			sourceTree = "<group>";
 		};
 		59E3CBAE2C41A9680023794A /* Map */ = {
