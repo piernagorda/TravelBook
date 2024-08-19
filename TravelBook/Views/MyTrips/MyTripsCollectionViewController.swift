@@ -27,7 +27,7 @@ class MyTripsCollectionViewController: UICollectionViewController {
             addTripVC.dismiss(animated: true)
             if !closeModal! {
                 self.sendTripToDatabase(trip: tripToAdd!) { good, error  in
-                    if let error {
+                    if error != nil {
                         print("Error adding the trip in the DB...")
                     } else {
                         currentUser?.addTrip(trip: tripToAdd!)

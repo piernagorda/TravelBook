@@ -4,7 +4,7 @@
 //
 //  Created by Javier Piernagorda Olivé on 2024-03-25.
 //
-
+import FirebaseAuth
 import UIKit
 
 class ProfileViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -24,7 +24,12 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.topViewController?.navigationItem.rightBarButtonItem = nil
+        // rectangle.portrait.and.arrow.right
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+                                                                                                     style: .plain,
+                                                                                                     target: self,
+                                                                                                     action: #selector(logoutMessage))
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
         super.navigationController?.navigationBar.isHidden = false
     }
     
@@ -34,6 +39,26 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         biography?.text = currentUser?.description
         let nib = UINib(nibName: "AchievementsViewCell", bundle: nil)
         self.achievementsCollectionView!.register(nib, forCellWithReuseIdentifier: "datacell2")
+    }
+    
+    @objc func logoutMessage() {
+        let alert = UIAlertController(title: "Log Out", message: "You're going to log out. Are you sure?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        let logoutAction = UIAlertAction(title: "OK", style: .default) {_ in
+            self.logout()
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(logoutAction)
+        self.present(alert, animated: true)
+    }
+    
+    private func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Logged out")
+        }
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }
