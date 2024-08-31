@@ -14,6 +14,8 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
 
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
+    private var previousLocation: LocationModel?
+    private var zoomOutRegion: MKCoordinateRegion?
     
     public var index: Int!
     
@@ -40,8 +42,6 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
         cell.image?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code.lowercased() ?? "default-image2")
         cell.city?.text = currentUser?.trips[index].locations[indexPath.row].city
         cell.country?.text = currentUser?.trips[index].locations[indexPath.row].country
-        print(currentUser?.trips[index].locations[indexPath.row].city)
-              print(currentUser?.trips[index].locations[indexPath.row].country)
         return cell
     }
     
@@ -49,22 +49,36 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
         currentUser?.trips[index].locations.count ?? 0
     }
     
-    /*
-     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = UITableViewCell()
-     let city = currentUser?.trips[index].locations[indexPath.row].city
-     let country = currentUser?.trips[index].locations[indexPath.row].country
-     cell.textLabel?.text = (city ?? "") + ", " + (country ?? "")
-     cell.imageView?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code ?? "AZ")
-     return cell
-     }
-     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     currentUser?.trips[index].locations.count ?? 0
-     }
-     
-     */
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if previousLocation == nil {
+            previousLocation = currentUser!.trips[index].locations[indexPath.row]
+            let location = CLLocationCoordinate2D(latitude: CLLocationDegrees(currentUser!.trips[index].locations[indexPath.row].latitude),
+                                                  longitude: CLLocationDegrees(currentUser!.trips[index].locations[indexPath.row].longitude))
+
+                    let region = MKCoordinateRegion(
+                        center: location,
+                        latitudinalMeters: 10000, // Zoom level - adjust as needed
+                        longitudinalMeters: 10000  // Zoom level - adjust as needed
+                    )
+            map.setRegion(region, animated: true)
+        } else {
+            // Step 1: Set the region of all the coordinates
+            let newLocation = CLLocationCoordinate2D(latitude: CLLocationDegrees(currentUser!.trips[index].locations[indexPath.row].latitude),
+                                                     longitude: CLLocationDegrees(currentUser!.trips[index].locations[indexPath.row].longitude))
+
+            map.setRegion(zoomOutRegion!, animated: true)
+            
+            // Step 2: After a delay, zoom into the new location
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                let zoomedInRegion = MKCoordinateRegion(
+                    center: newLocation,
+                    latitudinalMeters: 10000, // Adjust these values for the zoom level at the new location
+                    longitudinalMeters: 10000
+                )
+                self.map.setRegion(zoomedInRegion, animated: true)
+            }
+        }
+    }
     
 }
 
@@ -109,6 +123,7 @@ extension TripViewController {
         // Calculate the region to include all annotations
         if !coordinates.isEmpty {
             let region = regionForCoordinates(coordinates: coordinates)
+            self.zoomOutRegion = region
             map.setRegion(region, animated: true)
         }
     }
