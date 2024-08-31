@@ -12,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TripViewController" customModule="TravelBook" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="c11-zm-qUY" id="CSn-W1-PzK"/>
                 <outlet property="map" destination="kma-gY-46a" id="gUq-ci-Jxh"/>
-                <outlet property="tableView" destination="OAD-mE-Md2" id="erA-se-WZo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,28 +22,34 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OAD-mE-Md2">
-                    <rect key="frame" x="0.0" y="279" width="393" height="573"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </tableView>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kma-gY-46a">
-                    <rect key="frame" x="0.0" y="59" width="393" height="220"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="220" id="0yj-YQ-eoL"/>
-                    </constraints>
+                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                     <standardMapConfiguration key="preferredConfiguration"/>
                 </mapView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="c11-zm-qUY">
+                    <rect key="frame" x="0.0" y="668" width="393" height="150"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="fNW-BF-hlw"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NjY-SP-z55">
+                        <size key="itemSize" width="200" height="150"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kma-gY-46a" secondAttribute="trailing" id="8G6-K4-jJr"/>
-                <constraint firstItem="OAD-mE-Md2" firstAttribute="top" secondItem="kma-gY-46a" secondAttribute="bottom" id="TZ5-IW-9v5" userLabel="Table View.top = Map View.bottom"/>
-                <constraint firstItem="kma-gY-46a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VCg-hJ-rLp"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OAD-mE-Md2" secondAttribute="trailing" id="YLc-Ti-6kC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="OAD-mE-Md2" secondAttribute="bottom" constant="-34" id="fsI-AA-1qO"/>
-                <constraint firstItem="OAD-mE-Md2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gc5-Gu-nS4"/>
-                <constraint firstItem="kma-gY-46a" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="sPB-YU-lMm"/>
+                <constraint firstItem="c11-zm-qUY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RvR-yV-7gM"/>
+                <constraint firstItem="kma-gY-46a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UI7-I1-l6e"/>
+                <constraint firstAttribute="bottom" secondItem="kma-gY-46a" secondAttribute="bottom" id="UvX-hO-wTu"/>
+                <constraint firstItem="kma-gY-46a" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="huC-Mv-6Vy"/>
+                <constraint firstItem="kma-gY-46a" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kIA-yt-51s"/>
+                <constraint firstItem="c11-zm-qUY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="oiQ-mK-4qo"/>
+                <constraint firstItem="c11-zm-qUY" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="wbY-G7-e0F"/>
             </constraints>
             <point key="canvasLocation" x="-2.2900763358778624" y="-11.267605633802818"/>
         </view>

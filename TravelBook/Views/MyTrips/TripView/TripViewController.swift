@@ -8,39 +8,67 @@
 import UIKit
 import MapKit
 
-class TripViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
+class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+
+    let reuseIdentifier = "datacell7"
 
     @IBOutlet weak var map: MKMapView!
-    @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var collectionView: UICollectionView!
     
     public var index: Int!
-    /*
-    private var mapView: MapView!
-    private var cancelables = Set<AnyCancelable>()
-     */
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView?.delegate = self
-        tableView?.dataSource = self
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let nib = UINib(nibName: "TripViewCell", bundle: nil)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.delegate = self
         map.delegate = self
         setUpMap()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let city = currentUser?.trips[index].locations[indexPath.row].city
-        let country = currentUser?.trips[index].locations[indexPath.row].country
-        cell.textLabel?.text = (city ?? "") + ", " + (country ?? "")
-        cell.imageView?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code ?? "AZ")
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? TripViewCellController else {
+            return UICollectionViewCell()
+        }
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = 10.0
+        cell.layer.masksToBounds = true
+        cell.image?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code.lowercased() ?? "default-image2")
+        cell.city?.text = currentUser?.trips[index].locations[indexPath.row].city
+        cell.country?.text = currentUser?.trips[index].locations[indexPath.row].country
+        print(currentUser?.trips[index].locations[indexPath.row].city)
+              print(currentUser?.trips[index].locations[indexPath.row].country)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         currentUser?.trips[index].locations.count ?? 0
     }
     
+    /*
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     let cell = UITableViewCell()
+     let city = currentUser?.trips[index].locations[indexPath.row].city
+     let country = currentUser?.trips[index].locations[indexPath.row].country
+     cell.textLabel?.text = (city ?? "") + ", " + (country ?? "")
+     cell.imageView?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code ?? "AZ")
+     return cell
+     }
+     
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     currentUser?.trips[index].locations.count ?? 0
+     }
+     
+     */
     
+}
+
+extension TripViewController {
     
     private func setUpMap() {
         let trip: TripModel = currentUser!.trips[index]
@@ -163,5 +191,17 @@ class TripViewController: UIViewController, UITableViewDelegate, UITableViewData
                                             longitude: (minLon + maxLon) / 2)
         
         return MKCoordinateRegion(center: center, span: span)
+    }
+    
+    private func calculateDistanceCovered(_ locations: [LocationModel]) -> Int {
+        var distanceCovered: Double = 0.0
+        
+        for i in 0 ..< locations.count - 1 {
+            let locationA = CLLocation(latitude: locations[i].latitude, longitude: locations[i].longitude)
+            let locationB = CLLocation(latitude: locations[i+1].latitude, longitude: locations[i+1].longitude)
+            distanceCovered += locationA.distance(from: locationB)
+        }
+        
+        return Int(distanceCovered)
     }
 }

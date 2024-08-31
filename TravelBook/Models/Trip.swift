@@ -1,3 +1,4 @@
+import CoreLocation
 import UIKit
 
 final class TripModel: Codable {
@@ -44,7 +45,7 @@ extension TripModel {
                                 city: "Barcelona",
                                 latitude: 41.3927673,
                                 longitude: 2.057788,
-                                countryA2Code: "ES")
+                                countryA2Code: "es")
         return TripModel(locations: [.mock(), bcn],
                          year: 2022,
                          title: "Test Trip",
@@ -57,7 +58,7 @@ extension TripModel {
                                      city: "Helsinki",
                                      latitude: 60.1097541,
                                      longitude: 24.6890579,
-                                     countryA2Code: "FI")
+                                     countryA2Code: "fi")
         return TripModel(locations: [.mock(), helsinki],
                          year: 2023,
                          title: "Test Trip",
@@ -70,17 +71,17 @@ extension TripModel {
                                    city: "Thessaloniki",
                                    latitude: 40.6211852,
                                    longitude: 22.9048277,
-                                   countryA2Code: "GR")
+                                   countryA2Code: "gr")
         let turkey = LocationModel(country: "Turkey",
                                    city: "Capadoccia",
                                    latitude: 38.3694845,
                                    longitude: 33.7451519,
-                                   countryA2Code: "TR")
+                                   countryA2Code: "tr")
         let sophia = LocationModel(country: "Bulgaria",
                                    city: "Sophia",
                                    latitude: 42.6954025,
                                    longitude: 23.2413747,
-                                   countryA2Code: "BG")
+                                   countryA2Code: "bg")
         return TripModel(locations: [.mock(), thessa, turkey, sophia],
                          year: 2020,
                          title: "Test Trip",

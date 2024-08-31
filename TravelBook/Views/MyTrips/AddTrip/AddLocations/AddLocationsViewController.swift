@@ -53,9 +53,8 @@ extension AddLocationsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var locationToAppend = filterData[indexPath.row]
-        locationToAppend.countryA2code =  countryToAlpha2Code[locationToAppend.country] ?? ""
-        print(locationToAppend.countryA2code)
+        let locationToAppend = filterData[indexPath.row]
+        locationToAppend.countryA2code =  countryToAlpha2Code[locationToAppend.country]?.lowercased() ?? ""
         countriesInTrip.append(filterData[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
