@@ -27,6 +27,7 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
+        navigationController?.navigationBar.tintColor = .black
         map.delegate = self
         setUpMap()
     }
@@ -35,10 +36,6 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? TripViewCellController else {
             return UICollectionViewCell()
         }
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 1
-        cell.layer.cornerRadius = 10.0
-        cell.layer.masksToBounds = true
         cell.image?.image = UIImage(named: currentUser?.trips[index].locations[indexPath.row].countryA2code.lowercased() ?? "default-image2")
         cell.city?.text = currentUser?.trips[index].locations[indexPath.row].city
         cell.country?.text = currentUser?.trips[index].locations[indexPath.row].country

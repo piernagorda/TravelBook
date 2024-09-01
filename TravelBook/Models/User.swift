@@ -73,6 +73,6 @@ extension UserModel {
                   lastname: "Piernagorda",
                   description: "This is my bio!",
                   trips: [.mockOne(), .mockTwo(), .mockThree()],
-                  countriesVisited: ["ES", "FI", "US", "CA", "FR", "IT", "GR"])
+                  countriesVisited: ["es", "fi", "us", "ca", "fr", "it", "gr"])
     }
 }

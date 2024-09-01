@@ -16,6 +16,10 @@ class TripViewCellController: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderWidth = 2
+        self.layer.cornerRadius = 10.0
+        self.layer.masksToBounds = true
         image.layer.borderColor = UIColor.black.cgColor
         image.layer.borderWidth = 1
         image.layer.cornerRadius = 5.0
