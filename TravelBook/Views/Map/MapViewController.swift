@@ -8,56 +8,112 @@
 import UIKit
 import MapKit
 import Foundation
+import FirebaseStorage
 
 class MapViewController: UIViewController, MKMapViewDelegate {
 
-    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var button: UIButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpMap()
-        map.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.navigationController?.navigationBar.isHidden = true
     }
     
-    private func setUpMap() {
-        let trip: TripModel = .mockOne()
+    @IBAction func uploadPhoto() {
+        // Get the image you want to upload
+        guard let image = UIImage(named: "JAVIER.jpg") else {
+            print("Error: Image not found")
+            return
+        }
         
-        let locations = trip.locations
-        let count = locations.count - 1
-        
-        for i in 0 ..< count {
-            var annotations : [CLLocationCoordinate2D] = []
+        // Convert the image to data
+        if let imageData = image.jpegData(compressionQuality: 0.8) {
+            // Create a reference in Firebase Storage
+            let storageRef = Storage.storage().reference()
+            let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
             
-            let annotation = MKPointAnnotation()
-            annotation.coordinate.latitude = locations[i].latitude
-            annotation.coordinate.longitude = locations[i].longitude
-            annotation.title = locations[i].city
-            annotation.subtitle = locations[i].country
-            self.map.addAnnotation(annotation)
-            annotations.append(annotation.coordinate)
-       
-            let annotation2 = MKPointAnnotation()
-            annotation2.coordinate.latitude = locations[i+1].latitude
-            annotation2.coordinate.longitude = locations[i+1].longitude
-            annotation2.title = locations[i+1].city
-            annotation2.subtitle = locations[i+1].country
-            self.map.addAnnotation(annotation2)
-
-            annotations.append(annotation2.coordinate)
-        
-            map.addOverlay(MKPolyline(coordinates: annotations, count: 2))
-            
+            // Upload the image
+            imageRef.putData(imageData, metadata: nil) { metadata, error in
+                if let error = error {
+                    print("Error uploading image: \(error.localizedDescription)")
+                    return
+                } else {
+                    // Get the download URL after the image is uploaded
+                    imageRef.downloadURL { url, error in
+                        if let error = error {
+                            print("Error getting download URL: \(error.localizedDescription)")
+                        } else if let url = url {
+                            print("Download URL: \(url.absoluteString)")
+                            
+                            // Now save the URL to Firestore
+                            // self.saveImageURLToFirestore(imageURL: url.absoluteString)
+                            self.loadImageFromURL(url.absoluteString)
+                        }
+                    }
+                }
+            }
         }
     }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer{
-        let polylineRenderer  = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        polylineRenderer.strokeColor = UIColor.blue
-        polylineRenderer.lineWidth = 3.0
-        return polylineRenderer
+
+    /*
+    2. Save the Image URL in Firestore
+
+    Once you have the download URL of the uploaded image, you can save it in Firestore under the user's document (as23912sda).
+
+    swift
+
+    func saveImageURLToFirestore(imageURL: String) {
+        // Get a reference to Firestore
+        let db = Firestore.firestore()
+
+        // Get the user's document (replace 'as23912sda' with the actual document ID)
+        let userDocRef = db.collection("users").document("as23912sda")
+        
+        // Update the document by adding the image URL (e.g., under the field 'profileImageUrl')
+        userDocRef.updateData([
+            "profileImageUrl": imageURL
+        ]) { error in
+            if let error = error {
+                print("Error updating Firestore: \(error.localizedDescription)")
+            } else {
+                print("Image URL successfully saved to Firestore")
+            }
+        }
     }
+     */
+    
+    func loadImageFromURL(_ imageURL: String) {
+        guard let url = URL(string: imageURL) else {
+            print("Error: Invalid URL")
+            return
+        }
+
+        // Fetch the image data asynchronously
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error loading image: \(error.localizedDescription)")
+                return
+            }
+
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    // Ensure the navigationController exists before pushing
+                    if let navigationController = self.navigationController {
+                        let testController = TestViewController(nibName: "TestView", bundle: nil)
+                        testController.imagee = image
+                        print(image)
+                        navigationController.pushViewController(testController, animated: true)
+                    } else {
+                        print("Error: Navigation controller is nil")
+                    }
+                }
+            } else {
+                print("Error: Could not convert data to image")
+            }
+        }.resume()
+    }
+
 }

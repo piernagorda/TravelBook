@@ -3,7 +3,6 @@ import Foundation
 final class UserModel: Codable {
     var userId: String
     var email: String
-    var password: String
     var username: String
     var name: String
     var lastname: String
@@ -13,7 +12,6 @@ final class UserModel: Codable {
     
     init(userId: String,
          email: String,
-         password: String,
          username: String,
          name: String,
          lastname: String,
@@ -22,7 +20,6 @@ final class UserModel: Codable {
          countriesVisited: [String]?) {
         self.userId = userId
         self.email = email
-        self.password = password
         self.username = username
         self.name = name
         self.lastname = lastname
@@ -48,7 +45,6 @@ final class UserModel: Codable {
         var dict: [String: Any] = [
             "userId": userId,
             "email": email,
-            "password": password,
             "username": username,
             "name": name,
             "lastname": lastname,
@@ -65,9 +61,8 @@ final class UserModel: Codable {
 
 extension UserModel {
     static func mock() -> UserModel {
-        UserModel(userId: "as23912sda",
+        UserModel(userId: "4CNse5M1QyapDLTj6BobjYDThVY2",
                   email: "javier.poa@gmail.com",
-                  password: "123456",
                   username: "piernagorda",
                   name: "Javier",
                   lastname: "Piernagorda",

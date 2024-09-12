@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -9,33 +9,30 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="TravelBook" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestViewController" customModule="TravelBook" customModuleProvider="target">
             <connections>
-                <outlet property="button" destination="nfM-ip-g9X" id="1bx-Tx-lUD"/>
+                <outlet property="image" destination="bdY-Xe-q2g" id="3lV-xh-FPT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfM-ip-g9X">
-                    <rect key="frame" x="157.66666666666666" y="404.66666666666669" width="75" height="35"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                    <connections>
-                        <action selector="uploadPhoto" destination="-1" eventType="touchDown" id="fhv-o3-imr"/>
-                    </connections>
-                </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bdY-Xe-q2g">
+                    <rect key="frame" x="76" y="339" width="241" height="174"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="nfM-ip-g9X" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="QTI-Vc-CYz"/>
-                <constraint firstItem="nfM-ip-g9X" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="a8F-tC-Oxl"/>
+                <constraint firstItem="bdY-Xe-q2g" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="280" id="06k-7f-W4f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bdY-Xe-q2g" secondAttribute="trailing" constant="76" id="OXa-ga-wP6"/>
+                <constraint firstItem="bdY-Xe-q2g" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="jGf-Z4-eaE"/>
+                <constraint firstItem="bdY-Xe-q2g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="76" id="qav-i0-ixo"/>
             </constraints>
-            <point key="canvasLocation" x="130.76923076923077" y="-11.374407582938389"/>
+            <point key="canvasLocation" x="-66.412213740458014" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>

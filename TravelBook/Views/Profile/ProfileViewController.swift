@@ -30,6 +30,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
                                                                                                      target: self,
                                                                                                      action: #selector(logoutMessage))
         navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
+        navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"),
+                                                                                                     style: .plain,
+                                                                                                     target: self,
+                                                                                                     action: #selector(navigateToSettings))
+        navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
         super.navigationController?.navigationBar.isHidden = false
     }
     
@@ -50,6 +55,11 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
         alert.addAction(cancelAction)
         alert.addAction(logoutAction)
         self.present(alert, animated: true)
+    }
+    
+    @objc func navigateToSettings() {
+        let settingsController = SettingsViewController(nibName: "SettingsView", bundle: nil)
+        navigationController?.pushViewController(settingsController, animated: true)
     }
     
     private func logout() {
@@ -76,5 +86,4 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {    // add the code here to perform action on the cell
         // let cell = collectionView.cellForItem(at: indexPath) as? CustomCellClass
     }
-    
 }

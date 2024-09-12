@@ -52,5 +52,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C750C9F-24D4-4082-9100-A6286DDB3C6B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravelBook/Views/Map/MapViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "loadImageFromURL(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9C750C9F-24D4-4082-9100-A6286DDB3C6B - efc818ae72a4cede"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in TravelBook.MapViewController.loadImageFromURL(Swift.String) -&gt; ()"
+                  moduleName = "TravelBook"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/javi/Documents/GitHub/TravelBook/TravelBook/Views/Map/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "472">
+               </Location>
+               <Location
+                  uuid = "9C750C9F-24D4-4082-9100-A6286DDB3C6B - efc818ae72a4cede"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in TravelBook.MapViewController.loadImageFromURL(Swift.String) -&gt; ()"
+                  moduleName = "TravelBook"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/javi/Documents/GitHub/TravelBook/TravelBook/Views/Map/MapViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "604">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

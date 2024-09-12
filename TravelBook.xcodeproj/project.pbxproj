@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590A84EE2C935747004D18F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A84EC2C935747004D18F0 /* SettingsViewController.swift */; };
+		590A84EF2C935747004D18F0 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 590A84ED2C935747004D18F0 /* SettingsView.xib */; };
+		590A84F32C935ACB004D18F0 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A84F12C935ACB004D18F0 /* TestViewController.swift */; };
+		590A84F42C935ACB004D18F0 /* TestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 590A84F22C935ACB004D18F0 /* TestView.xib */; };
 		590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3FAB2C541E1800C718A9 /* A2Codes.swift */; };
 		5917D3DF2C4AC9E700B72587 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */; };
 		5917D3E22C4ACAA600B72587 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5917D3E12C4ACAA600B72587 /* FirebaseAuth */; };
@@ -55,6 +59,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590A84EC2C935747004D18F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		590A84ED2C935747004D18F0 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
+		590A84F12C935ACB004D18F0 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		590A84F22C935ACB004D18F0 /* TestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestView.xib; sourceTree = "<group>"; };
 		590B3FAB2C541E1800C718A9 /* A2Codes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A2Codes.swift; sourceTree = "<group>"; };
 		5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5917D3F12C4ACE8000B72587 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
@@ -115,6 +123,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		590A84EB2C93562A004D18F0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				590A84EC2C935747004D18F0 /* SettingsViewController.swift */,
+				590A84ED2C935747004D18F0 /* SettingsView.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		590A84F02C935ABF004D18F0 /* TestView */ = {
+			isa = PBXGroup;
+			children = (
+				590A84F12C935ACB004D18F0 /* TestViewController.swift */,
+				590A84F22C935ACB004D18F0 /* TestView.xib */,
+			);
+			path = TestView;
+			sourceTree = "<group>";
+		};
 		5917D3F32C4AE2F300B72587 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +242,7 @@
 		5943E1C42BB21C68001BEFD6 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				590A84EB2C93562A004D18F0 /* Settings */,
 				591952E02BB5F9DB00FD52FE /* AchievementsCollectionView */,
 				5943E1C52BB21C74001BEFD6 /* ProfileViewController.swift */,
 				5943E1C62BB21C74001BEFD6 /* ProfileView.xib */,
@@ -265,6 +292,7 @@
 		59E3CBAE2C41A9680023794A /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				590A84F02C935ABF004D18F0 /* TestView */,
 				59E3CBAF2C41A9900023794A /* MapViewController.swift */,
 				59E3CBB02C41A9900023794A /* MapView.xib */,
 			);
@@ -393,7 +421,9 @@
 				59960C952BB8860900724A22 /* AddLocationsView.xib in Resources */,
 				5943E1B12BB2147C001BEFD6 /* LaunchScreen.storyboard in Resources */,
 				59EE18262C83C31000228B4A /* TripViewCell.xib in Resources */,
+				590A84F42C935ACB004D18F0 /* TestView.xib in Resources */,
 				5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */,
+				590A84EF2C935747004D18F0 /* SettingsView.xib in Resources */,
 				5943E1C82BB21C74001BEFD6 /* ProfileView.xib in Resources */,
 				5943E1AE2BB2147C001BEFD6 /* Assets.xcassets in Resources */,
 				59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */,
@@ -418,11 +448,13 @@
 				5917D3F52C4AE2FC00B72587 /* AuthService.swift in Sources */,
 				591952D42BB5E29000FD52FE /* Location.swift in Sources */,
 				59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */,
+				590A84F32C935ACB004D18F0 /* TestViewController.swift in Sources */,
 				591952E32BB5F9F500FD52FE /* AchievementsViewCell.swift in Sources */,
 				59EE18252C83C31000228B4A /* TripViewCellController.swift in Sources */,
 				5943E1C32BB21C53001BEFD6 /* TabBarController.swift in Sources */,
 				5943E1C72BB21C74001BEFD6 /* ProfileViewController.swift in Sources */,
 				5943E1A52BB2147B001BEFD6 /* AppDelegate.swift in Sources */,
+				590A84EE2C935747004D18F0 /* SettingsViewController.swift in Sources */,
 				59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */,
 				5917D3F22C4ACE8000B72587 /* RegisterModel.swift in Sources */,
 				591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */,
