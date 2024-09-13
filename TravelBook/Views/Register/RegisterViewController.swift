@@ -28,11 +28,11 @@ class RegisterViewController: UIViewController {
         if (fullNameTextField!.hasText && emailTextField!.hasText && usernameTextField!.hasText && passwordTextField!.hasText && passwordRepeatTextField!.hasText && passwordTextField!.text == passwordRepeatTextField!.text){
             // Request Data
             let userData = RegisterUserRequest(email: emailTextField!.text!,
-                                              password: passwordTextField!.text!,
-                                              name: emailTextField!.text!,
-                                              username: usernameTextField!.text!,
-                                              birthDate: Date())
-                        
+                                               password: passwordTextField!.text!,
+                                               name: emailTextField!.text!,
+                                               username: usernameTextField!.text!,
+                                               birthDate: Date())
+            
             AuthService.shared.registerUser(userRequest: userData, completion: { wasRegistered, error in
                 if let error = error {
                     print(error.localizedDescription)

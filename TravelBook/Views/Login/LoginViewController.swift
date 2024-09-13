@@ -33,10 +33,14 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonTapped() {
         AuthService.shared.signIn(email: emailTextField!.text!, password: passwordTextField!.text!) { signedIn, error in
             if signedIn {
-                self.fetchUserModel(userId: "as23912sda") { result in
+                guard let userID = Auth.auth().currentUser?.uid else {
+                    return
+                }
+                self.fetchUserModel(userId: userID) { result in
                     switch result {
                     case .success:
                         print("User retrieved successfully")
+                        print("User ID: " + userID)
                         self.navigateToHomeScreen()
                     case .failure(let error):
                         print("Error retrieving user: \(error.localizedDescription)")

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="addLocationsButton" destination="Rhw-RN-IPn" id="9XR-iC-bO4"/>
                 <outlet property="choosePhotoButton" destination="Aea-GS-H0i" id="bgc-ZY-cja"/>
-                <outlet property="image" destination="Iug-h1-X2t" id="Di4-DS-knm"/>
+                <outlet property="imageView" destination="Iug-h1-X2t" id="WZL-tK-UlO"/>
                 <outlet property="table" destination="Yjg-Es-re4" id="b4W-8a-vGj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,17 +23,20 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="yfn-xk-YSh">
+                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="42" translatesAutoresizingMaskIntoConstraints="NO" id="yfn-xk-YSh">
                     <rect key="frame" x="54" y="59.000000000000007" width="285" height="80.666666666666686"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Iug-h1-X2t">
-                            <rect key="frame" x="0.0" y="31.333333333333329" width="24.666666666666668" height="18"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iug-h1-X2t">
+                            <rect key="frame" x="0.0" y="10.333333333333329" width="80" height="60"/>
                             <color key="tintColor" systemColor="labelColor"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aea-GS-H0i">
-                            <rect key="frame" x="84.666666666666643" y="23.333333333333332" width="200.33333333333337" height="34.333333333333343"/>
+                            <rect key="frame" x="122" y="23.333333333333332" width="163" height="34.333333333333343"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="Choose a photo"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Choose a Photo"/>
+                            <connections>
+                                <action selector="choosePhotoPressed:" destination="-1" eventType="touchDown" id="0x4-Hn-3eP"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
@@ -51,7 +54,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhw-RN-IPn">
                     <rect key="frame" x="130" y="442.66666666666669" width="133" height="34.333333333333314"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Add locations!"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Add Locations"/>
                     <connections>
                         <action selector="addLocationsPressed" destination="-1" eventType="touchDown" id="2IV-wv-REa"/>
                     </connections>
@@ -75,9 +78,8 @@
         </view>
     </objects>
     <resources>
-        <image name="camera" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

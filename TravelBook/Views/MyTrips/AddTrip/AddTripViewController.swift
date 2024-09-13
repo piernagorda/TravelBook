@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import Photos
 
-class AddTripViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddTripViewController: UIViewController,
+                             UITableViewDelegate,
+                             UITableViewDataSource,
+                             UIImagePickerControllerDelegate,
+                             UINavigationControllerDelegate {
 
-    @IBOutlet weak var image: UIImageView?
+    @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var choosePhotoButton: UIButton?
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var addLocationsButton: UIButton?
+    lazy var imagePicker = UIImagePickerController()
+
     
     public var callback: (_ close: Bool?, _ tripToAdd: TripModel?) -> Void = {close, tripToAdd in ()}
     private var temporaryTrip = TripModel(locations: [], year: 0, title: "", description: "")
@@ -38,6 +45,28 @@ class AddTripViewController: UIViewController, UITableViewDelegate, UITableViewD
         let navC = UINavigationController(rootViewController: addLocationsVC)
         navC.modalPresentationStyle = .formSheet
         navigationController?.present(navC, animated: true)
+    }
+    
+    @IBAction func choosePhotoPressed(_ sender: Any) {
+            PHPhotoLibrary.requestAuthorization({ [self]status in
+                if status == .authorized{
+                    DispatchQueue.main.async { [self] in
+                        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                            self.imagePicker.delegate = self
+                            self.imagePicker.sourceType = .photoLibrary
+                            self.imagePicker.allowsEditing = false
+                            present(imagePicker, animated: true, completion: nil)
+                        }
+                    }
+                } else {}
+            })
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageView!.image = image
+        }
     }
     
     @objc func addTrip() {
