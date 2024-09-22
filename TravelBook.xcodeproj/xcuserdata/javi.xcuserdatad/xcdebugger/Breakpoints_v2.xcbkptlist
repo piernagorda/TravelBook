@@ -100,5 +100,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "921925A4-C2DA-4E63-A318-F86B1D0578F4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TravelBook/Entities/TripEntity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "toTripModel(loadedImage:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "921925A4-C2DA-4E63-A318-F86B1D0578F4 - 6cc7b9270298773"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TravelBook.TripEntity.toTripModel(loadedImage: Swift.Optional&lt;__C.UIImage&gt;) -&gt; TravelBook.TripModel"
+                  moduleName = "TravelBook"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/javi/Documents/GitHub/TravelBook/TravelBook/Entities/TripEntity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "921925A4-C2DA-4E63-A318-F86B1D0578F4 - 380bc2e06f935076"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (TravelBook.LocationEntity) -&gt; TravelBook.LocationModel in TravelBook.TripEntity.toTripModel(loadedImage: Swift.Optional&lt;__C.UIImage&gt;) -&gt; TravelBook.TripModel"
+                  moduleName = "TravelBook"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/javi/Documents/GitHub/TravelBook/TravelBook/Entities/TripEntity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

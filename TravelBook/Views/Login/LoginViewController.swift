@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var preloadDataButton: UIButton?
     @IBOutlet weak var loginButton: UIButton?
     @IBOutlet weak var registerButton: UIButton?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped() {
+        // Start animating the loader
+        activityIndicator.startAnimating()
+        
         AuthService.shared.signIn(email: emailTextField!.text!, password: passwordTextField!.text!) { signedIn, error in
             if signedIn {
                 guard let userID = Auth.auth().currentUser?.uid else {
@@ -39,8 +43,7 @@ class LoginViewController: UIViewController {
                 self.fetchUserModel(userId: userID) { result in
                     switch result {
                     case .success:
-                        print("User retrieved successfully")
-                        print("User ID: " + userID)
+                        self.activityIndicator.stopAnimating()
                         self.navigateToHomeScreen()
                     case .failure(let error):
                         print("Error retrieving user: \(error.localizedDescription)")
@@ -83,25 +86,31 @@ extension LoginViewController {
             
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                let userModel = try JSONDecoder().decode(UserEntity.self, from: jsonData)
+                let userEntity = try JSONDecoder().decode(UserEntity.self, from: jsonData)
                 // Setting the current user to the data retrieved
-                currentUser = userModel.toUserModel(arrayOfLoadedImages: nil)
-                print("Current entity: ")
-                print(userModel.toDictionary())
+                currentUser = userEntity.toUserModel(arrayOfLoadedImages: nil)
+                print(userEntity.trips[0].tripImageURL)
+                print(currentUser!.trips[0].tripImageURL)
+                // Initialize DispatchGroup to manage asynchronous tasks
+                let dispatchGroup = DispatchGroup()
+                
                 for trip in currentUser!.trips {
                     print("Iterating trips")
-                    print("URL found: " +  (trip.tripImageURL ?? "none"))
-                    if let tripImageURL = trip.tripImageURL {
-                        print("URL is not nil, will try to load images")
-                        self.loadImageFromURL(tripImageURL) { image in
-                            trip.tripImage = image
-                        }
-                    } else {
-                        print("URL was nil, default image asigned")
-                        trip.tripImage = UIImage(named: "default-image")!
+                    print("URL found: " + (trip.tripImageURL ?? "none"))
+                    
+                    // Enter the group before starting the image load
+                    dispatchGroup.enter()
+                    
+                    self.loadImageFromURL(trip.tripImageURL) { image in
+                        trip.tripImage = image
+                        // Leave the group when the image is loaded
+                        dispatchGroup.leave()
                     }
                 }
-                completion(.success(userModel.toUserModel(arrayOfLoadedImages: nil)))
+                // Wait for all image loading to complete before calling the completion
+                dispatchGroup.notify(queue: .main) {
+                    completion(.success(currentUser!))
+                }
             } catch {
                 completion(.failure(error))
             }

@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="TravelBook" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="4T3-Np-Bac" id="Ktt-hC-KhT"/>
                 <outlet property="emailTextField" destination="tRG-gW-ab4" id="t7o-jx-h8v"/>
                 <outlet property="loginButton" destination="hXt-dV-c5g" id="GTR-MW-6Ie"/>
                 <outlet property="passwordTextField" destination="4jj-hh-YRN" id="4PD-FI-E5h"/>
@@ -80,6 +81,9 @@
                         </button>
                     </subviews>
                 </stackView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="4T3-Np-Bac">
+                    <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -88,11 +92,13 @@
                 <constraint firstItem="DC5-2l-8lz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="1Ri-8z-lk6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DC5-2l-8lz" secondAttribute="trailing" constant="20" id="1mp-HT-uA5"/>
                 <constraint firstItem="qco-0V-6qv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="61T-iP-jc0"/>
+                <constraint firstItem="4T3-Np-Bac" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="9RU-If-xgc"/>
                 <constraint firstItem="PWb-Qp-GKG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="167" id="HMW-U1-RZQ"/>
                 <constraint firstItem="PWb-Qp-GKG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="QhY-80-7Mv"/>
                 <constraint firstItem="qco-0V-6qv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="52" id="VzH-WR-aNO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DC5-2l-8lz" secondAttribute="bottom" constant="44" id="ezs-go-ZiO"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qco-0V-6qv" secondAttribute="trailing" constant="20" id="fkh-mS-DDU"/>
+                <constraint firstItem="4T3-Np-Bac" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="otk-Y8-t7Q"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>

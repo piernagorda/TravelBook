@@ -7,12 +7,12 @@ final class TripEntity: Codable {
     var title: String
     var description: String
     var tripId: String
-    var tripImageURL: String?
+    var tripImageURL: String
     
     init(locations: [LocationEntity],
          year: Int,
          title: String,
-         tripImageURL: String? = "default-image",
+         tripImageURL: String,
          description: String){
         self.locations = locations
         self.year = year
@@ -27,7 +27,7 @@ final class TripEntity: Codable {
         var dict: [String: Any] = [
             "year": year,
             "title": title,
-            "tripImage": tripImageURL ?? "default-image",
+            "tripImage": tripImageURL,
             "description": description,
             "tripId": tripId
         ]

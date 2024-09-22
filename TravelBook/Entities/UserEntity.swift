@@ -53,8 +53,7 @@ final class UserEntity: Codable {
                   username: username,
                   name: name,
                   lastname: lastname,
-                  trips: trips.enumerated().map { index, element in
-            element.toTripModel(loadedImage: arrayOfLoadedImages?[index])
+                  trips: trips.map { $0.toTripModel(loadedImage: nil)
         },
                   countriesVisited: countriesVisited)
     }

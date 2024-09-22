@@ -7,7 +7,7 @@ final class TripModel {
     var title: String
     var description: String
     var tripId: String
-    var tripImageURL: String?
+    var tripImageURL: String
     var tripImage: UIImage?
     
     init(locations: [LocationModel],
@@ -22,6 +22,7 @@ final class TripModel {
         self.tripImage = tripImage
         self.description = description
         self.tripId = "abc"
+        self.tripImageURL = tripImageURL ?? "none"
     }
     
     func toTripEntity() -> TripEntity {
