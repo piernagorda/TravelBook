@@ -21,14 +21,18 @@ class AddTripViewController: UIViewController,
     lazy var imagePicker = UIImagePickerController()
 
     
-    public var callback: (_ close: Bool?, _ tripToAdd: TripModel?) -> Void = {close, tripToAdd in ()}
+    public var callback: (_ close: Bool, _ tripToAdd: TripModel?) -> Void = {close, tripToAdd in ()}
     private var temporaryTrip = TripModel(locations: [], year: 0, title: "", tripImage: nil, tripImageURL: nil, description: "")
 
     override func viewDidLoad() {
         table.delegate = self
         table.dataSource = self
+        
         navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeModal))
+        navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
+        
         navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Trip", style: .plain, target: self, action: #selector(addTrip))
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
         super.viewDidLoad()
         let cell = UINib(nibName: "NameAndDescriptionTableView", bundle: nil)
         table.register(cell, forCellReuseIdentifier: "datacell4")
@@ -82,7 +86,7 @@ class AddTripViewController: UIViewController,
         let temporaryTrip = TripModel(locations: temporaryTrip.locations,
                                       year: Int(tripBeginning) ?? 0,
                                       title: tripName,
-                                      tripImage: nil,
+                                      tripImage: imageView?.image,
                                       tripImageURL: nil,
                                       description: tripDescription)
         callback(false, temporaryTrip)

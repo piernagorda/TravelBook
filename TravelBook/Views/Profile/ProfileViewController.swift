@@ -4,6 +4,7 @@
 //
 //  Created by Javier Piernagorda Olivé on 2024-03-25.
 //
+import CoreImage
 import FirebaseAuth
 import UIKit
 
@@ -40,8 +41,20 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func setUpProfileView() {
         name?.text = currentUser?.name
-        username?.text = "@"+currentUser!.username
-        biography?.text = currentUser?.description
+        username?.text = "@" + currentUser!.username
+        biography?.text = currentUser!.description
+        backgroundPicture?.image = UIImage(named: "default-image")
+        // Create a semi-transparent dark overlay view
+        let overlayView = UIView(frame: backgroundPicture!.bounds)
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.4) // Dark layer with 40% opacity
+        backgroundPicture?.addSubview(overlayView)
+        profilePicture!.image = UIImage(named: "JAVIER.jpg")
+        profilePicture!.clipsToBounds = true // Important to clip the image to the rounded corners
+        // Set the corner radius (for a circle, use half of the width/height)
+        profilePicture!.layer.cornerRadius = 5 // You can adjust this value
+        profilePicture!.layer.borderWidth = 2
+        profilePicture!.layer.borderColor = UIColor.black.cgColor
+
         let nib = UINib(nibName: "AchievementsViewCell", bundle: nil)
         self.achievementsCollectionView!.register(nib, forCellWithReuseIdentifier: "datacell2")
     }
@@ -69,6 +82,26 @@ class ProfileViewController: UIViewController, UICollectionViewDataSource, UICol
             print("Logged out")
         }
         navigationController?.popToRootViewController(animated: true)
+    }
+    
+    
+    func dimImage(_ image: UIImage, by brightness: Float) -> UIImage? {
+        guard let ciImage = CIImage(image: image) else { return nil }
+        
+        // Create a filter for brightness adjustment
+        let filter = CIFilter(name: "CIColorControls")!
+        filter.setValue(ciImage, forKey: kCIInputImageKey)
+        filter.setValue(brightness, forKey: kCIInputBrightnessKey) // Range: -1.0 (darker) to 1.0 (brighter)
+        
+        // Get output CIImage
+        guard let outputImage = filter.outputImage else { return nil }
+        
+        // Convert CIImage back to UIImage
+        let context = CIContext()
+        if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
+            return UIImage(cgImage: cgImage)
+        }
+        return nil
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int { 1 }

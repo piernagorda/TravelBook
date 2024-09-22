@@ -95,12 +95,8 @@ extension LoginViewController {
                 let dispatchGroup = DispatchGroup()
                 
                 for trip in currentUser!.trips {
-                    print("Iterating trips")
-                    print("URL found: " + (trip.tripImageURL ?? "none"))
-                    
                     // Enter the group before starting the image load
                     dispatchGroup.enter()
-                    
                     self.loadImageFromURL(trip.tripImageURL) { image in
                         trip.tripImage = image
                         // Leave the group when the image is loaded
@@ -149,7 +145,6 @@ extension LoginViewController {
             print("Error: Invalid URL")
             return
         }
-        print("loading image with URL: " + imageURL)
         // Fetch the image data asynchronously
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
@@ -157,7 +152,6 @@ extension LoginViewController {
                 return
             }
             if let data = data, let image = UIImage(data: data) {
-                print("Image loaded")
                 completion(image)
             } else {
                 print("Error: Could not convert data to image")
