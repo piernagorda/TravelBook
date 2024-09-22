@@ -1,13 +1,14 @@
 import Foundation
+import UIKit
 
-final class UserModel: Codable {
+final class UserEntity: Codable {
     var userId: String
     var email: String
     var username: String
     var name: String
     var lastname: String
     var description: String?
-    var trips: [TripModel]
+    var trips: [TripEntity]
     var countriesVisited: [String] = []
     
     init(userId: String,
@@ -16,7 +17,7 @@ final class UserModel: Codable {
          name: String,
          lastname: String,
          description: String? = nil,
-         trips: [TripModel],
+         trips: [TripEntity],
          countriesVisited: [String]?) {
         self.userId = userId
         self.email = email
@@ -26,18 +27,6 @@ final class UserModel: Codable {
         self.description = description
         self.trips = trips
         self.countriesVisited = countriesVisited ?? []
-    }
-    
-    public func addTrip(trip: TripModel) {
-        trips.append(trip)
-    }
-    
-    public func removeTripWithIndex(index: Int) {
-        trips.remove(at: index)
-    }
-    
-    public func removeTripWithId(id: String) {
-        trips.removeAll(where: { $0.tripId == id })
     }
     
     // Function to convert UserModel to a dictionary
@@ -57,17 +46,16 @@ final class UserModel: Codable {
         
         return dict
     }
-}
-
-extension UserModel {
-    static func mock() -> UserModel {
-        UserModel(userId: "4CNse5M1QyapDLTj6BobjYDThVY2",
-                  email: "javier.poa@gmail.com",
-                  username: "piernagorda",
-                  name: "Javier",
-                  lastname: "Piernagorda",
-                  description: "This is my bio!",
-                  trips: [.mockOne(), .mockTwo(), .mockThree()],
-                  countriesVisited: ["es", "fi", "us", "ca", "fr", "it", "gr"])
+    
+    func toUserModel(arrayOfLoadedImages: [UIImage]?) -> UserModel {
+        UserModel(userId: userId,
+                  email: email,
+                  username: username,
+                  name: name,
+                  lastname: lastname,
+                  trips: trips.enumerated().map { index, element in
+            element.toTripModel(loadedImage: arrayOfLoadedImages?[index])
+        },
+                  countriesVisited: countriesVisited)
     }
 }

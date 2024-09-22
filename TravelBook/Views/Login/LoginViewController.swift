@@ -83,10 +83,25 @@ extension LoginViewController {
             
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                let userModel = try JSONDecoder().decode(UserModel.self, from: jsonData)
+                let userModel = try JSONDecoder().decode(UserEntity.self, from: jsonData)
                 // Setting the current user to the data retrieved
-                currentUser = userModel
-                completion(.success(userModel))
+                currentUser = userModel.toUserModel(arrayOfLoadedImages: nil)
+                print("Current entity: ")
+                print(userModel.toDictionary())
+                for trip in currentUser!.trips {
+                    print("Iterating trips")
+                    print("URL found: " +  (trip.tripImageURL ?? "none"))
+                    if let tripImageURL = trip.tripImageURL {
+                        print("URL is not nil, will try to load images")
+                        self.loadImageFromURL(tripImageURL) { image in
+                            trip.tripImage = image
+                        }
+                    } else {
+                        print("URL was nil, default image asigned")
+                        trip.tripImage = UIImage(named: "default-image")!
+                    }
+                }
+                completion(.success(userModel.toUserModel(arrayOfLoadedImages: nil)))
             } catch {
                 completion(.failure(error))
             }
@@ -118,5 +133,27 @@ extension LoginViewController {
         let ok = UIAlertAction(title: "OK", style: .default)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func loadImageFromURL(_ imageURL: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: imageURL) else {
+            print("Error: Invalid URL")
+            return
+        }
+        print("loading image with URL: " + imageURL)
+        // Fetch the image data asynchronously
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error loading image: \(error.localizedDescription)")
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                print("Image loaded")
+                completion(image)
+            } else {
+                print("Error: Could not convert data to image")
+                completion(nil)
+            }
+        }.resume()
     }
 }

@@ -27,6 +27,14 @@ final class LocationModel: Codable {
             "countryA2code" : countryA2code
         ]
     }
+    
+    func toLocationEntity() -> LocationEntity {
+        LocationEntity(country: country,
+                       city: city,
+                       latitude: latitude,
+                       longitude: longitude,
+                       countryA2Code: countryA2code)
+    }
 }
 
 /*
@@ -38,12 +46,3 @@ final class LocationModel: Codable {
  
  */
 
-extension LocationModel {
-    static func mock() -> Self {
-        Self.init(country: "Spain",
-                  city: "Madrid",
-                  latitude: 40.4380986,
-                  longitude: -3.8443462,
-                  countryA2Code: "ES")
-    }
-}

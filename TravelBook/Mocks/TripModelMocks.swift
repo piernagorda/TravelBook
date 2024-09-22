@@ -1,43 +1,12 @@
-import CoreLocation
-import UIKit
+//
+//  TripModelMocks.swift
+//  TravelBook
+//
+//  Created by Javier Piernagorda Olivé on 9/22/24.
+//
 
-final class TripModel: Codable {
-    var locations: [LocationModel]
-    var year: Int
-    var title: String
-    var tripImage: String?
-    var description: String
-    var tripId: String
-    
-    init(locations: [LocationModel],
-         year: Int,
-         title: String,
-         tripImage: String = "default-image",
-         description: String){
-        self.locations = locations
-        self.year = year
-        self.title = title
-        self.tripImage = tripImage
-        self.description = description
-        self.tripId = "abc"
-    }
-    
-    // Function to convert UserModel to a dictionary
-    func toDictionary() -> [String: Any] {
-        var dict: [String: Any] = [
-            "year": year,
-            "title": title,
-            "tripImage": tripImage ?? "",
-            "description": description,
-            "tripId": tripId
-        ]
-        
-        let locationsArray = self.locations.map { $0.toDictionary() }
-        dict["locations"] = locationsArray
-        
-        return dict
-    }
-}
+import Foundation
+import UIKit
 
 extension TripModel {
     static func mockOne() -> TripModel {
@@ -49,7 +18,8 @@ extension TripModel {
         return TripModel(locations: [.mock(), bcn],
                          year: 2022,
                          title: "Test Trip",
-                         tripImage: "default-image",
+                         tripImage: UIImage(named: "default-image"),
+                         tripImageURL: "default-image.url",
                          description: "Test Description")
     }
     
@@ -62,7 +32,8 @@ extension TripModel {
         return TripModel(locations: [.mock(), helsinki],
                          year: 2023,
                          title: "Test Trip",
-                         tripImage: "default-image2",
+                         tripImage: UIImage(named: "default-image"),
+                         tripImageURL: "default-image.url",
                          description: "Test Description Two")
     }
     
@@ -85,7 +56,8 @@ extension TripModel {
         return TripModel(locations: [.mock(), thessa, turkey, sophia],
                          year: 2020,
                          title: "Test Trip",
-                         tripImage: "default-image3",
+                         tripImage: UIImage(named: "default-image"),
+                         tripImageURL: "default-image.url",
                          description: "Test Description Three")
     }
 }

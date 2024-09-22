@@ -23,9 +23,9 @@
 		5917D3F02C4ACAA600B72587 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 5917D3EF2C4ACAA600B72587 /* FirebaseStorageCombine-Community */; };
 		5917D3F22C4ACE8000B72587 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917D3F12C4ACE8000B72587 /* RegisterModel.swift */; };
 		5917D3F52C4AE2FC00B72587 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917D3F42C4AE2FC00B72587 /* AuthService.swift */; };
-		591952D42BB5E29000FD52FE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D32BB5E29000FD52FE /* Location.swift */; };
-		591952D62BB5E29A00FD52FE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D52BB5E29A00FD52FE /* User.swift */; };
-		591952D82BB5E2A200FD52FE /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D72BB5E2A200FD52FE /* Trip.swift */; };
+		591952D42BB5E29000FD52FE /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D32BB5E29000FD52FE /* LocationModel.swift */; };
+		591952D62BB5E29A00FD52FE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D52BB5E29A00FD52FE /* UserModel.swift */; };
+		591952D82BB5E2A200FD52FE /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D72BB5E2A200FD52FE /* TripModel.swift */; };
 		591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D92BB5E39200FD52FE /* CurrentUser.swift */; };
 		591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */; };
 		591952DF2BB5E5BC00FD52FE /* MyTripsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */; };
@@ -44,6 +44,9 @@
 		5943E1C82BB21C74001BEFD6 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1C62BB21C74001BEFD6 /* ProfileView.xib */; };
 		5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */; };
 		5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */; };
+		597FE98F2CA0058A00ED5507 /* TripModelMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FE98E2CA0058A00ED5507 /* TripModelMocks.swift */; };
+		597FE9912CA0059B00ED5507 /* UserModelMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FE9902CA0059B00ED5507 /* UserModelMocks.swift */; };
+		597FE9932CA005B000ED5507 /* LocationModelMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FE9922CA005B000ED5507 /* LocationModelMocks.swift */; };
 		59960C952BB8860900724A22 /* AddLocationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59960C942BB8860900724A22 /* AddLocationsView.xib */; };
 		59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59960C932BB8860900724A22 /* AddLocationsViewController.swift */; };
 		599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */; };
@@ -52,6 +55,9 @@
 		59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */; };
 		59E3CBB12C41A9900023794A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E3CBAF2C41A9900023794A /* MapViewController.swift */; };
 		59E3CBB22C41A9900023794A /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59E3CBB02C41A9900023794A /* MapView.xib */; };
+		59EB989A2C973E2700655953 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB98992C973E2700655953 /* UserEntity.swift */; };
+		59EB989C2C973E4000655953 /* TripEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB989B2C973E4000655953 /* TripEntity.swift */; };
+		59EB989E2C973E8500655953 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB989D2C973E8500655953 /* LocationEntity.swift */; };
 		59EE18252C83C31000228B4A /* TripViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EE18232C83C31000228B4A /* TripViewCellController.swift */; };
 		59EE18262C83C31000228B4A /* TripViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59EE18242C83C31000228B4A /* TripViewCell.xib */; };
 		59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F56CFC2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift */; };
@@ -67,9 +73,9 @@
 		5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5917D3F12C4ACE8000B72587 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		5917D3F42C4AE2FC00B72587 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		591952D32BB5E29000FD52FE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		591952D52BB5E29A00FD52FE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		591952D72BB5E2A200FD52FE /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		591952D32BB5E29000FD52FE /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		591952D52BB5E29A00FD52FE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		591952D72BB5E2A200FD52FE /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
 		591952D92BB5E39200FD52FE /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewCell.swift; sourceTree = "<group>"; };
 		591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsViewCell.xib; sourceTree = "<group>"; };
@@ -90,6 +96,9 @@
 		5943E1C62BB21C74001BEFD6 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsCollectionViewController.swift; sourceTree = "<group>"; };
 		5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsCollectionView.xib; sourceTree = "<group>"; };
+		597FE98E2CA0058A00ED5507 /* TripModelMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModelMocks.swift; sourceTree = "<group>"; };
+		597FE9902CA0059B00ED5507 /* UserModelMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModelMocks.swift; sourceTree = "<group>"; };
+		597FE9922CA005B000ED5507 /* LocationModelMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModelMocks.swift; sourceTree = "<group>"; };
 		59960C932BB8860900724A22 /* AddLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationsViewController.swift; sourceTree = "<group>"; };
 		59960C942BB8860900724A22 /* AddLocationsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddLocationsView.xib; sourceTree = "<group>"; };
 		599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +107,9 @@
 		59A850EB2BB9C938005D3E9B /* AddTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTripView.xib; sourceTree = "<group>"; };
 		59E3CBAF2C41A9900023794A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		59E3CBB02C41A9900023794A /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
+		59EB98992C973E2700655953 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		59EB989B2C973E4000655953 /* TripEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEntity.swift; sourceTree = "<group>"; };
+		59EB989D2C973E8500655953 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
 		59EE18232C83C31000228B4A /* TripViewCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewCellController.swift; sourceTree = "<group>"; };
 		59EE18242C83C31000228B4A /* TripViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripViewCell.xib; sourceTree = "<group>"; };
 		59F56CFC2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameAndDescriptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -153,9 +165,9 @@
 		591952D22BB5E17B00FD52FE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				591952D32BB5E29000FD52FE /* Location.swift */,
-				591952D52BB5E29A00FD52FE /* User.swift */,
-				591952D72BB5E2A200FD52FE /* Trip.swift */,
+				591952D32BB5E29000FD52FE /* LocationModel.swift */,
+				591952D52BB5E29A00FD52FE /* UserModel.swift */,
+				591952D72BB5E2A200FD52FE /* TripModel.swift */,
 				5917D3F12C4ACE8000B72587 /* RegisterModel.swift */,
 			);
 			path = Models;
@@ -206,10 +218,12 @@
 		5943E1A32BB2147B001BEFD6 /* TravelBook */ = {
 			isa = PBXGroup;
 			children = (
+				597FE98D2CA0057400ED5507 /* Mocks */,
 				59CCBF4F2C70074100DE3A96 /* Dummies */,
 				5917D3F32C4AE2F300B72587 /* Utils */,
 				59E3CBB32C41AAFA0023794A /* Views */,
 				591952D22BB5E17B00FD52FE /* Models */,
+				59EB98982C973E0F00655953 /* Entities */,
 				5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */,
 				5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */,
 				5943E1AD2BB2147C001BEFD6 /* Assets.xcassets */,
@@ -262,6 +276,16 @@
 			path = MyTrips;
 			sourceTree = "<group>";
 		};
+		597FE98D2CA0057400ED5507 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				597FE98E2CA0058A00ED5507 /* TripModelMocks.swift */,
+				597FE9902CA0059B00ED5507 /* UserModelMocks.swift */,
+				597FE9922CA005B000ED5507 /* LocationModelMocks.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		59960C922BB885F800724A22 /* AddLocations */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +333,16 @@
 				5943E1C42BB21C68001BEFD6 /* Profile */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		59EB98982C973E0F00655953 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				59EB98992C973E2700655953 /* UserEntity.swift */,
+				59EB989B2C973E4000655953 /* TripEntity.swift */,
+				59EB989D2C973E8500655953 /* LocationEntity.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		59EE18222C83C2EF00228B4A /* TripViewCells */ = {
@@ -438,15 +472,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				591952D82BB5E2A200FD52FE /* Trip.swift in Sources */,
+				591952D82BB5E2A200FD52FE /* TripModel.swift in Sources */,
 				5943E1BB2BB214EC001BEFD6 /* LoginViewController.swift in Sources */,
 				5943E1C02BB217BA001BEFD6 /* RegisterViewController.swift in Sources */,
+				597FE9912CA0059B00ED5507 /* UserModelMocks.swift in Sources */,
 				599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */,
 				59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */,
 				5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */,
 				59E3CBB12C41A9900023794A /* MapViewController.swift in Sources */,
 				5917D3F52C4AE2FC00B72587 /* AuthService.swift in Sources */,
-				591952D42BB5E29000FD52FE /* Location.swift in Sources */,
+				591952D42BB5E29000FD52FE /* LocationModel.swift in Sources */,
 				59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */,
 				590A84F32C935ACB004D18F0 /* TestViewController.swift in Sources */,
 				591952E32BB5F9F500FD52FE /* AchievementsViewCell.swift in Sources */,
@@ -458,9 +493,14 @@
 				59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */,
 				5917D3F22C4ACE8000B72587 /* RegisterModel.swift in Sources */,
 				591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */,
+				597FE98F2CA0058A00ED5507 /* TripModelMocks.swift in Sources */,
+				597FE9932CA005B000ED5507 /* LocationModelMocks.swift in Sources */,
 				590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */,
-				591952D62BB5E29A00FD52FE /* User.swift in Sources */,
+				591952D62BB5E29A00FD52FE /* UserModel.swift in Sources */,
 				591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */,
+				59EB989C2C973E4000655953 /* TripEntity.swift in Sources */,
+				59EB989A2C973E2700655953 /* UserEntity.swift in Sources */,
+				59EB989E2C973E8500655953 /* LocationEntity.swift in Sources */,
 				5943E1A72BB2147B001BEFD6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

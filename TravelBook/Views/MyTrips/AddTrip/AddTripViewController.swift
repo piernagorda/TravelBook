@@ -22,7 +22,7 @@ class AddTripViewController: UIViewController,
 
     
     public var callback: (_ close: Bool?, _ tripToAdd: TripModel?) -> Void = {close, tripToAdd in ()}
-    private var temporaryTrip = TripModel(locations: [], year: 0, title: "", description: "")
+    private var temporaryTrip = TripModel(locations: [], year: 0, title: "", tripImage: nil, tripImageURL: nil, description: "")
 
     override func viewDidLoad() {
         table.delegate = self
@@ -82,6 +82,8 @@ class AddTripViewController: UIViewController,
         let temporaryTrip = TripModel(locations: temporaryTrip.locations,
                                       year: Int(tripBeginning) ?? 0,
                                       title: tripName,
+                                      tripImage: nil,
+                                      tripImageURL: nil,
                                       description: tripDescription)
         callback(false, temporaryTrip)
     }

@@ -48,7 +48,8 @@ class MyTripsCollectionViewController: UICollectionViewController {
         do {
             // Convert Trip struct to JSON data
             let encoder = JSONEncoder()
-            let jsonData = try encoder.encode(trip)
+            let tripEntity = trip.toTripEntity()
+            let jsonData = try encoder.encode(tripEntity)
             // Convert JSON data to a dictionary
             let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
             // Make sure jsonObject is a dictionary
@@ -92,7 +93,7 @@ extension MyTripsCollectionViewController {
         cell.layer.masksToBounds = true
         cell.titleLabel?.text = currentUser!.trips[indexPath.row].title
         cell.yearLabel?.text = "\(currentUser!.trips[indexPath.row].year)"
-        cell.image?.image = UIImage(named: currentUser!.trips[indexPath.row].tripImage ?? "default-image")
+        cell.image?.image = currentUser!.trips[indexPath.row].tripImage
         return cell
     }
     
