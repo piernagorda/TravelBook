@@ -7,6 +7,9 @@ let reuseIdentifier = "datacell"
 
 class MyTripsCollectionViewController: UICollectionViewController {
     
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    
     override func viewDidLoad() {
         let nib = UINib(nibName: "MyTripsViewCell", bundle: nil)
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -24,17 +27,17 @@ class MyTripsCollectionViewController: UICollectionViewController {
     
     @objc func addTripPressed() {
         let addTripVC = AddTripViewController(nibName: "AddTripView", bundle: nil)
-        addTripVC.callback = { closeModal, tripToAdd in
+        addTripVC.callback = { [weak self] closeModal, tripToAdd in
             if !closeModal {
-                self.uploadPhoto(image: (tripToAdd?.tripImage)!) { imageURL in
+                self?.uploadPhoto(image: (tripToAdd?.tripImage)!) { imageURL in
                     if let imageURL = imageURL  {
                         tripToAdd!.tripImageURL = imageURL
-                        self.sendTripToDatabase(trip: tripToAdd!) { good, error  in
+                        self?.sendTripToDatabase(trip: tripToAdd!) { good, error  in
                             if error != nil {
                                 print("Error adding the trip in the DB...")
                             } else {
                                 currentUser?.addTrip(trip: tripToAdd!)
-                                self.collectionView.reloadData()
+                                self?.collectionView.reloadData()
                             }
                             addTripVC.dismiss(animated: true)
                         }
@@ -123,9 +126,17 @@ extension MyTripsCollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? MyTripsViewCell else {
             return UICollectionViewCell()
         }
+        
         cell.titleLabel?.text = currentUser!.trips[indexPath.row].title
         cell.yearLabel?.text = "\(currentUser!.trips[indexPath.row].year)"
-        cell.image?.image = currentUser!.trips[indexPath.row].tripImage
+        
+        if let largeImage = currentUser!.trips[indexPath.row].tripImage {
+            cell.image?.image = resizeImage(largeImage, targetSize: CGSize(width: screenWidth/3, height: screenHeight/3))
+            cell.image?.contentMode = .scaleToFill
+        } else {
+            cell.image?.image = currentUser!.trips[indexPath.row].tripImage
+        }
+        
         return cell
     }
     

@@ -16,7 +16,9 @@ class AddLocationsViewController: UIViewController {
         tableView.dataSource = self
         searchBar.delegate = self
         self.navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeModal))
+        self.navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
         self.navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Locations", style: .plain, target: self, action: #selector(addLocations))
+        self.navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
         super.viewDidLoad()
     }
     

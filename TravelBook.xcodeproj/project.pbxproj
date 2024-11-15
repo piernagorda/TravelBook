@@ -10,6 +10,7 @@
 		590A84EE2C935747004D18F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A84EC2C935747004D18F0 /* SettingsViewController.swift */; };
 		590A84EF2C935747004D18F0 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 590A84ED2C935747004D18F0 /* SettingsView.xib */; };
 		590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3FAB2C541E1800C718A9 /* A2Codes.swift */; };
+		5917956D2CA8C232001258BC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5917956C2CA8C232001258BC /* ProfileView.swift */; };
 		5917D3DF2C4AC9E700B72587 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */; };
 		5917D3E22C4ACAA600B72587 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5917D3E12C4ACAA600B72587 /* FirebaseAuth */; };
 		5917D3E42C4ACAA600B72587 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 5917D3E32C4ACAA600B72587 /* FirebaseAuthCombine-Community */; };
@@ -27,8 +28,8 @@
 		591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D92BB5E39200FD52FE /* CurrentUser.swift */; };
 		591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */; };
 		591952DF2BB5E5BC00FD52FE /* MyTripsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */; };
-		591952E32BB5F9F500FD52FE /* AchievementsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952E12BB5F9F500FD52FE /* AchievementsViewCell.swift */; };
-		591952E42BB5F9F500FD52FE /* AchievementsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591952E22BB5F9F500FD52FE /* AchievementsViewCell.xib */; };
+		592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */; };
+		592B40BF2CE7BEAC006C6A1E /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */; };
 		5943E1A52BB2147B001BEFD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */; };
 		5943E1A72BB2147B001BEFD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */; };
 		5943E1AE2BB2147C001BEFD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1AD2BB2147C001BEFD6 /* Assets.xcassets */; };
@@ -38,8 +39,6 @@
 		5943E1C02BB217BA001BEFD6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1BE2BB217BA001BEFD6 /* RegisterViewController.swift */; };
 		5943E1C12BB217BA001BEFD6 /* RegisterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1BF2BB217BA001BEFD6 /* RegisterView.xib */; };
 		5943E1C32BB21C53001BEFD6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1C22BB21C53001BEFD6 /* TabBarController.swift */; };
-		5943E1C72BB21C74001BEFD6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1C52BB21C74001BEFD6 /* ProfileViewController.swift */; };
-		5943E1C82BB21C74001BEFD6 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1C62BB21C74001BEFD6 /* ProfileView.xib */; };
 		5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */; };
 		5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */; };
 		597FE98F2CA0058A00ED5507 /* TripModelMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597FE98E2CA0058A00ED5507 /* TripModelMocks.swift */; };
@@ -64,6 +63,7 @@
 		590A84EC2C935747004D18F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		590A84ED2C935747004D18F0 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		590B3FAB2C541E1800C718A9 /* A2Codes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A2Codes.swift; sourceTree = "<group>"; };
+		5917956C2CA8C232001258BC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		5917D3DE2C4AC9E700B72587 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5917D3F12C4ACE8000B72587 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		5917D3F42C4AE2FC00B72587 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		591952D92BB5E39200FD52FE /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewCell.swift; sourceTree = "<group>"; };
 		591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsViewCell.xib; sourceTree = "<group>"; };
-		591952E12BB5F9F500FD52FE /* AchievementsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewCell.swift; sourceTree = "<group>"; };
-		591952E22BB5F9F500FD52FE /* AchievementsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementsViewCell.xib; sourceTree = "<group>"; };
+		592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewHostingController.swift; sourceTree = "<group>"; };
+		592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		5943E1A12BB2147B001BEFD6 /* TravelBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,8 +86,6 @@
 		5943E1BE2BB217BA001BEFD6 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		5943E1BF2BB217BA001BEFD6 /* RegisterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterView.xib; sourceTree = "<group>"; };
 		5943E1C22BB21C53001BEFD6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		5943E1C52BB21C74001BEFD6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		5943E1C62BB21C74001BEFD6 /* ProfileView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		5943E1CA2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsCollectionViewController.swift; sourceTree = "<group>"; };
 		5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsCollectionView.xib; sourceTree = "<group>"; };
 		597FE98E2CA0058A00ED5507 /* TripModelMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModelMocks.swift; sourceTree = "<group>"; };
@@ -141,6 +139,7 @@
 			children = (
 				5917D3F42C4AE2FC00B72587 /* AuthService.swift */,
 				590B3FAB2C541E1800C718A9 /* A2Codes.swift */,
+				592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -163,23 +162,6 @@
 				591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */,
 			);
 			path = MyTripsCells;
-			sourceTree = "<group>";
-		};
-		591952E02BB5F9DB00FD52FE /* AchievementsCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				591952E52BB5FA9B00FD52FE /* Cells */,
-			);
-			path = AchievementsCollectionView;
-			sourceTree = "<group>";
-		};
-		591952E52BB5FA9B00FD52FE /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				591952E12BB5F9F500FD52FE /* AchievementsViewCell.swift */,
-				591952E22BB5F9F500FD52FE /* AchievementsViewCell.xib */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		5943E1982BB2147B001BEFD6 = {
@@ -239,10 +221,9 @@
 		5943E1C42BB21C68001BEFD6 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				5917956C2CA8C232001258BC /* ProfileView.swift */,
+				592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */,
 				590A84EB2C93562A004D18F0 /* Settings */,
-				591952E02BB5F9DB00FD52FE /* AchievementsCollectionView */,
-				5943E1C52BB21C74001BEFD6 /* ProfileViewController.swift */,
-				5943E1C62BB21C74001BEFD6 /* ProfileView.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -417,7 +398,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				591952E42BB5F9F500FD52FE /* AchievementsViewCell.xib in Resources */,
 				599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */,
 				5943E1BC2BB214EC001BEFD6 /* LoginView.xib in Resources */,
 				5943E1C12BB217BA001BEFD6 /* RegisterView.xib in Resources */,
@@ -428,7 +408,6 @@
 				59EE18262C83C31000228B4A /* TripViewCell.xib in Resources */,
 				5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */,
 				590A84EF2C935747004D18F0 /* SettingsView.xib in Resources */,
-				5943E1C82BB21C74001BEFD6 /* ProfileView.xib in Resources */,
 				5943E1AE2BB2147C001BEFD6 /* Assets.xcassets in Resources */,
 				59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */,
 				5917D3DF2C4AC9E700B72587 /* GoogleService-Info.plist in Resources */,
@@ -452,10 +431,8 @@
 				5917D3F52C4AE2FC00B72587 /* AuthService.swift in Sources */,
 				591952D42BB5E29000FD52FE /* LocationModel.swift in Sources */,
 				59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */,
-				591952E32BB5F9F500FD52FE /* AchievementsViewCell.swift in Sources */,
 				59EE18252C83C31000228B4A /* TripViewCellController.swift in Sources */,
 				5943E1C32BB21C53001BEFD6 /* TabBarController.swift in Sources */,
-				5943E1C72BB21C74001BEFD6 /* ProfileViewController.swift in Sources */,
 				5943E1A52BB2147B001BEFD6 /* AppDelegate.swift in Sources */,
 				590A84EE2C935747004D18F0 /* SettingsViewController.swift in Sources */,
 				59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */,
@@ -463,9 +440,12 @@
 				591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */,
 				597FE98F2CA0058A00ED5507 /* TripModelMocks.swift in Sources */,
 				597FE9932CA005B000ED5507 /* LocationModelMocks.swift in Sources */,
+				592B40BF2CE7BEAC006C6A1E /* ImageResizer.swift in Sources */,
 				590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */,
+				5917956D2CA8C232001258BC /* ProfileView.swift in Sources */,
 				591952D62BB5E29A00FD52FE /* UserModel.swift in Sources */,
 				591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */,
+				592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */,
 				59EB989C2C973E4000655953 /* TripEntity.swift in Sources */,
 				59EB989A2C973E2700655953 /* UserEntity.swift in Sources */,
 				59EB989E2C973E8500655953 /* LocationEntity.swift in Sources */,

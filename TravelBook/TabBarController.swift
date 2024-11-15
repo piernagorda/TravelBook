@@ -3,7 +3,7 @@ import UIKit
 final class TabBarController: UITabBarController{
     
     private var myTripsViewController: MyTripsCollectionViewController?
-    private var profileViewController: ProfileViewController?
+    private var profileViewController: ProfileViewHostingController?
     
     override func viewDidLoad() {
         
@@ -13,9 +13,11 @@ final class TabBarController: UITabBarController{
         self.myTripsViewController?.tabBarItem = UITabBarItem(title: "My Trips", image: UIImage(systemName: "map"), tag: 0)
         self.myTripsViewController?.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
         
-        self.profileViewController = ProfileViewController(nibName: "ProfileView", bundle: nil)
-        self.profileViewController?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 2)
-        self.profileViewController?.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle.fill")
+        // SwiftUI-based TestViewProfile integrated in NewProfileViewController
+        let testViewProfile = ProfileView(userName: "Javier") // Your SwiftUI view
+        self.profileViewController = ProfileViewHostingController(userName: "Javier")
+        self.profileViewController?.tabBarItem = UITabBarItem(title: "New Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        self.profileViewController?.tabBarItem.selectedImage = UIImage(systemName: "star.fill")
         
         self.tabBar.tintColor = .black
         self.tabBar.backgroundColor = .white

@@ -21,13 +21,16 @@ class AddTripViewController: UIViewController,
     lazy var imagePicker = UIImagePickerController()
 
     
-    public var callback: (_ close: Bool, _ tripToAdd: TripModel?) -> Void = {close, tripToAdd in ()}
+    public var callback: (_ close: Bool, _ tripToAdd: TripModel?) -> Void = { close, tripToAdd in () }
     private var temporaryTrip = TripModel(locations: [], year: 0, title: "", tripImage: nil, tripImageURL: nil, description: "")
 
     override func viewDidLoad() {
         table.delegate = self
         table.dataSource = self
-        
+        imageView?.layer.masksToBounds = true
+        imageView?.layer.borderWidth = 1
+        imageView?.layer.borderColor = UIColor.black.cgColor
+        imageView?.layer.cornerRadius = 5
         navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(closeModal))
         navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
         
@@ -40,10 +43,11 @@ class AddTripViewController: UIViewController,
     
     @IBAction func addLocationsPressed() {
         let addLocationsVC = AddLocationsViewController(nibName: "AddLocationsView", bundle: nil)
-        addLocationsVC.callback = { closeModal, locations in
+        
+        addLocationsVC.callback = { [weak self] closeModal, locations in
             addLocationsVC.dismiss(animated: true)
             if !closeModal {
-                self.temporaryTrip.locations = locations!
+                self?.temporaryTrip.locations = locations!
             }
         }
         let navC = UINavigationController(rootViewController: addLocationsVC)
