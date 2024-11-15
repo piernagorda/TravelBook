@@ -16,7 +16,7 @@ struct ProfileView: View {
                 // Header takes up 1/3 of the screen height
                 header(height: proxy.size.height / 3)
                 bodyList()
-            }
+            }.background(Color(red: 240/255, green: 240/255, blue: 246/255))
         }
     }
 }
@@ -26,6 +26,7 @@ func header(height: CGFloat) -> some View {
     ZStack {
         Rectangle()
             .fill(Color.white)
+            .cornerRadius(20)
         VStack {
             Image("JAVIER")
                 .resizable() // Allows the image to be resized
@@ -41,6 +42,9 @@ func header(height: CGFloat) -> some View {
         }
     }
     .frame(height: height) // Set the height to the passed value
+    .padding(.leading, 20)
+    .padding(.trailing, 20)
+    .padding(.top, 20)
 }
 
 @ViewBuilder
