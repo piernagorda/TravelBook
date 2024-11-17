@@ -50,6 +50,8 @@
 		599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599E5D102BB7689E00E6DE7E /* TripView.xib */; };
 		59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A850EB2BB9C938005D3E9B /* AddTripView.xib */; };
 		59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */; };
+		59C74A402CEA7E710080724F /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C74A3F2CEA7E710080724F /* AchievementsView.swift */; };
+		59C74A422CEA7EA10080724F /* AchievementsViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C74A412CEA7EA10080724F /* AchievementsViewHostingController.swift */; };
 		59EB989A2C973E2700655953 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB98992C973E2700655953 /* UserEntity.swift */; };
 		59EB989C2C973E4000655953 /* TripEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB989B2C973E4000655953 /* TripEntity.swift */; };
 		59EB989E2C973E8500655953 /* LocationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB989D2C973E8500655953 /* LocationEntity.swift */; };
@@ -97,6 +99,8 @@
 		599E5D102BB7689E00E6DE7E /* TripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripView.xib; sourceTree = "<group>"; };
 		59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		59A850EB2BB9C938005D3E9B /* AddTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTripView.xib; sourceTree = "<group>"; };
+		59C74A3F2CEA7E710080724F /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		59C74A412CEA7EA10080724F /* AchievementsViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewHostingController.swift; sourceTree = "<group>"; };
 		59EB98992C973E2700655953 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		59EB989B2C973E4000655953 /* TripEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEntity.swift; sourceTree = "<group>"; };
 		59EB989D2C973E8500655953 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 		5943E1C42BB21C68001BEFD6 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				59C74A3E2CEA7E610080724F /* AchievementsView */,
 				5917956C2CA8C232001258BC /* ProfileView.swift */,
 				592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */,
 				590A84EB2C93562A004D18F0 /* Settings */,
@@ -267,6 +272,15 @@
 				599E5D102BB7689E00E6DE7E /* TripView.xib */,
 			);
 			path = TripView;
+			sourceTree = "<group>";
+		};
+		59C74A3E2CEA7E610080724F /* AchievementsView */ = {
+			isa = PBXGroup;
+			children = (
+				59C74A3F2CEA7E710080724F /* AchievementsView.swift */,
+				59C74A412CEA7EA10080724F /* AchievementsViewHostingController.swift */,
+			);
+			path = AchievementsView;
 			sourceTree = "<group>";
 		};
 		59CCBF4F2C70074100DE3A96 /* Dummies */ = {
@@ -429,6 +443,7 @@
 				59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */,
 				5943E1CC2BB21CE3001BEFD6 /* MyTripsCollectionViewController.swift in Sources */,
 				5917D3F52C4AE2FC00B72587 /* AuthService.swift in Sources */,
+				59C74A422CEA7EA10080724F /* AchievementsViewHostingController.swift in Sources */,
 				591952D42BB5E29000FD52FE /* LocationModel.swift in Sources */,
 				59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */,
 				59EE18252C83C31000228B4A /* TripViewCellController.swift in Sources */,
@@ -443,6 +458,7 @@
 				592B40BF2CE7BEAC006C6A1E /* ImageResizer.swift in Sources */,
 				590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */,
 				5917956D2CA8C232001258BC /* ProfileView.swift in Sources */,
+				59C74A402CEA7E710080724F /* AchievementsView.swift in Sources */,
 				591952D62BB5E29A00FD52FE /* UserModel.swift in Sources */,
 				591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */,
 				592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */,

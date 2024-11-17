@@ -11,9 +11,9 @@ import UIKit
 class ProfileViewHostingController: UIHostingController<ProfileView> {
     // Custom initializer
     init(userName: String) {
-        // Initialize with the SwiftUI view and pass arguments
-        let testViewProfile = ProfileView(userName: userName)
-        super.init(rootView: testViewProfile)
+        // Initialize with the SwiftUI view and pass the hosting controller reference
+        super.init(rootView: ProfileView(userName: userName, hostingController: nil))
+        rootView.hostingController = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +28,10 @@ class ProfileViewHostingController: UIHostingController<ProfileView> {
                                                                                                      action: #selector(navigateToSettings))
         navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
         super.navigationController?.navigationBar.isHidden = false
+    }
+    
+    public func didTapOnAchievements() {
+        navigationController?.pushViewController(AchievementsViewHostingController(), animated: true)
     }
     
     @objc func logoutMessage() {
