@@ -14,24 +14,45 @@ class ProfileViewHostingController: UIHostingController<ProfileView> {
         // Initialize with the SwiftUI view and pass the hosting controller reference
         super.init(rootView: ProfileView(userName: userName, hostingController: nil))
         rootView.hostingController = self
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
-                                                                                                     style: .plain,
-                                                                                                     target: self,
-                                                                                                     action: #selector(logoutMessage))
-        navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
-        navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"),
-                                                                                                     style: .plain,
-                                                                                                     target: self,
-                                                                                                     action: #selector(navigateToSettings))
-        navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
-        super.navigationController?.navigationBar.isHidden = false
+        super.viewWillAppear(animated)
+            
+            // Configure the navigation bar appearance
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground() // Make the navigation bar non-transparent
+            appearance.backgroundColor = UIColor.white // Set a background color (e.g., white)
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.black] // Optional: Set title color
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.black] // Optional: Set large title color
+            
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            navigationController?.navigationBar.compactAppearance = appearance // For compact heights
+            navigationController?.navigationBar.isTranslucent = false // Disable translucency
+            
+            // Set navigation items
+            navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"),
+                                                                                                         style: .plain,
+                                                                                                         target: self,
+                                                                                                         action: #selector(logoutMessage))
+            navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
+            navigationController?.topViewController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"),
+                                                                                                         style: .plain,
+                                                                                                         target: self,
+                                                                                                         action: #selector(navigateToSettings))
+            navigationController?.topViewController?.navigationItem.leftBarButtonItem?.tintColor = .black
+            
+            navigationController?.navigationBar.isHidden = false // Ensure the navigation bar is visible
     }
     
     public func didTapOnAchievements() {
         navigationController?.pushViewController(AchievementsViewHostingController(), animated: true)
+    }
+    
+    public func didTapOnCountriesVisited() {
+        
     }
     
     @objc func logoutMessage() {

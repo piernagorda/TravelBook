@@ -28,6 +28,8 @@
 		591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952D92BB5E39200FD52FE /* CurrentUser.swift */; };
 		591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */; };
 		591952DF2BB5E5BC00FD52FE /* MyTripsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */; };
+		59205C582CFB3E61003CE9D4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59205C562CFB3E61003CE9D4 /* DataModel.xcdatamodeld */; };
+		59205C5B2CFB3F46003CE9D4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59205C5A2CFB3F46003CE9D4 /* CoreData.framework */; };
 		592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */; };
 		592B40BF2CE7BEAC006C6A1E /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */; };
 		5943E1A52BB2147B001BEFD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */; };
@@ -75,6 +77,8 @@
 		591952D92BB5E39200FD52FE /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		591952DC2BB5E5BC00FD52FE /* MyTripsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTripsViewCell.swift; sourceTree = "<group>"; };
 		591952DD2BB5E5BC00FD52FE /* MyTripsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsViewCell.xib; sourceTree = "<group>"; };
+		59205C572CFB3E61003CE9D4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		59205C5A2CFB3F46003CE9D4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewHostingController.swift; sourceTree = "<group>"; };
 		592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		5943E1A12BB2147B001BEFD6 /* TravelBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5917D3E82C4ACAA600B72587 /* FirebaseDatabaseSwift in Frameworks */,
+				59205C5B2CFB3F46003CE9D4 /* CoreData.framework in Frameworks */,
 				5917D3E62C4ACAA600B72587 /* FirebaseDatabase in Frameworks */,
 				5917D3F02C4ACAA600B72587 /* FirebaseStorageCombine-Community in Frameworks */,
 				5917D3E22C4ACAA600B72587 /* FirebaseAuth in Frameworks */,
@@ -168,10 +173,37 @@
 			path = MyTripsCells;
 			sourceTree = "<group>";
 		};
+		59205C542CFB3DEC003CE9D4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				59205C552CFB3E0B003CE9D4 /* CoreData */,
+				59CCBF4F2C70074100DE3A96 /* Dummies */,
+				597FE98D2CA0057400ED5507 /* Mocks */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		59205C552CFB3E0B003CE9D4 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				59205C562CFB3E61003CE9D4 /* DataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		59205C592CFB3F46003CE9D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59205C5A2CFB3F46003CE9D4 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5943E1982BB2147B001BEFD6 = {
 			isa = PBXGroup;
 			children = (
 				5943E1A32BB2147B001BEFD6 /* TravelBook */,
+				59205C592CFB3F46003CE9D4 /* Frameworks */,
 				5943E1A22BB2147B001BEFD6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -187,8 +219,7 @@
 		5943E1A32BB2147B001BEFD6 /* TravelBook */ = {
 			isa = PBXGroup;
 			children = (
-				597FE98D2CA0057400ED5507 /* Mocks */,
-				59CCBF4F2C70074100DE3A96 /* Dummies */,
+				59205C542CFB3DEC003CE9D4 /* Data */,
 				5917D3F32C4AE2F300B72587 /* Utils */,
 				59E3CBB32C41AAFA0023794A /* Views */,
 				591952D22BB5E17B00FD52FE /* Models */,
@@ -460,6 +491,7 @@
 				5917956D2CA8C232001258BC /* ProfileView.swift in Sources */,
 				59C74A402CEA7E710080724F /* AchievementsView.swift in Sources */,
 				591952D62BB5E29A00FD52FE /* UserModel.swift in Sources */,
+				59205C582CFB3E61003CE9D4 /* DataModel.xcdatamodeld in Sources */,
 				591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */,
 				592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */,
 				59EB989C2C973E4000655953 /* TripEntity.swift in Sources */,
@@ -602,6 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TravelBook/TravelBook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WXAAK3FNEG;
@@ -631,6 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TravelBook/TravelBook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WXAAK3FNEG;
@@ -731,6 +765,19 @@
 			productName = "FirebaseStorageCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		59205C562CFB3E61003CE9D4 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				59205C572CFB3E61003CE9D4 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 59205C572CFB3E61003CE9D4 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5943E1992BB2147B001BEFD6 /* Project object */;
 }
