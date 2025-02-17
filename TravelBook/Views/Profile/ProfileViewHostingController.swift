@@ -74,7 +74,11 @@ class ProfileViewHostingController: UIHostingController<ProfileView> {
     private func logout() {
         do {
             try Auth.auth().signOut()
-            navigationController?.popToRootViewController(animated: true)
+            if let loginVC = self.navigationController?.viewControllers.filter({ $0 is LoginViewController }).first {
+                navigationController?.setNavigationBarHidden(true, animated: false)
+                self.navigationController?.popToViewController(loginVC, animated: true)
+            }
+            // navigationController?.popToRootViewController(animated: true)
         } catch {
             print("Logged out")
         }

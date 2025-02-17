@@ -27,7 +27,7 @@ final class TripEntity: Codable {
         var dict: [String: Any] = [
             "year": year,
             "title": title,
-            "tripImage": tripImageURL,
+            "tripImageURL": tripImageURL,
             "description": description,
             "tripId": tripId
         ]

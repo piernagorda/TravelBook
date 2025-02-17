@@ -9,7 +9,6 @@ final class UserEntity: Codable {
     var lastname: String
     var description: String?
     var trips: [TripEntity]
-    var countriesVisited: [String] = []
     
     init(userId: String,
          email: String,
@@ -17,8 +16,7 @@ final class UserEntity: Codable {
          name: String,
          lastname: String,
          description: String? = nil,
-         trips: [TripEntity],
-         countriesVisited: [String]?) {
+         trips: [TripEntity]) {
         self.userId = userId
         self.email = email
         self.username = username
@@ -26,7 +24,6 @@ final class UserEntity: Codable {
         self.lastname = lastname
         self.description = description
         self.trips = trips
-        self.countriesVisited = countriesVisited ?? []
     }
     
     // Function to convert UserModel to a dictionary
@@ -37,8 +34,7 @@ final class UserEntity: Codable {
             "username": username,
             "name": name,
             "lastname": lastname,
-            "description": description ?? "",
-            "countriesVisited": countriesVisited
+            "description": description ?? ""
         ]
         
         let tripsArray = trips.map { $0.toDictionary() }
@@ -53,8 +49,6 @@ final class UserEntity: Codable {
                   username: username,
                   name: name,
                   lastname: lastname,
-                  trips: trips.map { $0.toTripModel(loadedImage: nil)
-        },
-                  countriesVisited: countriesVisited)
+                  trips: trips.map { $0.toTripModel(loadedImage: nil) })
     }
 }

@@ -143,6 +143,8 @@ extension MyTripsCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TripViewController(nibName: "TripView", bundle: nil)
         vc.index = indexPath.row
+        vc.callback = { self.collectionView.reloadData() }
+        // This callback is called when deleting a trip
         navigationController?.pushViewController(vc, animated: true)
     }
 }

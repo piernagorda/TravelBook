@@ -4,9 +4,12 @@
 //
 //  Created by Javier Piernagorda Olivé on 2024-03-29.
 //
-
-import UIKit
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseStorage
 import MapKit
+import UIKit
 
 class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -18,11 +21,17 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
     private var zoomOutRegion: MKCoordinateRegion?
     
     public var index: Int!
+    public var callback: (() -> Void) = {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"),
+                                                                                                     style: .plain,
+                                                                                                     target: self,
+                                                                                                     action: #selector(didTapDeleteTrip))
+        navigationController?.topViewController?.navigationItem.rightBarButtonItem?.tintColor = .black
         let nib = UINib(nibName: "TripViewCell", bundle: nil)
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
@@ -31,6 +40,94 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
         map.delegate = self
         setUpMap()
     }
+    
+    @objc func didTapDeleteTrip() {
+        let alert = UIAlertController(title: "Delete Trip", message: "You're going to delete this trip. Are you sure?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        let logoutAction = UIAlertAction(title: "OK", style: .default) {_ in
+            self.deleteTrip()
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(logoutAction)
+        self.present(alert, animated: true)
+    }
+    
+    private func deleteTrip() {
+        // When deleting a trip:
+        // 1 - Delete the trip and the image associated to it
+        // 2 - Update the trips array
+        // 3 - Update the visited countries array
+        // We tell the father to update its collectionView data and we pop the view controller
+        deleteVisitedCountries()
+        deleteImageFromStorage()
+        deleteTripFromFirebase()
+        callback()
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func deleteImageFromStorage() {
+        guard let imageURL = currentUser?.trips[index].tripImageURL, let imagePath = getImagePath(imageURL: imageURL) else {
+            print("Error retrieving the image path...")
+            return
+        }
+        let storageRef = Storage.storage().reference().child(imagePath)
+        storageRef.delete { error in
+            if let error = error {
+                print("Error deleting image from Storage: \(error.localizedDescription)")
+            } else {
+                print("Image successfully deleted from Storage.")
+            }
+        }
+    }
+
+    private func deleteTripFromFirebase() {
+        guard let activeUser = currentUser else {
+            return
+        }
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(activeUser.userId)
+        // We remove it locally
+        currentUser?.trips.remove(at: self.index)
+        // Now, we remove it from Firebase
+        // Update Firestore with the modified array
+        userRef.updateData(["trips": activeUser.trips.map { $0.toTripEntity().toDictionary() }]) { error in
+            if let error = error {
+                print("Error updating trips array: \(error.localizedDescription)")
+            } else {
+                print("Trip removed successfully!")
+            }
+        }
+    }
+    
+    private func getImagePath(imageURL: String) -> String? {
+        // Decodes the full path (i.e., "images/AAAA.jpg")
+        if let encodedPath = imageURL.components(separatedBy: "/o/").last?.components(separatedBy: "?").first {
+            return encodedPath.removingPercentEncoding
+        }
+        return nil
+    }
+    
+    private func deleteVisitedCountries() {
+        guard let activeUser = currentUser else {
+            return
+        }
+        // We make a list of the countries in the current trip
+        var visitedCountriesInCurrentTrip: Set<String> = []
+        for country in activeUser.trips[index].locations {
+            visitedCountriesInCurrentTrip.insert(country.countryA2code)
+        }
+        // Now, for each country, we delete if its 1 and we decrease by 1 in any other case
+        for country in visitedCountriesInCurrentTrip {
+            if let count = activeUser.visitedCountriesAndAppearances[country] {
+                if count < 2 {
+                    currentUser?.visitedCountriesAndAppearances.removeValue(forKey: country)
+                } else {
+                    currentUser?.visitedCountriesAndAppearances[country] = count - 1
+                }
+            }
+        }
+    }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? TripViewCellController else {

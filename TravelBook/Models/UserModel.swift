@@ -8,7 +8,7 @@ final class UserModel {
     var lastname: String
     var description: String?
     var trips: [TripModel]
-    var countriesVisited: [String] = []
+    var visitedCountriesAndAppearances: [String:Int] = [:]
     
     init(userId: String,
          email: String,
@@ -16,8 +16,7 @@ final class UserModel {
          name: String,
          lastname: String,
          description: String? = nil,
-         trips: [TripModel],
-         countriesVisited: [String]?) {
+         trips: [TripModel]) {
         self.userId = userId
         self.email = email
         self.username = username
@@ -25,7 +24,7 @@ final class UserModel {
         self.lastname = lastname
         self.description = description
         self.trips = trips
-        self.countriesVisited = countriesVisited ?? []
+        self.visitedCountriesAndAppearances = self.createVisitedCountriesAndAppearancesMap()
     }
     
     public func addTrip(trip: TripModel) {
@@ -40,13 +39,31 @@ final class UserModel {
         trips.removeAll(where: { $0.tripId == id })
     }
     
-    func toUserEntity() -> UserEntity {
+    public func toUserEntity() -> UserEntity {
         UserEntity(userId: userId,
                    email: email,
                    username: username,
                    name: name,
                    lastname: lastname,
-                   trips: trips.map { $0.toTripEntity() },
-                   countriesVisited: countriesVisited)
+                   trips: trips.map { $0.toTripEntity() })
+    }
+    
+    private func createVisitedCountriesAndAppearancesMap() -> [String:Int] {
+        // We want to create a dictionary of the visited countries and in how many trips they appear
+        // That way, when we delete a trip, we can delete the countries in it from this map only when the count of the countries is 1
+        // If its higher than 1, it means that the country has been visited in multiple trips and we can't delete it
+        var countriesVisitedMap: [String:Int] = [:]
+        
+        for trip in trips {
+            // For each trip, we get the countries from the locations array
+            var countriesInTrip: [String] = []
+            for country in trip.locations {
+                if !(countriesInTrip.contains(country.countryA2code)) {
+                    countriesVisitedMap[country.countryA2code, default: 0] += 1
+                    countriesInTrip.append(country.countryA2code)
+                }
+            }
+        }
+        return countriesVisitedMap
     }
 }

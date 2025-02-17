@@ -105,6 +105,7 @@
 		59A850EB2BB9C938005D3E9B /* AddTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTripView.xib; sourceTree = "<group>"; };
 		59C74A3F2CEA7E710080724F /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		59C74A412CEA7EA10080724F /* AchievementsViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewHostingController.swift; sourceTree = "<group>"; };
+		59D02BA12D611B0400FA8777 /* Travelbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Travelbook.entitlements; sourceTree = "<group>"; };
 		59EB98992C973E2700655953 /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		59EB989B2C973E4000655953 /* TripEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEntity.swift; sourceTree = "<group>"; };
 		59EB989D2C973E8500655953 /* LocationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntity.swift; sourceTree = "<group>"; };
@@ -219,6 +220,7 @@
 		5943E1A32BB2147B001BEFD6 /* TravelBook */ = {
 			isa = PBXGroup;
 			children = (
+				59D02BA12D611B0400FA8777 /* Travelbook.entitlements */,
 				59205C542CFB3DEC003CE9D4 /* Data */,
 				5917D3F32C4AE2F300B72587 /* Utils */,
 				59E3CBB32C41AAFA0023794A /* Views */,
@@ -547,6 +549,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = TravelBook/Travelbook.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

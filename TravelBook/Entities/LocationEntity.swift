@@ -13,7 +13,6 @@ final class LocationEntity: Codable {
         self.latitude = latitude
         self.longitude = longitude
         self.countryA2code = countryA2Code
-        print("Entering init")
     }
     
     // Function to convert UserModel to a dictionary

@@ -15,8 +15,7 @@ extension UserModel {
                   name: "Javier",
                   lastname: "Piernagorda",
                   description: "This is my bio!",
-                  trips: [.mockOne(), .mockTwo(), .mockThree()],
-                  countriesVisited: ["es", "fi", "us", "ca", "fr", "it", "gr"])
+                  trips: [.mockOne(), .mockTwo(), .mockThree()])
     }
 }
 

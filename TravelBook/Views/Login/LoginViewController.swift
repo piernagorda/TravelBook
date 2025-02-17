@@ -31,6 +31,16 @@ class LoginViewController: UIViewController {
         preloadDataButton?.layer.borderWidth = 1
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     @IBAction func loginButtonTapped() {
         // Start animating the loader
         activityIndicator.startAnimating()
@@ -44,9 +54,10 @@ class LoginViewController: UIViewController {
                     switch result {
                     case .success:
                         self.activityIndicator.stopAnimating()
+                        let us = currentUser
                         self.navigateToHomeScreen()
                     case .failure(let error):
-                        print("Error retrieving user: \(error.localizedDescription)")
+                        print("Error retrieving user: \(error)")
                     }
                 }
             }
@@ -65,6 +76,12 @@ class LoginViewController: UIViewController {
         self.emailTextField!.text = "javier.poa@gmail.com"
         self.passwordTextField!.text = "123456"
     }
+    
+    private func navigateToHomeScreen() {
+        let tabController = TabBarController()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.pushViewController(tabController, animated: true)
+    }
 }
 
 extension LoginViewController {
@@ -75,18 +92,21 @@ extension LoginViewController {
         
         userRef.getDocument { (document, error) in
             if let error = error {
+                print("Error getting the users document")
                 completion(.failure(error))
                 return
             }
             
             guard let document = document, document.exists, let data = document.data() else {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist or data is nil"])))
+                print("Error getting the users document too")
                 return
             }
             
             do {
                 let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
                 let userEntity = try JSONDecoder().decode(UserEntity.self, from: jsonData)
+                print("Decoded successfully")
                 // Setting the current user to the data retrieved
                 currentUser = userEntity.toUserModel(arrayOfLoadedImages: nil)
                 print(userEntity.trips[0].tripImageURL)
@@ -94,6 +114,7 @@ extension LoginViewController {
                 // Initialize DispatchGroup to manage asynchronous tasks
                 let dispatchGroup = DispatchGroup()
                 
+                print("Loading the images of the trips now")
                 for trip in currentUser!.trips {
                     // Enter the group before starting the image load
                     dispatchGroup.enter()
@@ -113,10 +134,24 @@ extension LoginViewController {
         }
     }
     
-    private func navigateToHomeScreen() {
-        let tabController = TabBarController()
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.pushViewController(tabController, animated: true)
+    private func loadImageFromURL(_ imageURL: String, completion: @escaping (UIImage?) -> Void) {
+        guard let url = URL(string: imageURL) else {
+            print("Error: Invalid URL")
+            return
+        }
+        // Fetch the image data asynchronously
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error loading image: \(error.localizedDescription)")
+                return
+            }
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                print("Error: Could not convert data to image")
+                completion(nil)
+            }
+        }.resume()
     }
     
     private func checkFieldsComplete() -> Bool {
@@ -138,25 +173,5 @@ extension LoginViewController {
         let ok = UIAlertAction(title: "OK", style: .default)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    private func loadImageFromURL(_ imageURL: String, completion: @escaping (UIImage?) -> Void) {
-        guard let url = URL(string: imageURL) else {
-            print("Error: Invalid URL")
-            return
-        }
-        // Fetch the image data asynchronously
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error loading image: \(error.localizedDescription)")
-                return
-            }
-            if let data = data, let image = UIImage(data: data) {
-                completion(image)
-            } else {
-                print("Error: Could not convert data to image")
-                completion(nil)
-            }
-        }.resume()
     }
 }
