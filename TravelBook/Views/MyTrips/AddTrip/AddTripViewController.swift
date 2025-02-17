@@ -18,6 +18,7 @@ class AddTripViewController: UIViewController,
     @IBOutlet weak var choosePhotoButton: UIButton?
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var addLocationsButton: UIButton?
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     lazy var imagePicker = UIImagePickerController()
 
     
@@ -93,7 +94,9 @@ class AddTripViewController: UIViewController,
                                       tripImage: imageView?.image,
                                       tripImageURL: nil,
                                       description: tripDescription)
+        activityIndicator.startAnimating()
         callback(false, temporaryTrip)
+        activityIndicator.stopAnimating()
     }
     
     @objc func closeModal() {

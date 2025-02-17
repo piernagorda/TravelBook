@@ -1,17 +1,10 @@
-//
-//  LoginViewController.swift
-//  TravelBook
-//
-//  Created by Javier Piernagorda Olivé on 2024-03-25.
-//
-
 import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField?
     @IBOutlet weak var passwordTextField: UITextField?
@@ -23,12 +16,21 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
+        
+        // Set the "Done" key for both text fields
+        emailTextField?.returnKeyType = .done
+        emailTextField?.delegate = self
+        passwordTextField?.returnKeyType = .done
+        passwordTextField?.delegate = self
+        
         loginButton?.layer.cornerRadius = 5
         loginButton?.layer.borderWidth = 1
         registerButton?.layer.cornerRadius = 5
         registerButton?.layer.borderWidth = 1
         preloadDataButton?.layer.cornerRadius = 5
         preloadDataButton?.layer.borderWidth = 1
+
+        self.hideKeyboardWhenTappedAround() // Dismiss keyboard when tapping outside of it
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,24 +84,22 @@ class LoginViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.pushViewController(tabController, animated: true)
     }
-}
-
-extension LoginViewController {
-
+    
+    // Fetch user data
     func fetchUserModel(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
         
         userRef.getDocument { (document, error) in
             if let error = error {
-                print("Error getting the users document")
+                print("Error getting the user's document")
                 completion(.failure(error))
                 return
             }
             
             guard let document = document, document.exists, let data = document.data() else {
                 completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Document does not exist or data is nil"])))
-                print("Error getting the users document too")
+                print("Error getting the user's document too")
                 return
             }
             
@@ -107,24 +107,17 @@ extension LoginViewController {
                 let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
                 let userEntity = try JSONDecoder().decode(UserEntity.self, from: jsonData)
                 print("Decoded successfully")
-                // Setting the current user to the data retrieved
                 currentUser = userEntity.toUserModel(arrayOfLoadedImages: nil)
-                print(userEntity.trips[0].tripImageURL)
-                print(currentUser!.trips[0].tripImageURL)
-                // Initialize DispatchGroup to manage asynchronous tasks
                 let dispatchGroup = DispatchGroup()
                 
                 print("Loading the images of the trips now")
                 for trip in currentUser!.trips {
-                    // Enter the group before starting the image load
                     dispatchGroup.enter()
                     self.loadImageFromURL(trip.tripImageURL) { image in
                         trip.tripImage = image
-                        // Leave the group when the image is loaded
                         dispatchGroup.leave()
                     }
                 }
-                // Wait for all image loading to complete before calling the completion
                 dispatchGroup.notify(queue: .main) {
                     completion(.success(currentUser!))
                 }
@@ -134,12 +127,12 @@ extension LoginViewController {
         }
     }
     
+    // Load image from URL
     private func loadImageFromURL(_ imageURL: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: imageURL) else {
             print("Error: Invalid URL")
             return
         }
-        // Fetch the image data asynchronously
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error loading image: \(error.localizedDescription)")
@@ -154,6 +147,7 @@ extension LoginViewController {
         }.resume()
     }
     
+    // Check if fields are complete
     private func checkFieldsComplete() -> Bool {
         if (emailTextField!.hasText && passwordTextField!.hasText ) {
             return true
@@ -167,11 +161,19 @@ extension LoginViewController {
         }
     }
     
+    // Show error
     private func showError(error: Error) {
         print(error)
         let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Dismiss keyboard when "Done" is tapped
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Resign the first responder to dismiss the keyboard
+        textField.resignFirstResponder()
+        return true
     }
 }

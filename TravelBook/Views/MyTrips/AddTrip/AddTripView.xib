@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddTripViewController" customModule="TravelBook" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="x2a-E0-vUc" id="66z-ro-HOj"/>
                 <outlet property="addLocationsButton" destination="Rhw-RN-IPn" id="9XR-iC-bO4"/>
                 <outlet property="choosePhotoButton" destination="Aea-GS-H0i" id="bgc-ZY-cja"/>
                 <outlet property="imageView" destination="Iug-h1-X2t" id="WZL-tK-UlO"/>
@@ -61,6 +62,13 @@
                         <action selector="addLocationsPressed" destination="-1" eventType="touchDown" id="2IV-wv-REa"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="x2a-E0-vUc">
+                    <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="5un-FM-Ibe"/>
+                        <constraint firstAttribute="width" constant="37" id="NA9-09-CFf"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -71,8 +79,10 @@
                 <constraint firstItem="Rhw-RN-IPn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="130" id="BsQ-61-AK2"/>
                 <constraint firstItem="Yjg-Es-re4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="D1B-19-GxQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yfn-xk-YSh" secondAttribute="trailing" constant="54" id="Eak-IB-dep"/>
+                <constraint firstItem="x2a-E0-vUc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="GbJ-cT-V1D"/>
                 <constraint firstItem="Rhw-RN-IPn" firstAttribute="top" secondItem="Yjg-Es-re4" secondAttribute="bottom" constant="38" id="KvO-0L-bQv"/>
                 <constraint firstItem="yfn-xk-YSh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="Nh7-TV-Qi8"/>
+                <constraint firstItem="x2a-E0-vUc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="S6U-Ps-oA4"/>
                 <constraint firstItem="Yjg-Es-re4" firstAttribute="top" secondItem="yfn-xk-YSh" secondAttribute="bottom" constant="8" id="Wg6-Hr-yMc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rhw-RN-IPn" secondAttribute="trailing" constant="130" id="lpq-m3-RFq"/>
             </constraints>
@@ -81,7 +91,7 @@
     </objects>
     <resources>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

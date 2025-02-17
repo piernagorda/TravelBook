@@ -31,7 +31,6 @@
 		59205C582CFB3E61003CE9D4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 59205C562CFB3E61003CE9D4 /* DataModel.xcdatamodeld */; };
 		59205C5B2CFB3F46003CE9D4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59205C5A2CFB3F46003CE9D4 /* CoreData.framework */; };
 		592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */; };
-		592B40BF2CE7BEAC006C6A1E /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */; };
 		5943E1A52BB2147B001BEFD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */; };
 		5943E1A72BB2147B001BEFD6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */; };
 		5943E1AE2BB2147C001BEFD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1AD2BB2147C001BEFD6 /* Assets.xcassets */; };
@@ -52,6 +51,7 @@
 		599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599E5D102BB7689E00E6DE7E /* TripView.xib */; };
 		59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A850EB2BB9C938005D3E9B /* AddTripView.xib */; };
 		59A850ED2BB9C938005D3E9B /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */; };
+		59B074D12D63C371003BF869 /* ExtraUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B074D02D63C371003BF869 /* ExtraUtils.swift */; };
 		59C74A402CEA7E710080724F /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C74A3F2CEA7E710080724F /* AchievementsView.swift */; };
 		59C74A422CEA7EA10080724F /* AchievementsViewHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C74A412CEA7EA10080724F /* AchievementsViewHostingController.swift */; };
 		59EB989A2C973E2700655953 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EB98992C973E2700655953 /* UserEntity.swift */; };
@@ -80,7 +80,6 @@
 		59205C572CFB3E61003CE9D4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		59205C5A2CFB3F46003CE9D4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewHostingController.swift; sourceTree = "<group>"; };
-		592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		5943E1A12BB2147B001BEFD6 /* TravelBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5943E1A42BB2147B001BEFD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5943E1A62BB2147B001BEFD6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		599E5D102BB7689E00E6DE7E /* TripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripView.xib; sourceTree = "<group>"; };
 		59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		59A850EB2BB9C938005D3E9B /* AddTripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTripView.xib; sourceTree = "<group>"; };
+		59B074D02D63C371003BF869 /* ExtraUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraUtils.swift; sourceTree = "<group>"; };
 		59C74A3F2CEA7E710080724F /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
 		59C74A412CEA7EA10080724F /* AchievementsViewHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewHostingController.swift; sourceTree = "<group>"; };
 		59D02BA12D611B0400FA8777 /* Travelbook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Travelbook.entitlements; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 			children = (
 				5917D3F42C4AE2FC00B72587 /* AuthService.swift */,
 				590B3FAB2C541E1800C718A9 /* A2Codes.swift */,
-				592B40BE2CE7BEAC006C6A1E /* ImageResizer.swift */,
+				59B074D02D63C371003BF869 /* ExtraUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -485,10 +485,10 @@
 				590A84EE2C935747004D18F0 /* SettingsViewController.swift in Sources */,
 				59F56CFE2BB618EF00D3649E /* NameAndDescriptionTableViewCell.swift in Sources */,
 				5917D3F22C4ACE8000B72587 /* RegisterModel.swift in Sources */,
+				59B074D12D63C371003BF869 /* ExtraUtils.swift in Sources */,
 				591952DE2BB5E5BC00FD52FE /* MyTripsViewCell.swift in Sources */,
 				597FE98F2CA0058A00ED5507 /* TripModelMocks.swift in Sources */,
 				597FE9932CA005B000ED5507 /* LocationModelMocks.swift in Sources */,
-				592B40BF2CE7BEAC006C6A1E /* ImageResizer.swift in Sources */,
 				590B3FAC2C541E1800C718A9 /* A2Codes.swift in Sources */,
 				5917956D2CA8C232001258BC /* ProfileView.swift in Sources */,
 				59C74A402CEA7E710080724F /* AchievementsView.swift in Sources */,

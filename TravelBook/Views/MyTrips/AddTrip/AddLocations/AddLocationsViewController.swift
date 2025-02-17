@@ -67,27 +67,33 @@ extension AddLocationsViewController: UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.filterData = []
+        
         if searchText == "" {
             self.searching = false
             filterData = []
-        }
-        else {
+        } else {
             searching = true
             Task { @MainActor [weak self] in
                 let geocoder = CLGeocoder()
-                do{
-                    let req : [CLPlacemark] = try await geocoder.geocodeAddressString(searchText)
-                    if (!req.isEmpty) {
-                        for x in req {
-                            
-                           
-                            
+                
+                // Create a locale set to English (US)
+                let locale = Locale(identifier: "en_US")
+                
+                // Perform synchronous geocoding with the English locale
+                geocoder.geocodeAddressString(searchText, in: nil, preferredLocale: locale) { (placemarks, error) in
+                    if let error = error {
+                        print("Geocoding failed: \(error.localizedDescription)")
+                        return
+                    }
+
+                    if let placemarks = placemarks, !placemarks.isEmpty {
+                        for x in placemarks {
                             let city: LocationModel = LocationModel(country: x.country!,
                                                                     city: x.name!,
                                                                     latitude: x.location!.coordinate.latitude,
                                                                     longitude: x.location!.coordinate.longitude,
                                                                     countryA2Code: "")
-                            if !searchIfLocationInArray(location: city, array: self!.filterData) {
+                            if !(self!.searchIfLocationInArray(location: city, array: self!.filterData)) {
                                 self?.filterData.append(city)
                             }
                         }
@@ -98,4 +104,5 @@ extension AddLocationsViewController: UISearchBarDelegate{
         }
         self.tableView.reloadData()
     }
+
 }
