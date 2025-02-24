@@ -15,13 +15,14 @@ final class TripModel {
          title: String,
          tripImage: UIImage?,
          tripImageURL: String?,
-         description: String){
+         description: String,
+         tripId: String){
         self.locations = locations
         self.year = year
         self.title = title
         self.tripImage = tripImage
         self.description = description
-        self.tripId = "abc"
+        self.tripId = tripId
         self.tripImageURL = tripImageURL ?? "none"
     }
     

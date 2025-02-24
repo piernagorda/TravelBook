@@ -23,7 +23,7 @@ class AddTripViewController: UIViewController,
 
     
     public var callback: (_ tripToAdd: TripModel?) -> Void = { tripToAdd in () }
-    private var temporaryTrip = TripModel(locations: [], year: 0, title: "", tripImage: nil, tripImageURL: nil, description: "")
+    private var temporaryTrip = TripModel(locations: [], year: 0, title: "", tripImage: nil, tripImageURL: nil, description: "", tripId: "")
 
     override func viewDidLoad() {
         table.delegate = self
@@ -88,12 +88,17 @@ class AddTripViewController: UIViewController,
             showIncompleteFieldsError()
             return
         }
+        
+        // The tripImageURL will be nil until we send it to Firebase Storage and get a link to it
+        let randomID = UUID().uuidString
+        
         let temporaryTrip = TripModel(locations: temporaryTrip.locations,
                                       year: Int(tripBeginning) ?? 0,
                                       title: tripName,
                                       tripImage: imageView?.image,
                                       tripImageURL: nil,
-                                      description: tripDescription)
+                                      description: tripDescription,
+                                      tripId: randomID)
         activityIndicator.startAnimating()
         callback(temporaryTrip)
         activityIndicator.stopAnimating()
