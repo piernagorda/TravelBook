@@ -22,7 +22,7 @@ class AddTripViewController: UIViewController,
     lazy var imagePicker = UIImagePickerController()
 
     
-    public var callback: (_ close: Bool, _ tripToAdd: TripModel?) -> Void = { close, tripToAdd in () }
+    public var callback: (_ tripToAdd: TripModel?) -> Void = { tripToAdd in () }
     private var temporaryTrip = TripModel(locations: [], year: 0, title: "", tripImage: nil, tripImageURL: nil, description: "")
 
     override func viewDidLoad() {
@@ -95,12 +95,12 @@ class AddTripViewController: UIViewController,
                                       tripImageURL: nil,
                                       description: tripDescription)
         activityIndicator.startAnimating()
-        callback(false, temporaryTrip)
+        callback(temporaryTrip)
         activityIndicator.stopAnimating()
     }
     
     @objc func closeModal() {
-        callback(true, nil)
+        callback(nil)
     }
     
     private func showIncompleteFieldsError() {

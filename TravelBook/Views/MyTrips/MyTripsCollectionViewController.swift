@@ -26,29 +26,42 @@ class MyTripsCollectionViewController: UICollectionViewController {
     }
     
     @objc func addTripPressed() {
+        
         let addTripVC = AddTripViewController(nibName: "AddTripView", bundle: nil)
-        addTripVC.callback = { [weak self] closeModal, tripToAdd in
-            if !closeModal {
-                self?.uploadPhoto(image: (tripToAdd?.tripImage)!) { imageURL in
+        
+        // Callback preparation: dismiss modal or add the trip
+        addTripVC.callback = { [weak self] tripToAdd in
+            guard let tripToAdd else {
+                addTripVC.dismiss(animated: true)
+                return
+            }
+            let repository = Repository()
+            // 1. Add the trip to local CoreData storage
+            if repository.addTripToCoreData(trip: tripToAdd) {
+                // 2. Upload the pic to Firebase Storage
+                self?.uploadPhoto(image: (tripToAdd.tripImage)!) { imageURL in
                     if let imageURL = imageURL  {
-                        tripToAdd!.tripImageURL = imageURL
-                        self?.sendTripToDatabase(trip: tripToAdd!) { good, error  in
-                            if error != nil {
+                        tripToAdd.tripImageURL = imageURL
+                        // 3. If success -> Upload the trip to Firebase
+                        self?.sendTripToDatabase(trip: tripToAdd) { _, error  in
+                            if let error {
                                 print("Error adding the trip in the DB...")
+                                self?.showError(error: error)
                             } else {
-                                currentUser?.addTrip(trip: tripToAdd!)
+                                currentUser?.addTrip(trip: tripToAdd)
                                 self?.collectionView.reloadData()
                             }
                             addTripVC.dismiss(animated: true)
                         }
-                    } else {
+                    } else { // If no success, we have to delete the trip from CoreData
                         print("There was an error uploading the photo...")
+                        // repository.deleteTripFromCoreData(trip: tripToAdd)
                     }
                 }
-            } else {
-                addTripVC.dismiss(animated: true)
             }
         }
+        
+        // Navigation to the AddTrip View
         let navC = UINavigationController(rootViewController: addTripVC)
         navC.modalPresentationStyle = .formSheet
         navigationController?.present(navC, animated: true)
@@ -113,6 +126,14 @@ class MyTripsCollectionViewController: UICollectionViewController {
                 }
             }
         }
+    }
+    
+    private func showError(error: Error) {
+        print(error)
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

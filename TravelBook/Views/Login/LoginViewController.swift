@@ -46,7 +46,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginButtonTapped() {
-        // Start animating the loader
+        
         activityIndicator.startAnimating()
         
         AuthService.shared.signIn(email: emailTextField!.text!, password: passwordTextField!.text!) { signedIn, error in
@@ -58,6 +58,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if let localUser = self.repository.getLocalUserFromCoreData() {
                     print("Local user found. Retrieving it from CoreData")
                     currentUser = localUser
+                    
                     self.activityIndicator.stopAnimating()
                     self.navigateToHomeScreen()
                 } else {

@@ -129,6 +129,40 @@ public class LocalDataSource {
         }
     }
     
+    func addTripToCoreData(trip: TripModel) -> Bool {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        // Fetch the existing user from Core Data
+        let fetchRequest: NSFetchRequest<UserCoreData> = UserCoreData.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "userId == %@", currentUser!.userId) // Filter for the current user
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            guard let userCoreData = results.first else {
+                print("User not found in Core Data")
+                return false
+            }
+            
+            // Convert the new trip into CoreData format
+            guard let newTripCoreData = getTripCoreDataModel(tripModel: trip, context: context) else {
+                return false
+            }
+            
+            // Add the new trip to the user's trips
+            var existingTrips = userCoreData.trips as? Set<TripCoreData> ?? []
+            existingTrips.insert(newTripCoreData)
+            userCoreData.trips = NSSet(set: existingTrips)
+            
+            try context.save()
+            print("Trip added successfully to Core Data")
+            return true
+        } catch {
+            print("Failed to update Core Data: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
     private func getUserCoreDataModel(userModel: UserModel, context: NSManagedObjectContext) -> UserCoreData? {
         var newUserCoreData = UserCoreData(context: context)
         newUserCoreData.userId = userModel.userId
@@ -190,120 +224,3 @@ public class LocalDataSource {
         return locationCoreData
     }
 }
-
-/*
- @IBAction func didTapSaveDataButton() {
- 
- let userModel = getUserModelTest()
- 
- let appDelegate = UIApplication.shared.delegate as! AppDelegate
- let context = appDelegate.persistentContainer.viewContext
- 
- var newUserCoreData = getUserCoreDataModel(userModel: userModel, context: context)
- do {
- try context.save()
- print("Saved successfully!")
- } catch {
- print("Failed to save data: \(error.localizedDescription)")
- }
- }
- 
- @IBAction func didTapFetchDataButton() {
- // Fetch data from Core Data
- let appDelegate = UIApplication.shared.delegate as! AppDelegate
- let context = appDelegate.persistentContainer.viewContext
- 
- let fetchRequest: NSFetchRequest<UserCoreData> = UserCoreData.fetchRequest()
- 
- do {
- let results = try context.fetch(fetchRequest)
- for result in results {
- // Extract User Data
- guard let userId = result.userId,
- let email = result.email,
- let name = result.name,
- let lastname = result.lastname,
- let username = result.username else {
- return
- }
- // Extract trips
- var trips: [TripModel] = []
- if let fetchedTrips = result.trips as? Set<TripCoreData>{
- for fetchedTripCoreData in fetchedTrips {
- guard let imageData = fetchedTripCoreData.tripImage,
- let tripImage = UIImage(data: imageData) else {
- print("Error converting image data to UIImage")
- return
- }
- 
- // 2. Convert the locations (NSSet) to an array of LocationModel
- var locations: [LocationModel] = []
- if let fetchedLocations = fetchedTripCoreData.locations as? Set<LocationCoreData> {
- for locationCoreData in fetchedLocations {
- let location = LocationModel(country: locationCoreData.country ?? "",
- city: locationCoreData.city ?? "",
- latitude: CGFloat(locationCoreData.latitude),
- longitude: CGFloat(locationCoreData.longitude),
- countryA2Code: locationCoreData.countryA2code ?? "None")
- locations.append(location)
- }
- }
- 
- // 3. Create the TripModel object
- let trip = TripModel(locations: locations,
- year: Int(fetchedTripCoreData.year),
- title: fetchedTripCoreData.title ?? "",
- tripImage: tripImage,
- tripImageURL: fetchedTripCoreData.tripImageURL ?? "",
- description: fetchedTripCoreData.desc ?? "")
- trips.append(trip)
- }
- }
- print("Successfully fetched User")
- let userModel = UserModel(userId: userId,
- email: email,
- username: username,
- name: name,
- lastname: lastname,
- description: result.desc,
- trips: trips)
- // Navigate to the next screen with the fetched trip data
- navigationController?.pushViewController(FetchDataViewController(user: userModel), animated: true)
- }
- } catch {
- print("Failed to fetch: \(error.localizedDescription)")
- }
- }
- 
- }
- 
- extension MainViewController {
- func getUserModelTest() -> UserModel {
- let location = LocationModel(country: "Spain", city: "Madrid", latitude: 12.5, longitude: 24, countryA2Code: "ES")
- let location2 = LocationModel(country: "Spain", city: "Barcelona", latitude: 13, longitude: 30, countryA2Code: "ES")
- let trip1 = TripModel(locations: [location, location2],
- year: 2020,
- title: "My trip",
- tripImage: UIImage(named: "javi")!,
- tripImageURL: "https://www.google.com",
- description: "My trip description")
- let location3 = LocationModel(country: "Finland", city: "Helsinki", latitude: 100, longitude: 200, countryA2Code: "FI")
- let location4 = LocationModel(country: "Finland", city: "Oulu", latitude: 300, longitude: 400, countryA2Code: "FI")
- 
- let trip2 = TripModel(locations: [location3, location4],
- year: 2021,
- title: "My trip 2",
- tripImage: UIImage(named: "javi")!,
- tripImageURL: "https://www.google.com2",
- description: "My trip description 2")
- 
- let userModel = UserModel(userId: "abc", email: "javier.poa@gmail.com", username: "piernagorda", name: "Javi", lastname: "Piernagorda", description: "Desc", trips: [trip1, trip2])
- return userModel
- }
- }
- 
- // MARK: Methods to convert a Model to a Core Data model so that we can save it
- extension MainViewController {
- 
- }
- */
