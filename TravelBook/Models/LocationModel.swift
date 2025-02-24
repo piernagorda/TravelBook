@@ -2,7 +2,7 @@ import UIKit
 
 var temporaryLocations: LocationModel?
 
-final class LocationModel: Codable {
+final class LocationModel: Codable, Hashable, Equatable {
     var country: String
     var city: String
     var latitude: CGFloat
@@ -35,14 +35,20 @@ final class LocationModel: Codable {
                        longitude: longitude,
                        countryA2Code: countryA2code)
     }
+    
+    static func == (lhs: LocationModel, rhs: LocationModel) -> Bool {
+        return lhs.country == rhs.country &&
+               lhs.city == rhs.city &&
+               lhs.latitude == rhs.latitude &&
+               lhs.longitude == rhs.longitude &&
+               lhs.countryA2code == rhs.countryA2code
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(country)
+        hasher.combine(city)
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+        hasher.combine(countryA2code)
+    }
 }
-
-/*
- let location = CLLocation(latitude: -22.963451, longitude: -43.198242)
- location.fetchCityAndCountry { city, country, error in
-     guard let city = city, let country = country, error == nil else { return }
-     print(city + ", " + country)  // Rio de Janeiro, Brazil
- }
- 
- */
-

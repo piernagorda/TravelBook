@@ -13,6 +13,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var registerButton: UIButton?
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    private let repository = Repository()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
@@ -52,16 +54,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 guard let userID = Auth.auth().currentUser?.uid else {
                     return
                 }
-                self.fetchUserModel(userId: userID) { result in
-                    switch result {
-                    case .success:
-                        self.activityIndicator.stopAnimating()
-                        let us = currentUser
-                        self.navigateToHomeScreen()
-                    case .failure(let error):
-                        print("Error retrieving user: \(error)")
+        
+                if let localUser = self.repository.getLocalUserFromCoreData() {
+                    print("Local user found. Retrieving it from CoreData")
+                    currentUser = localUser
+                    self.activityIndicator.stopAnimating()
+                    self.navigateToHomeScreen()
+                } else {
+                    print("Local user  NOT found. Retrieving it from Firebase")
+                    self.fetchUserModelFromFirestore(userId: userID) { result in
+                        switch result {
+                        case .success:
+                            if self.repository.saveUserToCoreData(userModel: currentUser!) {
+                                print("User saved correctly to CoreData from Login")
+                                self.activityIndicator.stopAnimating()
+                                self.navigateToHomeScreen()
+                            } else {
+                                print("There was an error saving the user to CoreData from Login")
+                            }
+                        case .failure(let error):
+                            print("Error retrieving user: \(error)")
+                        }
                     }
                 }
+                
             }
             else {
                 self.showError(error: error!)
@@ -86,7 +102,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Fetch user data
-    func fetchUserModel(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
+    func fetchUserModelFromFirestore(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
         
@@ -107,17 +123,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
                 let userEntity = try JSONDecoder().decode(UserEntity.self, from: jsonData)
                 print("Decoded successfully")
-                currentUser = userEntity.toUserModel(arrayOfLoadedImages: nil)
+                let tempUser = userEntity.toUserModel(arrayOfLoadedImages: nil)
                 let dispatchGroup = DispatchGroup()
                 
                 print("Loading the images of the trips now")
-                for trip in currentUser!.trips {
+                for trip in tempUser.trips {
                     dispatchGroup.enter()
                     self.loadImageFromURL(trip.tripImageURL) { image in
                         trip.tripImage = image
                         dispatchGroup.leave()
                     }
                 }
+                print("Images loaded")
+                currentUser = tempUser
                 dispatchGroup.notify(queue: .main) {
                     completion(.success(currentUser!))
                 }
