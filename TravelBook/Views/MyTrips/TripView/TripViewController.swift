@@ -53,81 +53,19 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
     }
     
     private func deleteTrip() {
-        // When deleting a trip:
-        // 1 - Delete the trip and the image associated to it
-        // 2 - Update the trips array
-        // 3 - Update the visited countries array
-        // We tell the father to update its collectionView data and we pop the view controller
-        deleteVisitedCountries()
-        deleteImageFromStorage()
-        deleteTripFromFirebase()
-        callback()
-        navigationController?.popViewController(animated: true)
-    }
-    
-    private func deleteImageFromStorage() {
-        guard let imageURL = currentUser?.trips[index].tripImageURL, let imagePath = getImagePath(imageURL: imageURL) else {
-            print("Error retrieving the image path...")
+        guard let currentUser else {
             return
         }
-        let storageRef = Storage.storage().reference().child(imagePath)
-        storageRef.delete { error in
-            if let error = error {
-                print("Error deleting image from Storage: \(error.localizedDescription)")
+        let repository = Repository()
+        repository.removeTrip(index: self.index, tripId: currentUser.trips[index].tripId) { result in
+            if result {
+                self.callback()
+                self.navigationController?.popViewController(animated: true)
             } else {
-                print("Image successfully deleted from Storage.")
+                self.showError()
             }
         }
     }
-
-    private func deleteTripFromFirebase() {
-        guard let activeUser = currentUser else {
-            return
-        }
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(activeUser.userId)
-        // We remove it locally
-        currentUser?.trips.remove(at: self.index)
-        // Now, we remove it from Firebase
-        // Update Firestore with the modified array
-        userRef.updateData(["trips": activeUser.trips.map { $0.toTripEntity().toDictionary() }]) { error in
-            if let error = error {
-                print("Error updating trips array: \(error.localizedDescription)")
-            } else {
-                print("Trip removed successfully!")
-            }
-        }
-    }
-    
-    private func getImagePath(imageURL: String) -> String? {
-        // Decodes the full path (i.e., "images/AAAA.jpg")
-        if let encodedPath = imageURL.components(separatedBy: "/o/").last?.components(separatedBy: "?").first {
-            return encodedPath.removingPercentEncoding
-        }
-        return nil
-    }
-    
-    private func deleteVisitedCountries() {
-        guard let activeUser = currentUser else {
-            return
-        }
-        // We make a list of the countries in the current trip
-        var visitedCountriesInCurrentTrip: Set<String> = []
-        for country in activeUser.trips[index].locations {
-            visitedCountriesInCurrentTrip.insert(country.countryA2code)
-        }
-        // Now, for each country, we delete if its 1 and we decrease by 1 in any other case
-        for country in visitedCountriesInCurrentTrip {
-            if let count = activeUser.visitedCountriesAndAppearances[country] {
-                if count < 2 {
-                    currentUser?.visitedCountriesAndAppearances.removeValue(forKey: country)
-                } else {
-                    currentUser?.visitedCountriesAndAppearances[country] = count - 1
-                }
-            }
-        }
-    }
-
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? TripViewCellController else {
@@ -172,6 +110,14 @@ class TripViewController: UIViewController, MKMapViewDelegate, UICollectionViewD
                 self.map.setRegion(zoomedInRegion, animated: true)
             }
         }
+    }
+    
+    // Show error
+    private func showError() {
+        let alert = UIAlertController(title: "Error", message: "There was an error deleting the trip", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

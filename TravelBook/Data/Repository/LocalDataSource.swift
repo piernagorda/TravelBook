@@ -74,7 +74,9 @@ public class LocalDataSource {
         }
 
         // 3. Create the TripModel object
-        guard let title = fetchedTripCoreData.title, let tripImageURL = fetchedTripCoreData.tripImageURL else {
+        guard let title = fetchedTripCoreData.title,
+              let tripImageURL = fetchedTripCoreData.tripImageURL,
+              let tripId = fetchedTripCoreData.tripId else {
             return nil
         }
         
@@ -83,7 +85,8 @@ public class LocalDataSource {
                              title: title,
                              tripImage: tripImage,
                              tripImageURL: tripImageURL,
-                             description: fetchedTripCoreData.desc ?? "")
+                             description: fetchedTripCoreData.desc ?? "",
+                             tripId: tripId)
         return trip
     }
     
@@ -222,5 +225,97 @@ public class LocalDataSource {
         locationCoreData.city = locationModel.city
         locationCoreData.countryA2code = locationModel.countryA2code
         return locationCoreData
+    }
+    
+    // --------------------------------
+    // MARK: DELETE TRIP FROM CORE DATA
+    // --------------------------------
+    
+    func removeTripFromLocal(index: Int, tripId: String) -> Bool {
+        guard let currentUser else {
+            print("No active user found.")
+            return false
+        }
+
+        guard index >= 0, index < currentUser.trips.count else {
+            print("Invalid trip index: \(index)")
+            return false
+        }
+
+        // Try deleting from Core Data first
+        if deleteTripFromCoreData(tripId: tripId) {
+            
+            // Update the visited countries map
+            deleteVisitedCountries(index: index)
+            // Now its safe to remove from the in-memory storage
+            currentUser.trips.remove(at: index)
+
+            print("Trip successfully removed from local storage.")
+            return true
+        } else {
+            print("Core Data deletion failed. Local trip removal aborted.")
+            return false
+        }
+    }
+
+    
+    private func deleteTripFromCoreData(tripId: String) -> Bool {
+        guard let currentUser = currentUser else {
+            print("No active user found.")
+            return false
+        }
+
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest: NSFetchRequest<UserCoreData> = UserCoreData.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "userId == %@", currentUser.userId)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            guard let userCoreData = results.first else {
+                print("User not found in Core Data")
+                return false
+            }
+
+            guard let existingTrips = userCoreData.trips as? Set<TripCoreData> else {
+                print("No trips found for the user")
+                return false
+            }
+
+            if let tripToDelete = existingTrips.first(where: { $0.tripId == tripId }) {
+                context.delete(tripToDelete)
+                try context.save()
+                print("Trip removed successfully from Core Data")
+                return true
+            } else {
+                print("Trip not found in Core Data")
+                return false
+            }
+        } catch {
+            print("Failed to delete trip from Core Data: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    private func deleteVisitedCountries(index: Int) {
+        guard let activeUser = currentUser else {
+            return
+        }
+        // We make a list of the countries in the current trip
+        var visitedCountriesInCurrentTrip: Set<String> = []
+        for country in activeUser.trips[index].locations {
+            visitedCountriesInCurrentTrip.insert(country.countryA2code)
+        }
+        // Now, for each country, we delete if its 1 and we decrease by 1 in any other case
+        for country in visitedCountriesInCurrentTrip {
+            if let count = activeUser.visitedCountriesAndAppearances[country] {
+                if count < 2 {
+                    currentUser?.visitedCountriesAndAppearances.removeValue(forKey: country)
+                } else {
+                    currentUser?.visitedCountriesAndAppearances[country] = count - 1
+                }
+            }
+        }
     }
 }

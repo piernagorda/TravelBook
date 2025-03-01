@@ -44,6 +44,7 @@ final class TripEntity: Codable {
                   title: title,
                   tripImage: loadedImage,
                   tripImageURL: tripImageURL,
-                  description: description)
+                  description: description,
+                  tripId: tripId)
     }
 }
