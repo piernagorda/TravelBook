@@ -251,11 +251,6 @@ public class LocalDataSource: LocalDataSourceProtocol {
 
         // Try deleting from Core Data first
         if deleteTripFromCoreData(tripId: tripId) {
-            // Update the visited countries map
-            deleteVisitedCountries(index: index)
-            // Now its safe to remove from the in-memory storage
-            currentUser.trips.remove(at: index)
-
             print("Trip successfully removed from local storage.")
             return true
         } else {
@@ -301,27 +296,6 @@ public class LocalDataSource: LocalDataSourceProtocol {
         } catch {
             print("Failed to delete trip from Core Data: \(error.localizedDescription)")
             return false
-        }
-    }
-    
-    private func deleteVisitedCountries(index: Int) {
-        guard let activeUser = currentUser else {
-            return
-        }
-        // We make a list of the countries in the current trip
-        var visitedCountriesInCurrentTrip: Set<String> = []
-        for country in activeUser.trips[index].locations {
-            visitedCountriesInCurrentTrip.insert(country.countryA2code)
-        }
-        // Now, for each country, we delete if its 1 and we decrease by 1 in any other case
-        for country in visitedCountriesInCurrentTrip {
-            if let count = activeUser.visitedCountriesAndAppearances[country] {
-                if count < 2 {
-                    currentUser?.visitedCountriesAndAppearances.removeValue(forKey: country)
-                } else {
-                    currentUser?.visitedCountriesAndAppearances[country] = count - 1
-                }
-            }
         }
     }
 }

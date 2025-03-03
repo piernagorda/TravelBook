@@ -16,7 +16,7 @@ final class TabBarController: UITabBarController{
         // SwiftUI-based TestViewProfile integrated in NewProfileViewController
         let testViewProfile = ProfileView(userName: "Javier") // Your SwiftUI view
         self.profileViewController = ProfileViewHostingController(userName: "Javier")
-        self.profileViewController?.tabBarItem = UITabBarItem(title: "New Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
+        self.profileViewController?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
         self.profileViewController?.tabBarItem.selectedImage = UIImage(systemName: "star.fill")
         
         self.tabBar.tintColor = .black

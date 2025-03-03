@@ -61,6 +61,9 @@ public class Repository: RepositoryProtocol {
             if result {
                 // If success, remove locally
                 let localResult = self.localDataSource.deleteTripFromCoreData(index: index, tripId: tripId)
+                if localResult {
+                    currentUser?.removeTripWithIndex(index: index)
+                }
                 completion(localResult) // Ensures the result is passed back
             } else {
                 print("Failed to remove trip remotely. Local deletion skipped.")

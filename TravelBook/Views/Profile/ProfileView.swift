@@ -52,8 +52,11 @@ struct ProfileView: View {
     
     @ViewBuilder
     func bodyList() -> some View {
+        Button("Visited Countries") {
+            hostingController?.didTapOnCountriesVisited()
+        }
         List {
-            Text("First Row")
+            Text("Visited Countries: \(currentUser?.visitedCountriesAndAppearances.count ?? 0)")
             Text("Second Row")
             Text("Third Row")
         }

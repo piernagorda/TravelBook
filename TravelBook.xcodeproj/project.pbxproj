@@ -44,6 +44,8 @@
 		5943E1CD2BB21CE3001BEFD6 /* MyTripsCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */; };
 		59960C952BB8860900724A22 /* AddLocationsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59960C942BB8860900724A22 /* AddLocationsView.xib */; };
 		59960C962BB8860900724A22 /* AddLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59960C932BB8860900724A22 /* AddLocationsViewController.swift */; };
+		599C2CC52D75F99D004F9C46 /* VisitedCountriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599C2CC32D75F99D004F9C46 /* VisitedCountriesViewController.swift */; };
+		599C2CC62D75F99D004F9C46 /* VisitedCountriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599C2CC42D75F99D004F9C46 /* VisitedCountriesView.xib */; };
 		599E5D112BB7689E00E6DE7E /* TripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */; };
 		599E5D122BB7689E00E6DE7E /* TripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 599E5D102BB7689E00E6DE7E /* TripView.xib */; };
 		59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59A850EB2BB9C938005D3E9B /* AddTripView.xib */; };
@@ -95,6 +97,8 @@
 		5943E1CB2BB21CE3001BEFD6 /* MyTripsCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTripsCollectionView.xib; sourceTree = "<group>"; };
 		59960C932BB8860900724A22 /* AddLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationsViewController.swift; sourceTree = "<group>"; };
 		59960C942BB8860900724A22 /* AddLocationsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddLocationsView.xib; sourceTree = "<group>"; };
+		599C2CC32D75F99D004F9C46 /* VisitedCountriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitedCountriesViewController.swift; sourceTree = "<group>"; };
+		599C2CC42D75F99D004F9C46 /* VisitedCountriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VisitedCountriesView.xib; sourceTree = "<group>"; };
 		599E5D0F2BB7689E00E6DE7E /* TripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewController.swift; sourceTree = "<group>"; };
 		599E5D102BB7689E00E6DE7E /* TripView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripView.xib; sourceTree = "<group>"; };
 		59A850EA2BB9C938005D3E9B /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 		5943E1C42BB21C68001BEFD6 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				599C2CC22D75F8FA004F9C46 /* Visited Countries */,
 				59C74A3E2CEA7E610080724F /* AchievementsView */,
 				5917956C2CA8C232001258BC /* ProfileView.swift */,
 				592B40B82CE7B5BC006C6A1E /* ProfileViewHostingController.swift */,
@@ -295,6 +300,15 @@
 				59A949C72D6A5B9500E175C6 /* RemoteDataSource.swift */,
 			);
 			path = DataSources;
+			sourceTree = "<group>";
+		};
+		599C2CC22D75F8FA004F9C46 /* Visited Countries */ = {
+			isa = PBXGroup;
+			children = (
+				599C2CC32D75F99D004F9C46 /* VisitedCountriesViewController.swift */,
+				599C2CC42D75F99D004F9C46 /* VisitedCountriesView.xib */,
+			);
+			path = "Visited Countries";
 			sourceTree = "<group>";
 		};
 		599E5D0E2BB7688800E6DE7E /* TripView */ = {
@@ -466,6 +480,7 @@
 				5943E1AE2BB2147C001BEFD6 /* Assets.xcassets in Resources */,
 				59A850EC2BB9C938005D3E9B /* AddTripView.xib in Resources */,
 				5917D3DF2C4AC9E700B72587 /* GoogleService-Info.plist in Resources */,
+				599C2CC62D75F99D004F9C46 /* VisitedCountriesView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +519,7 @@
 				59205C582CFB3E61003CE9D4 /* DataModel.xcdatamodeld in Sources */,
 				591952DA2BB5E39200FD52FE /* CurrentUser.swift in Sources */,
 				592B40B92CE7B5BC006C6A1E /* ProfileViewHostingController.swift in Sources */,
+				599C2CC52D75F99D004F9C46 /* VisitedCountriesViewController.swift in Sources */,
 				59EB989C2C973E4000655953 /* TripEntity.swift in Sources */,
 				59EB989A2C973E2700655953 /* UserEntity.swift in Sources */,
 				59EB989E2C973E8500655953 /* LocationEntity.swift in Sources */,

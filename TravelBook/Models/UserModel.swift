@@ -28,10 +28,42 @@ final class UserModel {
     }
     
     public func addTrip(trip: TripModel) {
+        // Append
         trips.append(trip)
+        
+        // Update the map
+        var visitedCountriesInCurrentTrip: Set<String> = []
+        
+        for locations in trip.locations {
+            visitedCountriesInCurrentTrip.insert(locations.countryA2code)
+        }
+        
+        for country in visitedCountriesInCurrentTrip {
+            if let count = visitedCountriesAndAppearances[country] {
+                currentUser?.visitedCountriesAndAppearances[country] = count + 1
+            } else {
+                visitedCountriesAndAppearances[country] = 1
+            }
+        }
     }
     
     public func removeTripWithIndex(index: Int) {
+        // Update the map
+        var visitedCountriesInCurrentTrip: Set<String> = []
+        for country in trips[index].locations {
+            visitedCountriesInCurrentTrip.insert(country.countryA2code)
+        }
+        
+        for country in visitedCountriesInCurrentTrip {
+            if let count = visitedCountriesAndAppearances[country] {
+                if count < 2 {
+                    currentUser?.visitedCountriesAndAppearances.removeValue(forKey: country)
+                } else {
+                    currentUser?.visitedCountriesAndAppearances[country] = count - 1
+                }
+            }
+        }
+        // Deletion
         trips.remove(at: index)
     }
     

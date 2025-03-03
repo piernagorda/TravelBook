@@ -11,12 +11,18 @@ import UIKit
 class ProfileViewHostingController: UIHostingController<ProfileView> {
     // Custom initializer
     init(userName: String) {
-        // Initialize with the SwiftUI view and pass the hosting controller reference
-        super.init(rootView: ProfileView(userName: userName, hostingController: nil))
+        // Create the ProfileView
+        let profileView = ProfileView(userName: userName, hostingController: nil)
+        
+        // Initialize the super class
+        super.init(rootView: profileView)
+        
+        // Assign the hosting controller to the ProfileView
         rootView.hostingController = self
+        
         navigationController?.navigationBar.isTranslucent = false
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
             
@@ -52,7 +58,7 @@ class ProfileViewHostingController: UIHostingController<ProfileView> {
     }
     
     public func didTapOnCountriesVisited() {
-        
+        navigateToVisitedCountries()
     }
     
     @objc func logoutMessage() {
@@ -71,16 +77,21 @@ class ProfileViewHostingController: UIHostingController<ProfileView> {
         navigationController?.pushViewController(settingsController, animated: true)
     }
     
+    func navigateToVisitedCountries() {
+        let visitedCountriesController = VisitedCountriesViewController(nibName: "VisitedCountriesView", bundle: nil)
+        navigationController?.pushViewController(visitedCountriesController, animated: true)
+    }
+    
     private func logout() {
         do {
             try Auth.auth().signOut()
+            
             if let loginVC = self.navigationController?.viewControllers.filter({ $0 is LoginViewController }).first {
                 navigationController?.setNavigationBarHidden(true, animated: false)
                 self.navigationController?.popToViewController(loginVC, animated: true)
             }
-            // navigationController?.popToRootViewController(animated: true)
         } catch {
-            print("Logged out")
+            print("Error login out: \(error.localizedDescription)")
         }
     }
     
