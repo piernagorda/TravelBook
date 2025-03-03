@@ -17,7 +17,7 @@ final class TabBarController: UITabBarController{
         let testViewProfile = ProfileView(userName: "Javier") // Your SwiftUI view
         self.profileViewController = ProfileViewHostingController(userName: "Javier")
         self.profileViewController?.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), tag: 1)
-        self.profileViewController?.tabBarItem.selectedImage = UIImage(systemName: "star.fill")
+        self.profileViewController?.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle.fill")
         
         self.tabBar.tintColor = .black
         self.tabBar.backgroundColor = .white

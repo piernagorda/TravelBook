@@ -52,13 +52,15 @@ struct ProfileView: View {
     
     @ViewBuilder
     func bodyList() -> some View {
-        Button("Visited Countries") {
-            hostingController?.didTapOnCountriesVisited()
-        }
         List {
-            Text("Visited Countries: \(currentUser?.visitedCountriesAndAppearances.count ?? 0)")
-            Text("Second Row")
-            Text("Third Row")
+            HStack {
+                Text("Visited Countries")
+                Spacer()
+            }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                hostingController?.didTapOnCountriesVisited()
+            }
         }
     }
 }
