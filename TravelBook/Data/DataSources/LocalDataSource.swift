@@ -167,7 +167,7 @@ public class LocalDataSource {
     }
     
     private func getUserCoreDataModel(userModel: UserModel, context: NSManagedObjectContext) -> UserCoreData? {
-        var newUserCoreData = UserCoreData(context: context)
+        let newUserCoreData = UserCoreData(context: context)
         newUserCoreData.userId = userModel.userId
         newUserCoreData.email = userModel.email
         newUserCoreData.username = userModel.username
@@ -189,7 +189,7 @@ public class LocalDataSource {
     
     private func getTripCoreDataModel(tripModel: TripModel, context: NSManagedObjectContext) -> TripCoreData? {
         // Create a new TripCoreData object
-        var newTripCoreData = TripCoreData(context: context)
+        let newTripCoreData = TripCoreData(context: context)
         newTripCoreData.year = Int32(tripModel.year)
         newTripCoreData.title = tripModel.title
         newTripCoreData.desc = tripModel.description
@@ -244,7 +244,6 @@ public class LocalDataSource {
 
         // Try deleting from Core Data first
         if deleteTripFromCoreData(tripId: tripId) {
-            
             // Update the visited countries map
             deleteVisitedCountries(index: index)
             // Now its safe to remove from the in-memory storage

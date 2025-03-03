@@ -7,26 +7,54 @@
 
 import Foundation
 
-public class Repository {
+protocol RepositoryContract {
+    func addTrip(trip: TripModel, completion: @escaping (Bool) -> Void)
+    func getUser(userID: String, completion: @escaping (UserModel?) -> Void)
+    func removeTrip(index: Int, tripId: String, completion: @escaping (Bool) -> Void)
+}
+
+public class Repository: RepositoryContract {
     
     private let localDataSource = LocalDataSource()
     private let remoteDataSource = RemoteDataSource()
-    
-    // MARK: Save data
-    func saveUserToCoreData(userModel: UserModel) -> Bool {
-        localDataSource.saveUserToCoreData(userModel: userModel)
+
+    func addTrip(trip: TripModel, completion: @escaping (Bool) -> Void) {
+        // 1. Remote Add
+        remoteDataSource.addTripToRemote(trip: trip) { correctlyUploaded in
+            if correctlyUploaded  {
+                // 2. Local Add
+                if self.localDataSource.addTripToCoreData(trip: trip) {
+                    print("Trip added to core data, now adding to currentUser")
+                    currentUser?.addTrip(trip: trip)
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            } else {
+                completion(false)
+            }
+        }
     }
     
-    func addTripToCoreData(trip: TripModel) -> Bool {
-        localDataSource.addTripToCoreData(trip: trip)
+    func getUser(userID: String, completion: @escaping (UserModel?) -> Void) {
+        if let localUser = localDataSource.getLocalUserFromCoreData() {
+            completion(localUser)
+        } else {
+            remoteDataSource.getRemoteUserFromFirebase(userId: userID) { retrievedUser in
+                guard let retrievedUser else {
+                    completion(nil)
+                    return
+                }
+                // Save the user to local. If successful, we pass it upwards. If not, nil
+                if self.localDataSource.saveUserToCoreData(userModel: retrievedUser) {
+                    completion(retrievedUser)
+                } else {
+                    completion(nil)
+                }
+            }
+        }
     }
     
-    // MARK: Retrieve data
-    func getLocalUserFromCoreData() -> UserModel? {
-        localDataSource.getLocalUserFromCoreData()
-    }
-    
-    // MARK: Delete data
     func removeTrip(index: Int, tripId: String, completion: @escaping (Bool) -> Void) {
         remoteDataSource.removeTripFromRemote(index: index) { result in
             if result {

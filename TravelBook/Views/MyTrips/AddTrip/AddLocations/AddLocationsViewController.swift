@@ -44,21 +44,35 @@ extension AddLocationsViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if searching {
-            cell.textLabel?.text = filterData[indexPath.row].city + ", " + filterData[indexPath.row].country
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        let location = searching ? filterData[indexPath.row] : countriesInTrip[indexPath.row]
+        
+        cell.textLabel?.text = "\(location.city), \(location.country)"
+        
+        // Check if the location is already selected and add a checkmark
+        if searchIfLocationInArray(location: location, array: countriesInTrip) {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
-        else {
-            cell.textLabel?.text = countriesInTrip[indexPath.row].city + ", " + countriesInTrip[indexPath.row].country
-        }
+        
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let locationToAppend = filterData[indexPath.row]
-        locationToAppend.countryA2code =  countryToAlpha2Code[locationToAppend.country]?.lowercased() ?? ""
-        countriesInTrip.append(filterData[indexPath.row])
-        tableView.deselectRow(at: indexPath, animated: true)
+        let selectedLocation = searching ? filterData[indexPath.row] : countriesInTrip[indexPath.row]
+
+        // Add location if not already selected
+        if !searchIfLocationInArray(location: selectedLocation, array: countriesInTrip) {
+            var updatedLocation = selectedLocation
+            updatedLocation.countryA2code = countryToAlpha2Code[selectedLocation.country]?.lowercased() ?? ""
+            countriesInTrip.append(updatedLocation)
+        } else {
+            // If already selected, remove it
+            countriesInTrip.removeAll { $0.city.uppercased() == selectedLocation.city.uppercased() }
+        }
+
+        tableView.reloadData() // Refresh to update checkmarks
     }
 
 }

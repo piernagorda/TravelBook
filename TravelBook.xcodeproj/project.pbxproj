@@ -177,6 +177,7 @@
 		59205C542CFB3DEC003CE9D4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				599C2CC12D73B12A004F9C46 /* DataSources */,
 				59A949C22D6A5B4C00E175C6 /* Repository */,
 				59205C552CFB3E0B003CE9D4 /* CoreData */,
 				59CCBF4F2C70074100DE3A96 /* Dummies */,
@@ -287,6 +288,15 @@
 			path = AddLocations;
 			sourceTree = "<group>";
 		};
+		599C2CC12D73B12A004F9C46 /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				59A949C52D6A5B8D00E175C6 /* LocalDataSource.swift */,
+				59A949C72D6A5B9500E175C6 /* RemoteDataSource.swift */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
 		599E5D0E2BB7688800E6DE7E /* TripView */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,8 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				59A949C32D6A5B6300E175C6 /* Repository.swift */,
-				59A949C52D6A5B8D00E175C6 /* LocalDataSource.swift */,
-				59A949C72D6A5B9500E175C6 /* RemoteDataSource.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";

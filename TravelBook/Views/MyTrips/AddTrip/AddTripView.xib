@@ -62,7 +62,7 @@
                         <action selector="addLocationsPressed" destination="-1" eventType="touchDown" id="2IV-wv-REa"/>
                     </connections>
                 </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="x2a-E0-vUc">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="x2a-E0-vUc">
                     <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="5un-FM-Ibe"/>
