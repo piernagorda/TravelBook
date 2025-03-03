@@ -58,8 +58,8 @@ class ProfileViewHostingController: UIHostingController<ProfileView> {
     @objc func logoutMessage() {
         let alert = UIAlertController(title: "Log Out", message: "You're going to log out. Are you sure?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-        let logoutAction = UIAlertAction(title: "OK", style: .default) {_ in
-            self.logout()
+        let logoutAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.logout()
         }
         alert.addAction(cancelAction)
         alert.addAction(logoutAction)

@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol RepositoryContract {
-    func addTrip(trip: TripModel, completion: @escaping (Bool) -> Void)
+protocol RepositoryProtocol {
     func getUser(userID: String, completion: @escaping (UserModel?) -> Void)
-    func removeTrip(index: Int, tripId: String, completion: @escaping (Bool) -> Void)
+    func addTrip(trip: TripModel, completion: @escaping (Bool) -> Void)
+    func deleteTrip(index: Int, tripId: String, completion: @escaping (Bool) -> Void)
 }
 
-public class Repository: RepositoryContract {
+public class Repository: RepositoryProtocol {
     
     private let localDataSource = LocalDataSource()
     private let remoteDataSource = RemoteDataSource()
@@ -55,10 +55,12 @@ public class Repository: RepositoryContract {
         }
     }
     
-    func removeTrip(index: Int, tripId: String, completion: @escaping (Bool) -> Void) {
-        remoteDataSource.removeTripFromRemote(index: index) { result in
+    func deleteTrip(index: Int, tripId: String, completion: @escaping (Bool) -> Void) {
+        // Remove remote trip
+        remoteDataSource.deleteTripFromRemote(index: index) { result in
             if result {
-                let localResult = self.localDataSource.removeTripFromLocal(index: index, tripId: tripId)
+                // If success, remove locally
+                let localResult = self.localDataSource.deleteTripFromCoreData(index: index, tripId: tripId)
                 completion(localResult) // Ensures the result is passed back
             } else {
                 print("Failed to remove trip remotely. Local deletion skipped.")

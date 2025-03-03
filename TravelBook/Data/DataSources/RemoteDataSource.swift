@@ -8,16 +8,22 @@ import FirebaseFirestore
 import FirebaseStorage
 import Foundation
 
-public class RemoteDataSource {
+protocol RemoteDataSourceProtocol {
+    func getRemoteUserFromFirebase(userId: String, completion: @escaping (UserModel?) -> Void)
+    func addTripToRemote(trip: TripModel, completion: @escaping (Bool) -> Void)
+    func deleteTripFromRemote(index: Int, completion: @escaping (Bool) -> Void)
+}
+
+public class RemoteDataSource: RemoteDataSourceProtocol {
     
-    func removeTripFromRemote(index: Int, completion: @escaping (Bool) -> Void) {
+    func deleteTripFromRemote(index: Int, completion: @escaping (Bool) -> Void) {
         guard let tripImageURL = currentUser?.trips[index].tripImageURL else {
             completion(false)
             return
         }
-        deleteTripFromFirebase(index: index) { firebaseDeleted in
+        deleteTripFromFirebase(index: index) { [weak self] firebaseDeleted in
             if firebaseDeleted {
-                self.deleteImageFromStorage(tripImageURL: tripImageURL) { imageDeleted in
+                self?.deleteImageFromStorage(tripImageURL: tripImageURL) { imageDeleted in
                     if !imageDeleted {
                         print("Warning: Trip deleted from Firestore, but image deletion failed.")
                     }
@@ -40,18 +46,18 @@ public class RemoteDataSource {
                 } catch {
                     completion(nil)
                 }
-            case .failure(let error):
+            case .failure(_):
                 completion(nil)
             }
         }
     }
     
     // Fetch user data
-    func fetchUserModelFromFirestore(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
+    private func fetchUserModelFromFirestore(userId: String, completion: @escaping (Result<UserModel, Error>) -> Void) {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(userId)
         
-        userRef.getDocument { (document, error) in
+        userRef.getDocument { [weak self] (document, error) in
             if let error = error {
                 print("Error getting the user's document")
                 completion(.failure(error))
@@ -74,14 +80,16 @@ public class RemoteDataSource {
                 print("Loading the images of the trips now")
                 for trip in tempUser.trips {
                     dispatchGroup.enter()
-                    self.loadImageFromURL(trip.tripImageURL) { image in
+                    self?.loadImageFromURL(trip.tripImageURL) { [weak self] image in
+                        guard let self = self else { return }  // Safely unwrap self
                         trip.tripImage = image
                         dispatchGroup.leave()
                     }
                 }
                 print("Images loaded")
                 currentUser = tempUser
-                dispatchGroup.notify(queue: .main) {
+                dispatchGroup.notify(queue: .main) { [weak self] in
+                    guard let self = self else { return }  // Safely unwrap self
                     completion(.success(currentUser!))
                 }
             } catch {
@@ -96,7 +104,9 @@ public class RemoteDataSource {
             print("Error: Invalid URL")
             return
         }
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return }  // Safely unwrap self
+            
             if let error = error {
                 print("Error loading image: \(error.localizedDescription)")
                 return
@@ -112,11 +122,12 @@ public class RemoteDataSource {
     
     func addTripToRemote(trip: TripModel, completion: @escaping (Bool) -> Void) {
         // 1 - Upload the photo to Firebase Storage
-        uploadPhoto(image: (trip.tripImage)!) { imageURL in
+        uploadPhoto(image: (trip.tripImage)!) { [weak self] imageURL in
             if let imageURL = imageURL  {
                 trip.tripImageURL = imageURL
                 // 2. If success -> Upload the trip to Firebase
-                self.sendTripToDatabase(trip: trip) { _, error  in
+                self?.sendTripToDatabase(trip: trip) { [weak self] _, error  in
+                    guard let self = self else { return }  // Safely unwrap self
                     if let error {
                         print("Error adding the trip in the DB...")
                         // self?.showError(error: error)
@@ -131,7 +142,7 @@ public class RemoteDataSource {
         }
     }
         
-    func uploadPhoto(image: UIImage, completion: @escaping (_ imageURL: String?) -> Void) {
+    private func uploadPhoto(image: UIImage, completion: @escaping (_ imageURL: String?) -> Void) {
         // Convert the image to data
         if let imageData = image.jpegData(compressionQuality: 0.8) {
             // Create a reference in Firebase Storage
@@ -192,10 +203,6 @@ public class RemoteDataSource {
         }
     }
     
-}
-
-public extension RemoteDataSource {
-        
     private func deleteImageFromStorage(tripImageURL: String, completion: @escaping (Bool) -> Void) {
         
         guard let imagePath = getImagePath(imageURL: tripImageURL) else {
@@ -246,4 +253,5 @@ public extension RemoteDataSource {
         }
         return nil
     }
+    
 }

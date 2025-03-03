@@ -30,9 +30,9 @@ class MyTripsCollectionViewController: UICollectionViewController {
         let addTripVC = AddTripViewController(nibName: "AddTripView", bundle: nil)
         
         // Callback: should reload data or not. When called we always dismiss the modal
-        addTripVC.callback = { reloadData in
+        addTripVC.callback = { [weak self] reloadData in
             if reloadData {
-                self.collectionView.reloadData()
+                self?.collectionView.reloadData()
             }
             addTripVC.dismiss(animated: true)
         }

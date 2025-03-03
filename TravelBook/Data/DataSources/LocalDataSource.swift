@@ -8,7 +8,14 @@ import CoreData
 import Foundation
 import UIKit
 
-public class LocalDataSource {
+protocol LocalDataSourceProtocol {
+    func getLocalUserFromCoreData() -> UserModel?
+    func saveUserToCoreData(userModel: UserModel) -> Bool
+    func addTripToCoreData(trip: TripModel) -> Bool
+    func deleteTripFromCoreData(index: Int, tripId: String) -> Bool
+}
+
+public class LocalDataSource: LocalDataSourceProtocol {
     
     // -------------------------------
     // MARK: FETCH USER FROM CORE DATA
@@ -231,7 +238,7 @@ public class LocalDataSource {
     // MARK: DELETE TRIP FROM CORE DATA
     // --------------------------------
     
-    func removeTripFromLocal(index: Int, tripId: String) -> Bool {
+    func deleteTripFromCoreData(index: Int, tripId: String) -> Bool {
         guard let currentUser else {
             print("No active user found.")
             return false

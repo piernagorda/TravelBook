@@ -42,11 +42,16 @@ class AddTripViewController: UIViewController,
         table.register(cell, forCellReuseIdentifier: "datacell4")
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imagePicker.delegate = nil // When dismissing or deinitializing
+    }
+    
     @IBAction func addLocationsPressed() {
         let addLocationsVC = AddLocationsViewController(nibName: "AddLocationsView", bundle: nil)
         
-        addLocationsVC.callback = { [weak self] closeModal, locations in
-            addLocationsVC.dismiss(animated: true)
+        addLocationsVC.callback = { [weak self, weak addLocationsVC] closeModal, locations in
+            addLocationsVC?.dismiss(animated: true)
             if !closeModal {
                 self?.temporaryTrip.locations = locations!
             }
@@ -57,18 +62,19 @@ class AddTripViewController: UIViewController,
     }
     
     @IBAction func choosePhotoPressed(_ sender: Any) {
-            PHPhotoLibrary.requestAuthorization({ [self]status in
-                if status == .authorized{
-                    DispatchQueue.main.async { [self] in
-                        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-                            self.imagePicker.delegate = self
-                            self.imagePicker.sourceType = .photoLibrary
-                            self.imagePicker.allowsEditing = false
-                            present(imagePicker, animated: true, completion: nil)
-                        }
+        PHPhotoLibrary.requestAuthorization { [weak self] status in
+            if status == .authorized {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                        self.imagePicker.delegate = self
+                        self.imagePicker.sourceType = .photoLibrary
+                        self.imagePicker.allowsEditing = false
+                        self.present(self.imagePicker, animated: true, completion: nil)
                     }
-                } else {}
-            })
+                }
+            }
+        }
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -101,10 +107,10 @@ class AddTripViewController: UIViewController,
                                       tripId: randomID)
         let repository = Repository()
         activityIndicator.startAnimating()
-        repository.addTrip(trip: temporaryTrip) { result in
+        repository.addTrip(trip: temporaryTrip) { [weak self] result in
             if result {
-                self.activityIndicator.stopAnimating()
-                self.callback(true)
+                self?.activityIndicator.stopAnimating()
+                self?.callback(true)
             } else {
                 // show error
             }
